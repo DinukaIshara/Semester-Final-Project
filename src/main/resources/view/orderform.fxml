@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="890.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.OrderformController">
+   <children>
+      <AnchorPane fx:id="menuRootNode" layoutX="20.0" layoutY="21.0" prefHeight="850.0" prefWidth="651.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../css/sidePane.css">
+         <children>
+            <ScrollPane fx:id="menu_scrollPane" prefHeight="850.0" prefWidth="651.0">
+               <content>
+                  <GridPane fx:id="menu_gridPane" prefHeight="19.0" prefWidth="84.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children></AnchorPane>
+      <AnchorPane layoutX="685.0" layoutY="21.0" prefHeight="850.0" prefWidth="373.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../css/sidePane.css">
+         <children>
+            <TableView fx:id="tblOrder" layoutX="10.0" layoutY="12.0" prefHeight="474.0" prefWidth="355.0">
+              <columns>
+                <TableColumn fx:id="colItemName" prefWidth="156.0" text="Item Name" />
+                <TableColumn fx:id="colQty" prefWidth="75.0" text="qty." />
+                  <TableColumn fx:id="colUnitPrice" prefWidth="122.0" text="Unit Price" />
+              </columns>
+            </TableView>
+            <Label layoutX="11.0" layoutY="512.0" text="Order code :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblOrderCode" layoutX="148.0" layoutY="513.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="591.0" text="Customer Tel :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="633.0" text="Customer Name :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblCustName" layoutX="196.0" layoutY="633.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="551.0" text="Order Date :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblOrderDate" layoutX="145.0" layoutY="551.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <JFXComboBox layoutX="168.0" layoutY="590.0" onAction="#cmbCustomerTel" prefHeight="24.0" prefWidth="140.0" />
+            <JFXButton buttonType="RAISED" layoutX="314.0" layoutY="588.0" onAction="#btnAddCustomerOnAction" style="-fx-background-color: green;" text="+" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="11.0" layoutY="672.0" text="Payment Method :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <JFXComboBox layoutX="204.0" layoutY="671.0" onAction="#cmbPaymentMethod" prefHeight="24.0" prefWidth="140.0" />
+            <Label layoutX="11.0" layoutY="725.0" text="Total :">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblNetTotal" layoutX="83.0" layoutY="725.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutX="224.0" layoutY="770.0" onAction="#btnPlaceOrderOnAction" prefHeight="43.0" prefWidth="126.0" styleClass="btn" stylesheets="@../css/sidePane.css" text="Place Order" />
+            <JFXButton buttonType="RAISED" layoutX="36.0" layoutY="770.0" prefHeight="43.0" prefWidth="126.0" styleClass="btn" stylesheets="@../css/sidePane.css" text="Cancel" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

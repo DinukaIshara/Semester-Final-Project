@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="909.0" prefWidth="1416.0" style="-fx-background-color: #1E1E1E;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.SidepanelformController">
+   <children>
+      <AnchorPane fx:id="childRootNode" layoutX="325.0" layoutY="10.0" prefHeight="890.0" prefWidth="1080.0" AnchorPane.bottomAnchor="9.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="10.0" />
+      <AnchorPane prefHeight="909.0" prefWidth="317.0" style="-fx-background-color: #272727;">
+         <children>
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="146.0" onAction="#btnDashboardOnAction" prefHeight="65.0" prefWidth="270.0" stylesheets="@../css/sidePane.css" text="    Dashboard" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                     <image>
+                        <Image url="@../icon/dashboard.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="filter" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="26.0" layoutY="221.0" onAction="#btnItemOnAction" prefHeight="65.0" prefWidth="270.0" stylesheets="@../css/sidePane.css" text="Item" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                     <image>
+                        <Image url="@../icon/item.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="filter" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="26.0" layoutY="295.0" onAction="#btnPlaceOrderOnAction" prefHeight="65.0" prefWidth="270.0" stylesheets="@../css/sidePane.css" text="Place Order" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                     <image>
+                        <Image url="@../icon/placeorded.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="filter" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="26.0" layoutY="370.0" onAction="#btnCustomerOnAction" prefHeight="65.0" prefWidth="270.0" stylesheets="@../css/sidePane.css" text="Customer" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                     <image>
+                        <Image url="@../icon/customer.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="filter" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="26.0" layoutY="443.0" onAction="#btnSupplierOnAction" prefHeight="65.0" prefWidth="270.0" stylesheets="@../css/sidePane.css" text="Supplier" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                     <image>
+                        <Image url="@../icon/supplies.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="filter" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="26.0" layoutY="519.0" onAction="#btnEmployeeOnAction" prefHeight="65.0" prefWidth="270.0" stylesheets="@../css/sidePane.css" text="Employee" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                     <image>
+                        <Image url="@../icon/customer.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="filter" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="26.0" layoutY="594.0" onAction="#btnRepairOnAction" prefHeight="65.0" prefWidth="270.0" stylesheets="@../css/sidePane.css" text="Repair" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                     <image>
+                        <Image url="@../icon/repair.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="filter" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="26.0" layoutY="669.0" onAction="#btnTransportOnAction" prefHeight="65.0" prefWidth="270.0" stylesheets="@../css/sidePane.css" text="Transport" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="29.0" styleClass="shadow">
+                     <image>
+                        <Image url="@../icon/icons8-loading-truck-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="filter" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="745.0" onAction="#btnReportOnAction" prefHeight="65.0" prefWidth="270.0" stylesheets="@../css/sidePane.css" text="Report" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                     <image>
+                        <Image url="@../icon/report.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="filter" />
+               </styleClass>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="824.0" onAction="#btnLogOutOnAction" prefHeight="65.0" prefWidth="270.0" stylesheets="@../css/sidePane.css" text="Log out" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icon/logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="logout" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </JFXButton>
+            <Label layoutX="122.0" layoutY="69.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="122.0" AnchorPane.topAnchor="69.0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

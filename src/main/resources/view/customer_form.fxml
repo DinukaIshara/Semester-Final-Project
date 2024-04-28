@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="755.0" prefWidth="1055.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.CustomerFormController">
+   <children>
+      <ImageView fitHeight="700.0" fitWidth="1055.0">
+         <image>
+            <Image url="@../../../../../../Dark%20modern%20tech%20products%20promo%20carousel%20Instagram%20post%20(1350%20x%20750%20px).jpg" />
+         </image>
+      </ImageView>
+      <JFXButton buttonType="RAISED" layoutX="697.0" layoutY="137.0" onAction="#btnUpdateOnAction" prefWidth="100.0" ripplerFill="BLACK" style="-fx-background-color: #f39c12;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="697.0" layoutY="229.0" onAction="#btnClearOnAction" prefWidth="100.0" ripplerFill="BLACK" style="-fx-background-color: #c0392b;" text="Clear" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="697.0" layoutY="90.0" onAction="#btnSaveOnAction" prefWidth="100.0" ripplerFill="BLACK" style="-fx-background-color: #2ecc71;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="39.0" layoutY="25.0" prefHeight="37.0" prefWidth="170.0" text="Customer Id" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblCostId" layoutX="233.0" layoutY="36.0" />
+      <Label layoutX="39.0" layoutY="71.0" prefWidth="174.0" text="Name" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" layoutX="233.0" layoutY="67.0" onAction="#nameOnAction" prefWidth="430.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="39.0" layoutY="113.0" prefHeight="21.0" prefWidth="174.0" text="Address" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtAddress" layoutX="233.0" layoutY="110.0" onAction="#addressOnAction" prefWidth="430.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="39.0" layoutY="158.0" prefHeight="21.0" prefWidth="175.0" text="NIC" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNIC" layoutX="233.0" layoutY="154.0" onAction="#nicOnAction" prefWidth="430.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="39.0" layoutY="201.0" prefHeight="21.0" prefWidth="174.0" text="Telephone Number" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtTel" layoutX="233.0" layoutY="196.0" onAction="#telOnAction" prefWidth="430.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="39.0" layoutY="242.0" prefHeight="21.0" prefWidth="174.0" text="Email" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEmail" layoutX="233.0" layoutY="237.0" prefWidth="430.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TableView fx:id="tblCustomer" layoutX="29.0" layoutY="325.0" prefHeight="360.0" prefWidth="998.0">
+         <columns>
+            <TableColumn fx:id="colId" prefWidth="105.0" text="Customer Id" />
+            <TableColumn fx:id="colName" prefWidth="142.0" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="187.0" text="Address" />
+            <TableColumn fx:id="colNIC" prefWidth="154.0" text="NIC" />
+            <TableColumn fx:id="colTel" prefWidth="137.0" text="Tel Number" />
+            <TableColumn fx:id="colEmail" minWidth="0.0" prefWidth="179.0" text="Email" />
+            <TableColumn fx:id="colStats" prefWidth="93.0" text="Stats" />
+         </columns>
+      </TableView>
+      <TextField fx:id="txtSearch" layoutX="30.0" layoutY="284.0" onAction="#txtSearchOnAction" prefHeight="28.0" prefWidth="245.0" promptText="🔎 Search">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <JFXButton buttonType="RAISED" layoutX="697.0" layoutY="182.0" onAction="#btnDeleteOnAction" prefWidth="100.0" ripplerFill="BLACK" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="841.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../OOP/ChamaComputers-DinukaIshara-/src/main/resources/icon/userPng.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="37.0" layoutY="289.0">
+         <image>
+            <Image url="@../../../../../../OOP/ChamaComputers-DinukaIshara-/src/main/resources/icon/searchPng.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtId" layoutX="233.0" layoutY="30.0" prefWidth="430.0">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

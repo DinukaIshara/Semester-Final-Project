@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.LoginFormController">
+   <children>
+      <ImageView fitHeight="550.0" fitWidth="400.0" layoutX="400.0" opacity="0.82">
+         <image>
+            <Image url="@../image/Turquoise Blue Shoes Realistic Product Promotion Facebook Post(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="550.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Dark modern tech products promo carousel Instagram post (400 x 550 px).png" />
+         </image>
+      </ImageView>
+      <Label layoutX="559.0" layoutY="49.0" text="Log In" textFill="#05bef3">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <TextField fx:id="txtUserName" layoutX="467.0" layoutY="242.0" prefHeight="35.0" prefWidth="269.0" promptText="\@User Name" style="-fx-background-radius: 20;" />
+      <JFXButton buttonType="RAISED" layoutX="467.0" layoutY="386.0" onAction="#btnLoginOnAction" prefHeight="35.0" prefWidth="269.0" style="-fx-background-color: #05BEF3; -fx-background-radius: 20;" text="Log in" textFill="WHITE">
+
+      </JFXButton>
+      <ImageView fitHeight="79.0" fitWidth="79.0" layoutX="563.0" layoutY="119.0" opacity="0.6">
+         <image>
+            <Image url="@../icon/icons8-user-48(1).png" />
+         </image>
+      </ImageView>
+      <Label layoutX="476.0" layoutY="437.0" text="Do you don't have any account?">
+         <font>
+            <Font size="11.0" />
+         </font></Label>
+      <Hyperlink layoutX="660.0" layoutY="434.0" onAction="#hyperRegistrationOnAction" style="-fx-effect: shadow;" text="Register">
+         <font>
+            <Font size="11.0" />
+         </font></Hyperlink>
+      <PasswordField fx:id="txtPassword" layoutX="467.0" layoutY="310.0" prefHeight="35.0" prefWidth="269.0" promptText="\@Password" style="-fx-background-radius: 20;" />
+   </children>
+</AnchorPane>

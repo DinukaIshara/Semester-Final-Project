@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="755.0" prefWidth="1055.0" style="-fx-background-color: #1E1E1E;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.DashboardFormController">
+   <children>
+      <AnchorPane layoutX="23.0" layoutY="23.0" prefHeight="200.0" prefWidth="253.0" style="-fx-background-color: #121212; -fx-background-radius: 20;">
+         <children>
+            <Label layoutX="34.0" layoutY="103.0" text="Customer count :" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="labCutCount" layoutX="120.0" layoutY="142.0" prefHeight="31.0" prefWidth="5.0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <ImageView layoutX="79.0" layoutY="4.0">
+               <image>
+                  <Image url="@../icon/userPng.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="314.0" layoutY="23.0" prefHeight="200.0" prefWidth="253.0" style="-fx-background-color: #121212; -fx-background-radius: 20;">
+         <children>
+            <Label layoutX="60.0" layoutY="103.0" text="Order count :" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="85.0" layoutY="142.0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="88.0" fitWidth="85.0" layoutX="89.0" layoutY="14.0">
+               <image>
+                  <Image url="@../icon/ordericon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <TableView layoutX="25.0" layoutY="275.0" prefHeight="401.0" prefWidth="362.0">
+        <columns>
+          <TableColumn prefWidth="95.0" text="Item ID" />
+          <TableColumn prefWidth="188.0" text="Item Name" />
+            <TableColumn prefWidth="78.0" text="QTY" />
+        </columns>
+      </TableView>
+      <Label layoutX="27.0" layoutY="242.0" text="Most Sell Items" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <AreaChart layoutX="415.0" layoutY="277.0" prefHeight="401.0" prefWidth="621.0" style="-fx-background-color: red;" title="Order Details">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+        </yAxis>
+      </AreaChart>
+      <AnchorPane layoutX="599.0" layoutY="24.0" prefHeight="200.0" prefWidth="418.0" style="-fx-background-color: #121212; -fx-background-radius: 20;">
+         <children>
+            <Label layoutX="24.0" layoutY="104.0" text="Total Income" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="85.0" layoutY="142.0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <LineChart layoutX="163.0" layoutY="10.0" prefHeight="188.0" prefWidth="243.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+              </yAxis>
+            </LineChart>
+            <Label layoutX="70.0" layoutY="142.0" prefHeight="31.0" prefWidth="0.0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
