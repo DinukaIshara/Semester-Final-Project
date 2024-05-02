@@ -132,4 +132,45 @@ public class SupplierFormController {
         txtLoacation.setText("");
         txtEmail.setText("");
     }
+
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
+        String supId = txtSupId.getText();
+        String companyName = txtCompanyName.getText();
+        String personName = txtPersonName.getText();
+        String tel = txtContact.getText();
+        String location = txtLoacation.getText();
+        String email = txtEmail.getText();
+
+        Supplier suppler = new Supplier(supId, companyName, personName, tel, location , email );
+
+        try {
+            boolean isSaved = SupplierRepo.update(suppler);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "supplier update!").show();
+                clearFields();
+                initialize();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnDeleteOnAction(ActionEvent actionEvent) {
+        String id = txtSupId.getText();
+
+        try {
+            boolean isDeleted = SupplierRepo.delete(id);
+            if(isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "supplier deleted!").show();
+                clearFields();
+                initialize();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    public void btnClearOnAction(ActionEvent actionEvent) {
+        clearFields();
+    }
 }

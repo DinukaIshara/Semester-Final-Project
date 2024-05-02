@@ -1,27 +1,20 @@
-.header{
-    -fx-background-color: linear-gradient(to bottom right, #098c53, #246861);
-    -fx-border-color: #fff;
-    -fx-border-width: 0 0 .8px 0;
-}
-
-.nav-form{
-    -fx-background-color: linear-gradient(to bottom right, #0f6789, #286155);
-}
-
 .nav-btn{
-    -fx-background-color: #121212;
-    -fx-border-color: #ffffff;
-    -fx-border-width: 2px;
+    -fx-background-color: #e7e7e7;
+    -fx-border-color: #05bef3;
+    -fx-border-radius: 50px;
+    -fx-border-width: 4px;
     -fx-cursor: hand;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #5b5b5b;
+    -fx-background-radius: 50px;
 }
 .nav-btn:hover{
     -fx-background-color: #05bef3;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #000000;
+    -fx-background-radius: 50px;
 }
 
 .logout{
-    -fx-background-color: #121212;
+    -fx-background-color: #5e5e5e;
     -fx-padding: 5px;
     -fx-cursor: hand;
     -fx-background-radius: 50px;
@@ -34,28 +27,16 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
 }
 
-.white-bg{
-    -fx-background-color: #f1f1f1;
-}
-
-.radius{
-    -fx-background-radius: 8px;
-}
-
-.transparent{
-    -fx-background-color: transparent;
-}
 
 .table-view{
-    -fx-background-color: transparent;
+    -fx-background-color: white;
     -fx-padding: 0;
     -fx-border-color: linear-gradient(to bottom right, #05bef3, #0081ff);
-    -fx-border-radius: 5px;
+    -fx-border-radius: 0px;
     -fx-border-width: 1.5px;
 }
 .table-view .column-header-background{
     -fx-background-color: linear-gradient(to bottom right, #05bef3, #0081ff);
-    -fx-background-radius: 5px 5px 0 0;
     -fx-background-insets: 0 0 0 0;
 }
 .table-view .column-header, .filter{
@@ -66,16 +47,23 @@
     -fx-text-fill: #fff;
 }
 
-.btn{
-    -fx-background-color: linear-gradient(to bottom right, #098c53, #246861); 
-    -fx-cursor: hand;
-    -fx-text-fill: #fff;
+.blue-text-Field{
+    -fx-border-radius: 5px;
+    -fx-background-color: #fff;
+    -fx-border-color: #05bef3;
+    -fx-border-width:  0px 0px 2px 0px;
+    -fx-font-family: Arial Rounded MT Bold;
     -fx-font-size: 14px;
 }
-.btn:hover{
-    -fx-background-color: linear-gradient(to bottom right, #0fb565, #399a8f); 
+.blue-box-text-field{
+    -fx-background-radius: 5px;
+    -fx-border-color: #05bef3;
+    -fx-border-radius: 5px;
+    -fx-border-width:  2px;
+    -fx-text-fill: #000;
+    -fx-font-family: Arial Rounded MT Bold;
+    -fx-font-size: 14px;
 }
-
 .shadow1{
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
 }

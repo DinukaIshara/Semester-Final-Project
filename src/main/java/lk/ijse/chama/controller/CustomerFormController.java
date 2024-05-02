@@ -1,5 +1,6 @@
 package lk.ijse.chama.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,11 +9,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.chama.model.Customer;
+import lk.ijse.chama.model.tm.CartTm;
 import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.repository.CustomerRepo;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class CustomerFormController {
 
@@ -67,10 +70,17 @@ public class CustomerFormController {
     @FXML
     private TableColumn<?, ?> colEmail;
 
+    private ObservableList<CartTm> obList = FXCollections.observableArrayList();
+
+    JFXButton btnRemove = new JFXButton("remo");
+
     public void initialize() {
         setCellValueFactory();
         loadAllCustomers();
+        //removeButtonOnAction();
+
     }
+
 
     private void setCellValueFactory() {
         colId.setCellValueFactory(new PropertyValueFactory<>("custId"));
@@ -79,6 +89,7 @@ public class CustomerFormController {
         colNIC.setCellValueFactory(new PropertyValueFactory<>("cNIC"));
         colTel.setCellValueFactory(new PropertyValueFactory<>("contactNo"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("cEmail"));
+        //colStats.setCellValueFactory(new PropertyValueFactory<>("remove"));
     }
 
     private void loadAllCustomers() {
@@ -94,6 +105,7 @@ public class CustomerFormController {
                         customer.getCNIC(),
                         customer.getContactNo(),
                         customer.getCEmail()
+                        //btnRemove
                 );
 
                 obList.add(tm);
@@ -152,7 +164,7 @@ public class CustomerFormController {
     }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnDeleteOnAction() {
         String id = txtId.getText();
 
         try {
@@ -199,23 +211,5 @@ public class CustomerFormController {
     @FXML
     void telOnAction(ActionEvent event) {
 
-    }
-
-    @FXML
-    void txtSearchOnAction(ActionEvent actionEvent) throws SQLException {
-        /*String id = txtId.getText();
-
-        Customer customer = CustomerRepo.searchById(id);
-        if (customer != null) {
-            txtId.setText(customer.getCustId());
-            txtName.setText(customer.getcName());
-            txtAddress.setText(customer.getcAddress());
-            txtNIC.setText(customer.getcNIC());
-            txtTel.setText(customer.getContactNo());
-            txtEmail.setText(customer.getcEmail());
-
-        } else {
-            new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
-        }*/
     }
 }

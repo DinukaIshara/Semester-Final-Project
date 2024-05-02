@@ -146,9 +146,9 @@ public class EmployeeFormController {
         Date dateRegistration = Date.valueOf(txtEnrollDate.getValue());
         String email = txtEmail.getText();
         double salary = Double.parseDouble(txtSallary.getText());
-        //String path = image.getUrl();
+        String path = image.getUrl();
 
-        Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary);
+        Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary, path);
 
         try {
 
@@ -175,9 +175,9 @@ public class EmployeeFormController {
         Date dateRegistration = Date.valueOf(txtEnrollDate.getValue());
         String email = txtEmail.getText();
         double salary = Double.parseDouble(txtSallary.getText());
-        //String path = image.getUrl();
+        String path = image.getUrl();
 
-        Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary);
+        Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary, path);
 
         try {
             boolean isUpdated = EmployeeRepo.update(employee);
@@ -220,7 +220,7 @@ public class EmployeeFormController {
         txtDOB.setValue(null);
         txtEnrollDate.setValue(null);
         txtEmail.setText("");
-        //image.cancel();
+        txtSallary.setText("");
     }
 
     @FXML
@@ -257,7 +257,7 @@ public class EmployeeFormController {
         if (file != null) {
 
           //  Employee.setPath() = file.getAbsolutePath();
-            image = new Image(file.toURI().toString(), 120, 127, false, true);
+            image = new Image(file.toURI().toString(), 153, 176, false, true);
 
             ImgView.setImage(image);
         }

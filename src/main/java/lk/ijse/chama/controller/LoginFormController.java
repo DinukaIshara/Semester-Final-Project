@@ -26,7 +26,7 @@ public class LoginFormController {
     private AnchorPane rootNode;
 
     @FXML
-    void btnLoginOnAction(ActionEvent event) throws IOException {
+    void btnLoginOnAction() throws IOException {
         String userName = txtUserName.getText();
         String pw = txtPassword.getText();
 
@@ -87,5 +87,11 @@ public class LoginFormController {
         stage.centerOnScreen();
         stage.show();
     }
+
+    @FXML
+    void txtPasswordOnAction() throws IOException {
+        btnLoginOnAction();
+    }
+
 
 }

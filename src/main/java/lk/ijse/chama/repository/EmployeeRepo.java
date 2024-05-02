@@ -15,7 +15,7 @@ import java.util.*;
 
 public class EmployeeRepo {
     public static boolean save(Employee employee) throws SQLException {
-        String sql = "INSERT INTO employee VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO employee VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -29,7 +29,7 @@ public class EmployeeRepo {
         pstm.setObject(8, employee.getDateRegister());
         pstm.setObject(9, employee.getEmpEmail());
         pstm.setObject(10, employee.getSalary());
-        //pstm.setObject(11, employee.getPath());
+        pstm.setObject(11, employee.getPath());
 
         return pstm.executeUpdate() > 0;
     }
@@ -84,9 +84,9 @@ public class EmployeeRepo {
             Date dateRegistration = resultSet.getDate(8);
             String email = resultSet.getString(9);
             double salary = resultSet.getDouble(10);
-            //String path = resultSet.getString(11);
+            String path = resultSet.getString(11);
 
-            Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary);
+            Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary, path);
             empList.add(employee);
         }
         return empList;

@@ -41,7 +41,7 @@ public class RegistrationFormController {
     }
 
     @FXML
-    void registrationOnAction(ActionEvent event) {
+    void registrationOnAction() {
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
 
@@ -87,5 +87,10 @@ public class RegistrationFormController {
 
         stage.centerOnScreen();
         stage.show();
+    }
+
+    @FXML
+    void txtPasswordOnAction() {
+        registrationOnAction();
     }
 }

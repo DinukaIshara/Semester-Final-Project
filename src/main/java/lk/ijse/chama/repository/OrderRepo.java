@@ -2,11 +2,15 @@ package lk.ijse.chama.repository;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import lk.ijse.chama.db.DbConnection;
+import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.Order;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class OrderRepo {
     public static String getCurrentId() throws SQLException {
@@ -26,7 +30,7 @@ public class OrderRepo {
         String sql = "INSERT INTO orders VALUES(?, ?, ?, ? ,?)";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
-
+        System.out.println(order);
         pstm.setString(1, order.getOrderId());
         pstm.setString(2, order.getCustomerId());
         pstm.setString(3, order.getTrId());
@@ -34,5 +38,28 @@ public class OrderRepo {
         pstm.setString(5, order.getPayment());
 
         return pstm.executeUpdate() > 0;
+    }
+
+    public static List<Order> getAll() throws SQLException {
+        String sql = "SELECT * FROM orders";
+
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        List<Order> orderList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            String orderId = resultSet.getString(1);
+            String custId = resultSet.getString(2);
+            String trId = resultSet.getString(3);
+            Date date = resultSet.getDate(4);
+            String payment = resultSet.getString(5);
+
+            Order order = new Order(orderId, custId, trId, (java.sql.Date) date, payment);
+            orderList.add(order);
+        }
+        return orderList;
     }
 }

@@ -50,4 +50,65 @@ public class SupplierRepo {
         }
         return supList;
     }
+    public static Supplier searchById(String id) throws SQLException {
+        String sql = "SELECT * FROM supplier WHERE sup_id = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, id);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            String sup_id = resultSet.getString(1);
+            String comName = resultSet.getString(2);
+            String person = resultSet.getString(3);
+            String contact = resultSet.getString(4);
+            String location =resultSet.getString(5);
+            String email = resultSet.getString(6);
+
+            return new Supplier(sup_id, comName, person, contact, location, email);
+        }
+
+        return null;
+    }
+    public static List<String> getId() throws SQLException {
+        String sql = "SELECT sup_id FROM supplier";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        List<String> idList = new ArrayList<>();
+
+        ResultSet resultSet = pstm.executeQuery();
+        while (resultSet.next()) {
+            String id = resultSet.getString(1);
+            idList.add(id);
+        }
+        return idList;
+    }
+
+    public static boolean update(Supplier supplier) throws SQLException {
+        String sql = "UPDATE supplier SET person_name = ?, company_name = ?, contact_no = ?, location = ?, email = ? WHERE sup_id = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        pstm.setObject(1, supplier.getCompanyName());
+        pstm.setObject(2, supplier.getPersonName());
+        pstm.setObject(3, supplier.getTel());
+        pstm.setObject(4, supplier.getLocation());
+        pstm.setObject(5, supplier.getEmail());
+        pstm.setObject(6, supplier.getSupId());
+
+        return pstm.executeUpdate() > 0;
+    }
+
+    public static boolean delete(String id) throws SQLException {
+        String sql = "DELETE FROM supplier WHERE sup_id = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, id);
+
+        return pstm.executeUpdate() > 0;
+    }
 }

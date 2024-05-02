@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="755.0" prefWidth="1055.0" style="-fx-background-color: #272727; -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.ReportFormController">
-
+<AnchorPane prefHeight="890.0" prefWidth="1080.0" style="-fx-background-color: #272727; -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.ReportFormController">
+   <children>
+      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="251.0" prefHeight="70.0" prefWidth="239.0" style="-fx-background-color: green;" text="Cutomer Report" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="334.0" prefHeight="70.0" prefWidth="239.0" style="-fx-background-color: green;" text="Employee Report" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="416.0" prefHeight="70.0" prefWidth="239.0" style="-fx-background-color: green;" text="Salary Report" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="500.0" prefHeight="70.0" prefWidth="239.0" style="-fx-background-color: green;" text="Stock Management" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
 </AnchorPane>

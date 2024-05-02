@@ -1,5 +1,6 @@
 package lk.ijse.chama.model.tm;
 
+import com.jfoenix.controls.JFXButton;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ public class CustomerTm {
     private String cNIC;
     private String contactNo;
     private String cEmail;
+    //private JFXButton remove;
 }

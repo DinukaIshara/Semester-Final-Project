@@ -121,7 +121,7 @@ public class PlaceOrderFormController {
 
     @FXML
     void cmbCustTelOnAction(ActionEvent event) {
-        String tel = (String) cmbCustTel.getValue();
+        String tel = cmbCustTel.getValue();
         try {
             Customer customer = CustomerRepo.searchById(tel);
 

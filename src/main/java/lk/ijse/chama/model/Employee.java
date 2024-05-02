@@ -19,9 +19,9 @@ public class Employee {
     private Date dateRegister;
     private String empEmail;
     private double salary;
-    //private String path;
+    private String path;
 
-    public Employee(String empId, String empName, String empAddress, String empNic, String position, String empTel, Date dob, Date dateRegister, String empEmail, double salary) {
+    public Employee(String empId, String empName, String empAddress, String empNic, String position, String empTel, Date dob, Date dateRegister, String empEmail, double salary, String path) {
         this.empId = empId;
         this.empName = empName;
         this.empAddress = empAddress;
@@ -32,7 +32,7 @@ public class Employee {
         this.dateRegister = dateRegister;
         this.empEmail = empEmail;
         this.salary = salary;
-        //this.path = path;
+        this.path = path;
     }
     @Override
     public String toString() {

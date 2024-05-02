@@ -21,24 +21,24 @@
             <Image url="@../image/Dark modern tech products promo carousel Instagram post (400 x 550 px).png" />
          </image>
       </ImageView>
-      <Label layoutX="110.0" layoutY="44.0" text="Registration" textFill="#05bef3">
+      <Label layoutX="110.0" layoutY="46.0" stylesheets="@../css/sidePane.css" text="Registration" textFill="#05bef3">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <TextField fx:id="txtUserName" layoutX="73.0" layoutY="242.0" onAction="#userNameOnAction" prefHeight="35.0" prefWidth="269.0" promptText="\@User Name" style="-fx-background-radius: 15;" />
-      <TextField fx:id="txtPassword" layoutX="73.0" layoutY="295.0" prefHeight="35.0" prefWidth="269.0" promptText="\@Password" style="-fx-background-radius: 15;" />
-      <JFXButton buttonType="RAISED" layoutX="73.0" layoutY="386.0" onAction="#registrationOnAction" prefHeight="35.0" prefWidth="269.0" style="-fx-background-color: #05BEF3; -fx-background-radius: 20;" text="Register" textFill="WHITE">
+      <TextField fx:id="txtUserName" layoutX="73.0" layoutY="283.0" onAction="#userNameOnAction" prefHeight="44.0" prefWidth="269.0" promptText="\@User Name" style="-fx-background-radius: 15;" />
+      <TextField fx:id="txtPassword" layoutX="73.0" layoutY="344.0" onAction="#txtPasswordOnAction" prefHeight="44.0" prefWidth="269.0" promptText="\@Password" style="-fx-background-radius: 15;" />
+      <JFXButton buttonType="RAISED" layoutX="102.0" layoutY="442.0" onAction="#registrationOnAction" prefHeight="44.0" prefWidth="205.0" style="-fx-background-color: #05BEF3; -fx-background-radius: 20;" text="Register" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <ImageView fitHeight="79.0" fitWidth="79.0" layoutX="169.0" layoutY="119.0" opacity="0.6">
+      <ImageView fitHeight="105.0" fitWidth="110.0" layoutX="149.0" layoutY="129.0" opacity="0.6">
          <image>
-            <Image url="@../icon/icons8-user-48(1).png" />
+            <Image url="@../icon/register.png" />
          </image>
       </ImageView>
-      <Label layoutX="93.0" layoutY="439.0" text="Do you have an Account? " />
-      <Hyperlink layoutX="270.0" layoutY="436.0" onAction="#logInOnAction" style="-fx-effect: shadow;" text="Log In" />
+      <Label layoutX="93.0" layoutY="504.0" text="Do you have an Account? " />
+      <Hyperlink layoutX="270.0" layoutY="501.0" onAction="#logInOnAction" style="-fx-effect: shadow;" text="Log In" />
    </children>
 </AnchorPane>

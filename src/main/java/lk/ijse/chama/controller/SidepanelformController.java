@@ -1,6 +1,7 @@
 package lk.ijse.chama.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,21 +9,44 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.repository.CustomerRepo;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class SidepanelformController {
 
     public AnchorPane rootNode;
     public AnchorPane childRootNode;
-    public String lblUserName;
+
+    @FXML
+    private Label lblDate;
+
+    @FXML
+    private Label lblUserName;
 
     public void initialize() throws IOException {
+        setDate();
         loadDashboardForm();
+        //loadUserName();
+    }
+    private void setDate() {
+        LocalDate nowDate = LocalDate.now();
+        lblDate.setText(String.valueOf(nowDate));
+    }
+    private void setLoadUserName(String st) throws Exception{
+        String sql = "SELECT user_name, password FROM users WHERE user_name = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, st);
     }
 
 
@@ -45,13 +69,13 @@ public class SidepanelformController {
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) throws IOException {
-        AnchorPane placeOrRootNode = FXMLLoader.load(this.getClass().getResource("/view/placeOrder_form.fxml"));
+        AnchorPane placeOrRootNode = FXMLLoader.load(this.getClass().getResource("/view/orderform.fxml"));
         childRootNode.getChildren().clear();
         childRootNode.getChildren().add(placeOrRootNode);
     }
 
     public void btnItemOnAction(ActionEvent actionEvent) throws IOException {
-        AnchorPane itemRootNode = FXMLLoader.load(this.getClass().getResource("/view/item_form.fxml"));
+        AnchorPane itemRootNode = FXMLLoader.load(this.getClass().getResource("/view/brandNewItem_form.fxml"));
         childRootNode.getChildren().clear();
         childRootNode.getChildren().add(itemRootNode);
     }
@@ -102,4 +126,6 @@ public class SidepanelformController {
     public void userIconClick(MouseEvent mouseEvent) {
 
     }
+
+
 }

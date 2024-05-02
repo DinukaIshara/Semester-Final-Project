@@ -4,13 +4,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="755.0" prefWidth="1055.0" style="-fx-background-color: #272727; -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.ItemFormController">
+<AnchorPane fx:id="rootNode" prefHeight="890.0" prefWidth="1080.0" style="-fx-background-color: #272727; -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.ItemFormController">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="26.0" layoutY="27.0" onAction="#btnBrandNewItemOnAction" prefHeight="650.0" prefWidth="490.0" style="-fx-background-color: yellow; -fx-background-radius: 20;" text="Brand New Items" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="20.0" layoutY="24.0" onAction="#btnBrandNewItemOnAction" prefHeight="841.0" prefWidth="508.0" style="-fx-background-color: yellow; -fx-background-radius: 20;" text="Brand New Items" textFill="WHITE">
          <font>
             <Font name="System Bold" size="39.0" />
          </font></JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="540.0" layoutY="27.0" onAction="#btnUsedItemOnAction" prefHeight="650.0" prefWidth="490.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Used Items" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="551.0" layoutY="23.0" onAction="#btnUsedItemOnAction" prefHeight="841.0" prefWidth="508.0" style="-fx-background-color: red; -fx-background-radius: 20;" text="Used Items" textFill="WHITE">
          <font>
             <Font name="System Bold" size="39.0" />
          </font></JFXButton>

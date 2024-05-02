@@ -5,8 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.chama.model.BrandNewItem;
 
 public class ProductCardController {
 
@@ -29,8 +31,18 @@ public class ProductCardController {
     private Spinner<?> prod_spinner;
 
     @FXML
-    void addBtn(ActionEvent event) {
+    void btnAddOnAction(ActionEvent event) {
 
     }
+    public void setData(BrandNewItem item) {
+        /*Image image = new Image(getClass().getResourceAsStream(String.valueOf(item.getImage()));
+        prod_imageView.setImage(image);
 
+        prod_name.setText(item.getItrmName());
+
+        prod_price.setText(String.valueOf(item.getPrice()));
+
+        prod_spinner.setPromptText(String.valueOf(item.getQty()));
+*/
+    }
 }

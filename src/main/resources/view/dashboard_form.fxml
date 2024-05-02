@@ -2,8 +2,8 @@
 
 <?import javafx.scene.chart.AreaChart?>
 <?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -12,69 +12,69 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="755.0" prefWidth="1055.0" style="-fx-background-color: #1E1E1E;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.DashboardFormController">
+<AnchorPane fx:id="rootNode" prefHeight="890.0" prefWidth="1080.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.DashboardFormController">
    <children>
-      <AnchorPane layoutX="23.0" layoutY="23.0" prefHeight="200.0" prefWidth="253.0" style="-fx-background-color: #121212; -fx-background-radius: 20;">
+      <AnchorPane layoutX="23.0" layoutY="23.0" prefHeight="200.0" prefWidth="253.0" style="-fx-background-color: E7E7E7FF; -fx-background-radius: 20;" styleClass="shadow1" stylesheets="@../css/sidePane.css" AnchorPane.bottomAnchor="667.0" AnchorPane.topAnchor="23.0">
          <children>
-            <Label layoutX="34.0" layoutY="103.0" text="Customer count :" textFill="WHITE">
+            <Label layoutX="41.0" layoutY="108.0" text="Customer Count">
                <font>
                   <Font name="System Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="labCutCount" layoutX="120.0" layoutY="142.0" prefHeight="31.0" prefWidth="5.0" textFill="WHITE">
+            <Label fx:id="labCutCount" layoutX="112.0" layoutY="141.0" prefHeight="31.0" prefWidth="5.0" text="o" textFill="#008fff">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
-            <ImageView layoutX="79.0" layoutY="4.0">
+            <ImageView fitHeight="101.0" fitWidth="103.0" layoutX="76.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../icon/userPng.png" />
+                  <Image url="@../icon/customer.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="314.0" layoutY="23.0" prefHeight="200.0" prefWidth="253.0" style="-fx-background-color: #121212; -fx-background-radius: 20;">
+      <AnchorPane layoutX="294.0" layoutY="23.0" prefHeight="200.0" prefWidth="253.0" style="-fx-background-color: E7E7E7FF; -fx-background-radius: 20;" styleClass="shadow1" stylesheets="@../css/sidePane.css" AnchorPane.bottomAnchor="667.0" AnchorPane.leftAnchor="294.0" AnchorPane.topAnchor="23.0">
          <children>
-            <Label layoutX="60.0" layoutY="103.0" text="Order count :" textFill="WHITE">
+            <Label layoutX="62.0" layoutY="106.0" text="Order Count">
                <font>
                   <Font name="System Bold" size="19.0" />
                </font>
             </Label>
-            <Label layoutX="85.0" layoutY="142.0" textFill="WHITE">
+            <Label fx:id="lblOrderCount" layoutX="114.0" layoutY="139.0" prefHeight="31.0" prefWidth="18.0" text="0" textFill="#008fff">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
-            <ImageView fitHeight="88.0" fitWidth="85.0" layoutX="89.0" layoutY="14.0">
+            <ImageView fitHeight="88.0" fitWidth="101.0" layoutX="82.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../icon/ordericon.png" />
+                  <Image url="@../icon/order.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <TableView layoutX="25.0" layoutY="275.0" prefHeight="401.0" prefWidth="362.0">
+      <TableView layoutX="25.0" layoutY="275.0" prefHeight="591.0" prefWidth="362.0" stylesheets="@../css/sidePane.css" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="693.0" AnchorPane.topAnchor="275.0">
         <columns>
           <TableColumn prefWidth="95.0" text="Item ID" />
           <TableColumn prefWidth="188.0" text="Item Name" />
             <TableColumn prefWidth="78.0" text="QTY" />
         </columns>
       </TableView>
-      <Label layoutX="27.0" layoutY="242.0" text="Most Sell Items" textFill="WHITE">
+      <Label layoutX="27.0" layoutY="242.0" text="Most Sell Items">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <AreaChart layoutX="415.0" layoutY="277.0" prefHeight="401.0" prefWidth="621.0" style="-fx-background-color: red;" title="Order Details">
+      <AreaChart layoutX="420.0" layoutY="376.0" prefHeight="487.0" prefWidth="635.0" styleClass="shadow" stylesheets="@../css/sidePane.css" title="Order Details" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="376.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+          <NumberAxis side="LEFT" />
         </yAxis>
       </AreaChart>
-      <AnchorPane layoutX="599.0" layoutY="24.0" prefHeight="200.0" prefWidth="418.0" style="-fx-background-color: #121212; -fx-background-radius: 20;">
+      <AnchorPane layoutX="565.0" layoutY="24.0" prefHeight="316.0" prefWidth="493.0" style="-fx-background-color: E7E7E7FF; -fx-background-radius: 20;" styleClass="shadow1" stylesheets="@../css/sidePane.css" AnchorPane.topAnchor="23.0">
          <children>
-            <Label layoutX="24.0" layoutY="104.0" text="Total Income" textFill="WHITE">
+            <Label layoutX="16.0" layoutY="27.0" text="Total Income">
                <font>
                   <Font name="System Bold" size="19.0" />
                </font>
@@ -84,19 +84,12 @@
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
-            <LineChart layoutX="163.0" layoutY="10.0" prefHeight="188.0" prefWidth="243.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" tickLabelFill="WHITE" />
-              </yAxis>
-            </LineChart>
             <Label layoutX="70.0" layoutY="142.0" prefHeight="31.0" prefWidth="0.0" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
+            <PieChart layoutX="155.0" layoutY="22.0" prefHeight="271.0" prefWidth="314.0" />
          </children>
       </AnchorPane>
    </children>

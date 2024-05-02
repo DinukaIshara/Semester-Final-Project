@@ -13,233 +13,249 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="755.0" prefWidth="1055.0" style="-fx-background-color: #272727; -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.RepairFormController">
+<AnchorPane prefHeight="890.0" prefWidth="1080.0" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.RepairFormController">
    <children>
-      <Pane layoutX="-1.0" layoutY="190.0" prefHeight="230.0" prefWidth="1025.0" style="-fx-background-color: #272727;" styleClass="gray-pane" />
-      <Pane layoutX="12.0" layoutY="7.0" prefHeight="180.0" prefWidth="448.0" style="-fx-background-color: #272727; -fx-background-radius: 20px;">
+      <AnchorPane layoutX="31.0" layoutY="107.0" prefHeight="304.0" prefWidth="1025.0" style="-fx-background-color: E7E7E7FF; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../css/sidePane.css">
          <children>
-            <HBox layoutY="20.0" prefHeight="30.0" prefWidth="390.0">
+            <Pane layoutX="19.0" layoutY="19.0" prefHeight="220.0" prefWidth="465.0">
                <children>
-                  <Label prefHeight="29.0" prefWidth="174.0" text="Repair Id " textFill="WHITE">
+                  <HBox layoutY="20.0" prefHeight="30.0" prefWidth="390.0">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="174.0" text="Repair Id ">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label text=":">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="txtRepairId" prefHeight="29.0" prefWidth="171.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox layoutY="60.0" prefHeight="30.0" prefWidth="417.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="173.0" text="Customer Tel">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefHeight="29.0" text=":">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXComboBox fx:id="cmbCustomerTel" onAction="#cmbCustomerTelOnAction" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: white;" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+                     </children>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox layoutY="100.0" prefHeight="30.0" prefWidth="396.0">
+                     <children>
+                        <Label prefHeight="22.0" prefWidth="172.0" text="Customer Name">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label prefHeight="29.0" text=":">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="lblCustomerName" prefHeight="29.0" textFill="#0088ff">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <Label layoutX="20.0" layoutY="139.0" prefHeight="29.0" prefWidth="141.0" text="Customer ID">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
                   </Label>
-                  <Label text=":" textFill="WHITE">
+                  <Label fx:id="lblCustomerId" layoutX="209.0" layoutY="140.0" textFill="#0088ff">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXButton buttonType="RAISED" layoutX="388.0" layoutY="102.0" onAction="#btnAddCustomerOnAction" prefHeight="38.0" prefWidth="74.0" styleClass="sale" stylesheets="@../css/style.css" text="+ New" textFill="WHITE" />
+                  <Label layoutX="194.0" layoutY="140.0" text=":">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
                   </Label>
-                  <TextField fx:id="txtRepairId" editable="false" prefHeight="28.0" prefWidth="103.0" styleClass="green-box-text-field">
+                  <Label layoutX="20.0" layoutY="181.0" prefHeight="29.0" prefWidth="141.0" text="Item Name">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="194.0" layoutY="182.0" text=":">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtItemName" layoutX="209.0" layoutY="181.0" prefHeight="30.0" prefWidth="170.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+               </children>
+            </Pane>
+            <Pane layoutX="498.0" layoutY="20.0" prefHeight="174.0" prefWidth="525.0">
+               <children>
+                  <HBox layoutY="16.0" prefHeight="30.0" prefWidth="605.0">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="129.0" text="Recive Date">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text=":">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <DatePicker fx:id="txtReceiveDate" editable="false" onAction="#dpReceiveDateOnAction" onMouseClicked="#checkCustomerIsSelect" prefHeight="28.0" prefWidth="200.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox layoutY="54.0" prefHeight="39.0" prefWidth="605.0">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="129.0" text="Return Date">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text=":">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <DatePicker fx:id="txtReturnDate" editable="false" onAction="#dpReturnDateOnAction" onMouseClicked="#checkCustomerIsSelect" prefHeight="25.0" prefWidth="200.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox layoutY="89.0" prefHeight="30.0" prefWidth="605.0">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="129.0" text="Description">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label text=":">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="txtDescription" onMouseClicked="#checkCustomerIsSelect" prefHeight="32.0" prefWidth="295.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <Label layoutX="22.0" layoutY="128.0" prefHeight="29.0" prefWidth="131.0" text="Cost">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="159.0" layoutY="130.0" text=":">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtCost" layoutX="196.0" layoutY="126.0" onMouseClicked="#checkCustomerIsSelect" prefHeight="32.0" prefWidth="295.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </TextField>
                </children>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </HBox>
-            <HBox layoutY="60.0" prefHeight="24.0" prefWidth="417.0">
-               <children>
-                  <Label prefHeight="21.0" prefWidth="173.0" text="Customer Tel" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label prefHeight="29.0" text=":" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <JFXComboBox prefHeight="30.0" prefWidth="146.0" />
-               </children>
-               <padding>
-                  <Insets left="20.0" right="20.0" />
-               </padding>
-            </HBox>
-            <HBox layoutY="100.0" prefHeight="30.0" prefWidth="396.0">
-               <children>
-                  <Label prefHeight="22.0" prefWidth="172.0" text="Customer Name" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
-                  <Label prefHeight="29.0" text=":" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </HBox>
-            <Label layoutX="20.0" layoutY="139.0" prefHeight="29.0" prefWidth="141.0" text="Item Name" textFill="WHITE">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <JFXButton buttonType="RAISED" layoutX="365.0" layoutY="91.0" onAction="#btnAddCustomerOnAction" prefHeight="30.0" prefWidth="72.0" style="-fx-background-color: green;" text="+ New" textFill="WHITE" />
-            <TextField fx:id="txtItemName" editable="false" layoutX="210.0" layoutY="139.0" prefHeight="28.0" prefWidth="146.0" styleClass="green-box-text-field">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="194.0" layoutY="140.0" text=":" textFill="WHITE">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Pane layoutX="470.0" layoutY="11.0" prefHeight="239.0" prefWidth="579.0" style="-fx-background-color: #272727; -fx-background-radius: 20px;">
-         <children>
-            <HBox layoutY="16.0" prefHeight="30.0" prefWidth="605.0">
-               <children>
-                  <Label prefHeight="29.0" prefWidth="129.0" text="Recive Date" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label text=":" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </Label>
-                  <DatePicker fx:id="txtReceiveDate" editable="false" onAction="#dpReceiveDateOnAction" onMouseClicked="#checkCustomerIsSelect" prefHeight="28.0" prefWidth="200.0" styleClass="green-box-text-field" />
-               </children>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </HBox>
-            <HBox layoutY="54.0" prefHeight="30.0" prefWidth="605.0">
-               <children>
-                  <Label prefHeight="29.0" prefWidth="129.0" text="Return Date" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label text=":" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </Label>
-                  <DatePicker fx:id="txtReturnDate" editable="false" onAction="#dpReturnDateOnAction" onMouseClicked="#checkCustomerIsSelect" prefHeight="25.0" prefWidth="200.0" styleClass="green-box-text-field" />
-               </children>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </HBox>
-            <HBox layoutY="89.0" prefHeight="30.0" prefWidth="605.0">
-               <children>
-                  <Label prefHeight="29.0" prefWidth="129.0" text="Description" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label text=":" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="txtDescription" onMouseClicked="#checkCustomerIsSelect" prefHeight="29.0" prefWidth="349.0" styleClass="green-text-Field">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="14.0" />
-                     </font>
-                  </TextField>
-               </children>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-            </HBox>
-            <JFXButton buttonType="RAISED" layoutX="327.0" layoutY="184.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" style="-fx-background-color: #f39c12;" text="Update" textFill="WHITE">
+            </Pane>
+            <JFXButton buttonType="RAISED" layoutX="632.0" layoutY="244.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="457.0" layoutY="184.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="758.0" layoutY="244.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Delete" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="199.0" layoutY="184.0" onAction="#btnSaveOnAction" prefWidth="80.0" ripplerFill="BLACK" style="-fx-background-color: #05BEF3;" text="Save" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="514.0" layoutY="244.0" onAction="#btnSaveOnAction" prefWidth="80.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Save" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <Label layoutX="22.0" layoutY="129.0" prefHeight="29.0" prefWidth="131.0" text="Cost" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="878.0" layoutY="244.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Clear" textFill="WHITE">
                <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-            </Label>
-            <Label layoutX="159.0" layoutY="130.0" text=":" textFill="WHITE">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtCost" layoutX="196.0" layoutY="127.0" onMouseClicked="#checkCustomerIsSelect" prefHeight="29.0" prefWidth="349.0" styleClass="green-text-Field">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </TextField>
+            </JFXButton>
          </children>
-      </Pane>
-      <Pane layoutX="-1.0" layoutY="244.0" prefHeight="456.0" prefWidth="1055.0" style="-fx-background-color: #272727;" styleClass="gray-pane">
-         <children>
-            <TableView fx:id="tblReturnedRepair" layoutX="14.0" layoutY="43.0" prefHeight="392.0" prefWidth="1025.0">
-               <columns>
-                  <TableColumn fx:id="colRepairId" prefWidth="75.0" text="Repair Id" />
-                  <TableColumn fx:id="colItemName" prefWidth="132.0" text="Item Name" />
-                  <TableColumn fx:id="colReturncolDescriptionedDescription" prefWidth="259.0" text="Description" />
-                  <TableColumn fx:id="colCustomerId" prefWidth="111.0" text="Customer Id" />
-                  <TableColumn fx:id="colCost" prefWidth="127.0" text="Cost" />
-                  <TableColumn fx:id="colReceiveDate" prefWidth="166.0" text="Receive Date" />
-                  <TableColumn fx:id="colReturnDate" prefWidth="154.0" text="True return Date" />
-               </columns>
-            </TableView>
-            <Label alignment="CENTER" layoutY="3.0" prefHeight="24.0" prefWidth="1047.0" text="Returned Repair" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      </AnchorPane>
+      <TableView fx:id="tblReturnedRepair" layoutX="28.0" layoutY="436.0" prefHeight="407.0" prefWidth="1025.0" stylesheets="@../css/sidePane.css">
+         <columns>
+            <TableColumn fx:id="colRepairId" prefWidth="75.0" text="Repair Id" />
+            <TableColumn fx:id="colItemName" prefWidth="132.0" text="Item Name" />
+            <TableColumn fx:id="colReturncolDescriptionedDescription" prefWidth="259.0" text="Description" />
+            <TableColumn fx:id="colCustomerId" prefWidth="111.0" text="Customer Id" />
+            <TableColumn fx:id="colCost" prefWidth="127.0" text="Cost" />
+            <TableColumn fx:id="colReceiveDate" prefWidth="166.0" text="Receive Date" />
+            <TableColumn fx:id="colReturnDate" prefWidth="154.0" text="True return Date" />
+         </columns>
+      </TableView>
+      <Label layoutX="400.0" layoutY="30.0" prefHeight="30.0" prefWidth="299.0" text="Repair Managemant" textFill="#0088ff">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
