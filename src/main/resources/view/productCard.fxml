@@ -10,7 +10,7 @@
 <AnchorPane fx:id="card_form" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../css/sidePane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.ProductCardController">
    <children>
       <ImageView fx:id="itemImage" fitHeight="109.0" fitWidth="190.0" layoutX="22.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnAddtoCart" layoutX="126.0" layoutY="165.0" mnemonicParsing="false" onAction="#btnAddtoCartOnAction" prefHeight="25.0" prefWidth="81.0" styleClass="sale" stylesheets="@../css/style.css" text="Add" />
+      <Button fx:id="btnAddToCart" layoutX="126.0" layoutY="165.0" mnemonicParsing="false" onAction="#btnAddToCartOnAction" prefHeight="25.0" prefWidth="81.0" styleClass="sale" stylesheets="@../css/style.css" text="Add" />
       <TextField fx:id="txtQty" layoutX="52.0" layoutY="166.0" prefHeight="24.0" prefWidth="51.0" promptText="Qty" />
       <Label fx:id="lblItemName" layoutX="14.0" layoutY="6.0" prefHeight="21.0" prefWidth="151.0" text="Spaghetti">
          <font>

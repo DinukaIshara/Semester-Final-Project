@@ -130,7 +130,7 @@ public class PPlaceOrderFormController {
 
     private List<ProductCard> productCards = new ArrayList<>();
 
-    ObservableList<ProductCard> obbList = FXCollections.observableArrayList();
+    List<BrandNewItem> itemList = BrandNewItemRepo.getAll();
 
     public void initialize() {
         setDateAndTime();
@@ -152,21 +152,35 @@ public class PPlaceOrderFormController {
     }
 
     private List<ProductCard> getData(){
-        List<ProductCard> productCards = new ArrayList<>();
-        ProductCard productCard;
+        ProductCard pc = null;
 
-        for (int i = 0; i < 30; i++){
-            productCard = new ProductCard();
+        try {
+            //List<BrandNewItem> itemList = BrandNewItemRepo.getAll();
+            List<ItemSupplierDetail> supplierDetail = ItemSupplierDetailRepo.getAll();
+            for(ItemSupplierDetail itemSupplier : supplierDetail) {
 
-            productCard.setItemName("Laptop");
-            productCard.setPrice(45);
-            productCard.setHandOnQty(8);
-            //productCard.setImage("src/main/resources/image/Turquoise Blue Shoes Realistic Product Promotion Facebook Post(1).png");
-
-            System.out.println("getData = "+productCard);
+                String item_name = null;
 
 
-            productCards.add(productCard);
+                for (BrandNewItem brandNewItemTm : itemList){
+                    if (brandNewItemTm.getItemId().equals(itemSupplier.getItemId())){
+                        item_name =   brandNewItemTm.getName();
+                    }
+                }
+
+
+                pc = new ProductCard(
+
+                        item_name,
+                        itemSupplier.getUnitPrice(),
+                        itemSupplier.getQty()
+                );
+
+                productCards.add(pc);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return productCards;
@@ -181,7 +195,7 @@ public class PPlaceOrderFormController {
         int row = 1;
 
         try {
-            for (int i = 0; i < productCards.size(); i++){
+            for (int i = 0; i < itemList.size(); i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/view/productCard.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();

@@ -17,6 +17,7 @@ import java.util.Objects;
 public class ProductCardController {
 
 
+    public Button btnAddToCart;
     @FXML
     private Button btnAddtoCart;
 
@@ -40,10 +41,6 @@ public class ProductCardController {
 
     private ProductCard productCard;
 
-    @FXML
-    void btnAddtoCartOnAction(ActionEvent event) {
-
-    }
 
     public void setData(ProductCard productCard) {
         this.productCard = productCard;
@@ -59,6 +56,11 @@ public class ProductCardController {
 
         System.out.println("setData = " + productCard);
 
+
+    }
+
+    @FXML
+    public void btnAddToCartOnAction(ActionEvent actionEvent) {
 
     }
 }

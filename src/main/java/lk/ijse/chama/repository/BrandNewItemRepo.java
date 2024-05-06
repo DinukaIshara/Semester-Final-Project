@@ -36,30 +36,37 @@ public class BrandNewItemRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static List<BrandNewItem> getAll() throws SQLException {
+    public static List<BrandNewItem> getAll() {
         String sql = "SELECT * FROM item";
+        List<BrandNewItem> itemList;
 
-        PreparedStatement pstm = DbConnection.getInstance().getConnection()
-                .prepareStatement(sql);
+        PreparedStatement pstm = null;
+        try {
+            pstm = DbConnection.getInstance().getConnection()
+                    .prepareStatement(sql);
+            ResultSet resultSet = pstm.executeQuery();
 
-        ResultSet resultSet = pstm.executeQuery();
+            itemList = new ArrayList<>();
 
-        List<BrandNewItem> itemList = new ArrayList<>();
+            while (resultSet.next()) {
+                String id = resultSet.getString(1);
+                String name = resultSet.getString(2);
+                String category = resultSet.getString(3);
+                String brand = resultSet.getString(4);
+                String modelNo = resultSet.getString(5);
+                String warranty = resultSet.getString(6);
+                String description = resultSet.getString(7);
+                String type = resultSet.getString(8);
+                String path = resultSet.getString(9);
 
-        while (resultSet.next()) {
-            String id = resultSet.getString(1);
-            String name = resultSet.getString(2);
-            String category = resultSet.getString(3);
-            String brand = resultSet.getString(4);
-            String modelNo = resultSet.getString(5);
-            String warranty = resultSet.getString(6);
-            String description = resultSet.getString(7);
-            String type = resultSet.getString(8);
-            String path = resultSet.getString(9);
-
-            BrandNewItem item = new BrandNewItem(id, name, category, brand, modelNo, warranty, description, type, path);
-            itemList.add(item);
+                BrandNewItem item = new BrandNewItem(id, name, category, brand, modelNo, warranty, description, type, path);
+                itemList.add(item);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
+
         return itemList;
     }
 
