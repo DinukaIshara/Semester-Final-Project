@@ -1,6 +1,5 @@
 package lk.ijse.chama.controller;
 
-import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +11,7 @@ import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.RepairTm;
 import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.RepairRepo;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -20,10 +20,10 @@ import java.util.List;
 public class RepairFormController {
 
     @FXML
-    private Label lblCustomerId;
+    private TextField txtCustomerTel;
 
     @FXML
-    private JFXComboBox<String> cmbCustomerTel;
+    private Label lblCustomerId;
 
     @FXML
     private TableColumn<?, ?> colCost;
@@ -120,8 +120,7 @@ public class RepairFormController {
             for(String tel : telList) {
                 obList.add(tel);
             }
-
-            cmbCustomerTel.setItems(obList);
+            TextFields.bindAutoCompletion(txtCustomerTel,obList);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -173,7 +172,6 @@ public class RepairFormController {
         String description = txtDescription.getText();
         String custId = lblCustomerId.getText();
         String itemName = txtItemName.getText();
-        System.out.println(lblCustomerId.getText());
 
         var repair = new Repair(repairId, reciveDate, returnDate, cost, description, custId, itemName);
 
@@ -193,20 +191,6 @@ public class RepairFormController {
     @FXML
     void checkCustomerIsSelect(MouseEvent event) {
 
-    }
-
-    @FXML
-    void cmbCustomerTelOnAction(ActionEvent event) {
-        String tel = cmbCustomerTel.getValue();
-        try {
-            Customer customer = CustomerRepo.searchById(tel);
-
-            lblCustomerName.setText(customer.getCName());
-            lblCustomerId.setText(customer.getCustId());
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @FXML
@@ -230,6 +214,22 @@ public class RepairFormController {
         txtItemName.setText("");
         txtReceiveDate.setValue(null);
         txtReturnDate.setValue(null);
+        txtCustomerTel.setText("");
+        lblCustomerId.setText("");
+        lblCustomerName.setText("");
 
+    }
+
+    public void txtCustomerTelOnAction(ActionEvent actionEvent) {
+        String tel = txtCustomerTel.getText();
+        try {
+            Customer customer = CustomerRepo.searchById(tel);
+
+            lblCustomerName.setText(customer.getCName());
+            lblCustomerId.setText(customer.getCustId());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

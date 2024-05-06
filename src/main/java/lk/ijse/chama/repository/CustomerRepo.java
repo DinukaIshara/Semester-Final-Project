@@ -73,6 +73,7 @@ public class CustomerRepo {
         return null;
     }
 
+
     public static List<Customer> getAll() throws SQLException {
         String sql = "SELECT * FROM customer";
 

@@ -1,7 +1,7 @@
 .nav-btn{
     -fx-background-color: #e7e7e7;
     -fx-border-color: #05bef3;
-    -fx-border-radius: 50px;
+    -fx-border-radius: 15px;
     -fx-border-width: 4px;
     -fx-cursor: hand;
     -fx-text-fill: #5b5b5b;
@@ -9,7 +9,7 @@
 }
 .nav-btn:hover{
     -fx-background-color: #05bef3;
-    -fx-text-fill: #000000;
+    -fx-text-fill: #ffffff;
     -fx-background-radius: 50px;
 }
 

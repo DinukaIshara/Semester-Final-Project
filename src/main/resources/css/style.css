@@ -1,26 +1,31 @@
-.sale {
-    -fx-padding: 8 11 11 11;
-    -fx-background-insets: 0,0 0 5 0,0 0 6 0,0 0 7 0;
-    -fx-background-radius: 8;
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #0081ff 0%, #0081ff 100%),
-    #0081ff,
-    #05bef3,
-    radial-gradient(center 50% 50%, radius 100%, #0081ff, #05bef3);
+
+.sale
+{
+    -fx-background-color:
+            linear-gradient(#25c8f6, #05bef3),
+            radial-gradient(center 50% -40%, radius 200%, #05bef3 45%, #0081ff 50%);
+    -fx-background-radius: 6,5;
+    -fx-background-insets: 0,1;
+
+
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),4,0,0,1);
-    -fx-font-weight: bold;
-    -fx-font-size: 1.1em;
-    -fx-text-fill: white;
+    -fx-text-fill: #ffffff;
+}
+
+.sale:hover
+{
+    -fx-background-color:
+            linear-gradient(#25c8f6, #05bef3),
+            radial-gradient(center 50% -40%, radius 200%, #0081ff 45%, #25c8f6 50%);
+    -fx-background-radius: 6,5;
+    -fx-background-insets: 0,1;
+
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0.0, 0, 1);
+    -fx-text-fill: #ffffff;
+    -fx-font-weight:bold;
 
 }
 
-.sale:hover {
-    -fx-background-color: linear-gradient(from 0% 93% to 0% 100%, #0081ff 0%, #05bef3 100%),
-    #05bef3,
-    #05bef3,
-    radial-gradient(center 50% 50%, radius 100%, #0081ff, #05bef3);
-}
-
-.sale:pressed {
-    -fx-padding: 10, 12, 10, 12;
-    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
 }

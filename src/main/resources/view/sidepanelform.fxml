@@ -16,7 +16,7 @@
       <AnchorPane fx:id="childRootNode" layoutX="325.0" layoutY="75.0" prefHeight="890.0" prefWidth="1080.0" style="-fx-background-color: EEEEEEFF; -fx-background-radius: 30;" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="75.0" />
       <AnchorPane prefHeight="978.0" prefWidth="317.0" style="-fx-background-color: white;">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="156.0" onAction="#btnDashboardOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 50;" styleClass="nav-btn" text="                Dashboard" textAlignment="RIGHT" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="156.0" onAction="#btnDashboardOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 15;" styleClass="nav-btn" text="                Dashboard" textAlignment="RIGHT" textFill="WHITE" AnchorPane.leftAnchor="25.0">
                <stylesheets>
                   <URL value="@../css/sidePane.css" />
                   <URL value="@../css/sidePane.css" />
@@ -25,7 +25,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="236.0" onAction="#btnItemOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 50;" styleClass="nav-btn" text="       Item" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="236.0" onAction="#btnItemOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 15;" styleClass="nav-btn" text="       Item" textFill="WHITE" AnchorPane.leftAnchor="25.0">
                <stylesheets>
                   <URL value="@../css/sidePane.css" />
                   <URL value="@../css/sidePane.css" />
@@ -34,7 +34,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="316.0" onAction="#btnPlaceOrderOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 50;" styleClass="nav-btn" text="                  Place Order" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="316.0" onAction="#btnPlaceOrderOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 15;" styleClass="nav-btn" text="                  Place Order" textFill="WHITE" AnchorPane.leftAnchor="25.0">
                <stylesheets>
                   <URL value="@../css/sidePane.css" />
                   <URL value="@../css/sidePane.css" />
@@ -43,7 +43,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="397.0" onAction="#btnCustomerOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 50;" styleClass="nav-btn" text="               Customer" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="397.0" onAction="#btnCustomerOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 15;" styleClass="nav-btn" text="               Customer" textFill="WHITE" AnchorPane.leftAnchor="25.0">
                <stylesheets>
                   <URL value="@../css/sidePane.css" />
                   <URL value="@../css/sidePane.css" />
@@ -52,7 +52,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="476.0" onAction="#btnSupplierOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 50;" styleClass="nav-btn" text="            Supplier" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="476.0" onAction="#btnSupplierOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 15;" styleClass="nav-btn" text="            Supplier" textFill="WHITE" AnchorPane.leftAnchor="25.0">
                <stylesheets>
                   <URL value="@../css/sidePane.css" />
                   <URL value="@../css/sidePane.css" />
@@ -61,7 +61,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="556.0" onAction="#btnEmployeeOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 50;" styleClass="nav-btn" text="               Employee" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="556.0" onAction="#btnEmployeeOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 15;" styleClass="nav-btn" text="               Employee" textFill="WHITE" AnchorPane.leftAnchor="25.0">
                <stylesheets>
                   <URL value="@../css/sidePane.css" />
                   <URL value="@../css/sidePane.css" />
@@ -70,7 +70,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="636.0" onAction="#btnRepairOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 50;" styleClass="nav-btn" text="         Repair" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="636.0" onAction="#btnRepairOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 15;" styleClass="nav-btn" text="         Repair" textFill="WHITE" AnchorPane.leftAnchor="25.0">
                <stylesheets>
                   <URL value="@../css/sidePane.css" />
                   <URL value="@../css/sidePane.css" />
@@ -79,7 +79,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="714.0" onAction="#btnTransportOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 50;" styleClass="nav-btn" text="               Transport" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="714.0" onAction="#btnTransportOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 15;" styleClass="nav-btn" text="               Transport" textFill="WHITE" AnchorPane.leftAnchor="25.0">
                <stylesheets>
                   <URL value="@../css/sidePane.css" />
                   <URL value="@../css/sidePane.css" />
@@ -88,7 +88,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="791.0" onAction="#btnReportOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 50;" styleClass="nav-btn" text="          Report" textFill="WHITE" AnchorPane.leftAnchor="25.0">
+            <JFXButton buttonType="RAISED" layoutX="25.0" layoutY="791.0" onAction="#btnReportOnAction" prefHeight="65.0" prefWidth="270.0" style="-fx-background-radius: 15;" styleClass="nav-btn" text="          Report" textFill="WHITE" AnchorPane.leftAnchor="25.0">
                <stylesheets>
                   <URL value="@../css/sidePane.css" />
                   <URL value="@../css/sidePane.css" />
@@ -106,7 +106,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <Pane layoutX="26.0" layoutY="12.0" prefHeight="126.0" prefWidth="270.0" style="-fx-background-color: black; -fx-background-radius: 20;" styleClass="shadow1" stylesheets="@../css/sidePane.css">
+            <Pane layoutX="26.0" layoutY="12.0" prefHeight="126.0" prefWidth="270.0" style="-fx-background-color: #b4b4b4; -fx-background-radius: 20;" styleClass="shadow1" stylesheets="@../css/sidePane.css">
                <children>
                   <ImageView fitHeight="82.0" fitWidth="78.0" layoutX="17.0" layoutY="18.0">
                      <image>
@@ -190,7 +190,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Pane layoutX="325.0" layoutY="9.0" prefHeight="37.0" prefWidth="1080.0" style="-fx-background-radius: 15; -fx-background-color: black;" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="9.0">
+      <Pane layoutX="325.0" layoutY="9.0" prefHeight="37.0" prefWidth="1080.0" style="-fx-background-radius: 15; -fx-background-color: #b4b4b4;" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="9.0">
          <children>
             <ImageView fitHeight="21.0" fitWidth="116.0" layoutX="490.0" layoutY="9.0">
                <image>

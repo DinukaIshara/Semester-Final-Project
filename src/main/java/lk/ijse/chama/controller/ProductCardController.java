@@ -5,44 +5,60 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.chama.model.BrandNewItem;
+import lk.ijse.chama.model.ProductCard;
+
+import java.util.Objects;
 
 public class ProductCardController {
+
+
+    @FXML
+    private Button btnAddtoCart;
 
     @FXML
     private AnchorPane card_form;
 
     @FXML
-    private Button prod_addBtn;
+    private ImageView itemImage;
 
     @FXML
-    private ImageView prod_imageView;
+    private Label lblHandOnQty;
 
     @FXML
-    private Label prod_name;
+    private Label lblItemName;
 
     @FXML
-    private Label prod_price;
+    private Label lblPrice;
 
     @FXML
-    private Spinner<?> prod_spinner;
+    private TextField txtQty;
+
+    private ProductCard productCard;
 
     @FXML
-    void btnAddOnAction(ActionEvent event) {
+    void btnAddtoCartOnAction(ActionEvent event) {
 
     }
-    public void setData(BrandNewItem item) {
-        /*Image image = new Image(getClass().getResourceAsStream(String.valueOf(item.getImage()));
-        prod_imageView.setImage(image);
 
-        prod_name.setText(item.getItrmName());
+    public void setData(ProductCard productCard) {
+        this.productCard = productCard;
 
-        prod_price.setText(String.valueOf(item.getPrice()));
+        lblItemName.setText(productCard.getItemName());
+        lblPrice.setText(String.valueOf(productCard.getPrice()));
+        lblHandOnQty.setText(String.valueOf(productCard.getHandOnQty()));
+        //spinnerQty.setPromptText(String.valueOf(productCard.getQty()));
+        //Image image = new Image(productCard.getImage());
+        //itemImage.setImage(image);
+        //System.out.println(productCard.getImage());
 
-        prod_spinner.setPromptText(String.valueOf(item.getQty()));
-*/
+
+        System.out.println("setData = " + productCard);
+
+
     }
 }

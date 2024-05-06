@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="rootNode" prefHeight="890.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.BrandNewItemFormController">
    <children>
-      <AnchorPane layoutX="26.0" layoutY="78.0" prefHeight="419.0" prefWidth="1032.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../css/sidePane.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="78.0">
+      <AnchorPane layoutX="26.0" layoutY="82.0" prefHeight="391.0" prefWidth="1032.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../css/sidePane.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="82.0">
          <children>
             <TextField fx:id="txtQty" layoutX="587.0" layoutY="181.0" onAction="#txtQtyOnAction" prefHeight="28.0" prefWidth="60.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <Label layoutX="526.0" layoutY="183.0" prefHeight="21.0" prefWidth="48.0" text="Qty :">
@@ -74,11 +74,7 @@
                </font>
             </Label>
             <JFXComboBox fx:id="cmbSupId" layoutX="185.0" layoutY="273.0" onAction="#cmbSupIdOnAction" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: white;" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="302.0" layoutY="272.0" onAction="#btnAddNewSupplierOnAction" prefHeight="38.0" prefWidth="77.0" styleClass="sale" stylesheets="@../css/style.css" text="+ New" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="302.0" layoutY="272.0" onAction="#btnAddNewSupplierOnAction" prefHeight="38.0" prefWidth="77.0" styleClass="sale" stylesheets="@../css/style.css" text="+ New" textFill="WHITE" />
             <Label layoutX="393.0" layoutY="276.0" prefHeight="21.0" prefWidth="178.0" text="Supplier Company :">
                <font>
                   <Font size="18.0" />
@@ -89,44 +85,24 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <JFXButton buttonType="RAISED" layoutX="21.0" layoutY="360.0" onAction="#btnSaveItemOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="+ Save" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="196.0" layoutY="360.0" onAction="#btnUpdateItemOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="375.0" layoutY="360.0" onAction="#btnDeleteItemOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="Delete" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="42.0" layoutY="347.0" onAction="#btnSaveItemOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="+ Save" textFill="WHITE" />
+            <JFXButton buttonType="RAISED" layoutX="217.0" layoutY="347.0" onAction="#btnUpdateItemOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE" />
+            <JFXButton buttonType="RAISED" layoutX="396.0" layoutY="347.0" onAction="#btnDeleteItemOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="Delete" textFill="WHITE" />
             <AnchorPane fx:id="imgRootNode" layoutX="795.0" layoutY="73.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fx:id="itemImage" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand;" />
                </children>
             </AnchorPane>
-            <JFXButton buttonType="RAISED" layoutX="838.0" layoutY="291.0" onAction="#btnPicImportOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="Import" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="539.0" layoutY="360.0" onAction="#btnClearOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="Clear" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </JFXButton>
-            <Label layoutX="499.0" layoutY="29.0" prefHeight="21.0" prefWidth="70.0" text="Type :">
+            <JFXButton buttonType="RAISED" layoutX="838.0" layoutY="291.0" onAction="#btnPicImportOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="Import" textFill="WHITE" />
+            <JFXButton buttonType="RAISED" layoutX="560.0" layoutY="347.0" onAction="#btnClearOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="green" stylesheets="@../css/btnStyles.css" text="Clear" textFill="WHITE" />
+            <Label layoutX="511.0" layoutY="29.0" prefHeight="21.0" prefWidth="70.0" text="Type :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="cmbType" layoutX="578.0" layoutY="24.0" onAction="#cmbtypeOnAction" prefHeight="28.0" prefWidth="178.0" style="-fx-background-color: white;" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
+            <JFXComboBox fx:id="cmbType" layoutX="584.0" layoutY="24.0" onAction="#cmbtypeOnAction" prefHeight="28.0" prefWidth="178.0" style="-fx-background-color: white;" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
          </children></AnchorPane>
-      <TableView fx:id="tableBrandNewItem" layoutX="26.0" layoutY="522.0" prefHeight="334.0" prefWidth="1032.0" stylesheets="@../css/sidePane.css" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="522.0">
+      <TableView fx:id="tableBrandNewItem" layoutX="26.0" layoutY="568.0" prefHeight="288.0" prefWidth="1032.0" stylesheets="@../css/sidePane.css" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="568.0">
          <columns>
             <TableColumn fx:id="colItemId" prefWidth="75.0" text="Item ID" />
             <TableColumn fx:id="colName" prefWidth="227.0" text="Item Name" />
@@ -143,5 +119,10 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <TextField fx:id="txtSearchItemName" layoutX="27.0" layoutY="519.0" onAction="#txtSearchItemNameOnAction" prefHeight="32.0" prefWidth="207.0" promptText="Search Name" style="-fx-background-radius: 15;" stylesheets="@../css/sidePane.css">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

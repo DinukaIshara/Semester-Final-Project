@@ -25,22 +25,22 @@
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="646.0" layoutY="393.0" onAction="#btnUpdateOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="562.0" layoutY="393.0" onAction="#btnUpdateOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="878.0" layoutY="393.0" onAction="#btnClearOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Clear" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="794.0" layoutY="393.0" onAction="#btnClearOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Clear" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="522.0" layoutY="393.0" onAction="#btnSaveOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Add" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="438.0" layoutY="393.0" onAction="#btnSaveOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Add" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="764.0" layoutY="393.0" onAction="#btnDeleteOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Delete" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="680.0" layoutY="393.0" onAction="#btnDeleteOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Delete" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
@@ -137,6 +137,11 @@
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
             </TextField>
+            <JFXButton buttonType="RAISED" layoutX="911.0" layoutY="393.0" onAction="#btnEmployeeReportOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Report" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </JFXButton>
          </children>
       </AnchorPane>
       <TableView fx:id="tblCustomer" layoutX="25.0" layoutY="572.0" prefHeight="283.0" prefWidth="1031.0" stylesheets="@../css/sidePane.css">

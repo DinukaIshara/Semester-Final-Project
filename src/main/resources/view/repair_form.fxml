@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -61,7 +60,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Label>
-                        <JFXComboBox fx:id="cmbCustomerTel" onAction="#cmbCustomerTelOnAction" prefHeight="30.0" prefWidth="171.0" style="-fx-background-color: white;" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+                        <TextField fx:id="txtCustomerTel" onAction="#txtCustomerTelOnAction" prefHeight="30.0" prefWidth="170.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
                      </children>
                      <padding>
                         <Insets left="20.0" right="20.0" />

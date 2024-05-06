@@ -12,6 +12,7 @@ import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.tm.CartTm;
 import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.repository.CustomerRepo;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -70,6 +71,9 @@ public class CustomerFormController {
     @FXML
     private TableColumn<?, ?> colEmail;
 
+    @FXML
+    private TextField txtSearchCustomers;
+
     private ObservableList<CartTm> obList = FXCollections.observableArrayList();
 
     JFXButton btnRemove = new JFXButton("remo");
@@ -77,8 +81,43 @@ public class CustomerFormController {
     public void initialize() {
         setCellValueFactory();
         loadAllCustomers();
+        getCustomerTel();
         //removeButtonOnAction();
 
+    }
+
+    @FXML
+    void txtSearchCustomersOnAction(ActionEvent event) throws SQLException {
+        String tel = txtSearchCustomers.getText();
+
+        Customer customer = CustomerRepo.searchById(String.valueOf(tel));
+        if (customer != null) {
+            txtId.setText(customer.getCustId());
+            txtName.setText(customer.getCName());
+            txtNIC.setText(customer.getCNIC());
+            txtAddress.setText(customer.getCAddress());
+            txtEmail.setText(customer.getCEmail());
+            txtTel.setText(customer.getContactNo());
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
+        }
+    }
+
+    private void getCustomerTel() {
+
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> telList = CustomerRepo.getTel();
+
+            for (String tel : telList) {
+                obList.add(tel);
+            }
+            TextFields.bindAutoCompletion(txtSearchCustomers, obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

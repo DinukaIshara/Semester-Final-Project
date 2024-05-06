@@ -16,6 +16,7 @@ import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.BrandNewItemTm;
 import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.repository.*;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrandNewItemFormController {
+
+    @FXML
+    private TextField txtSearchItemName;
 
     @FXML
     private TableView tableBrandNewItem;
@@ -106,6 +110,7 @@ public class BrandNewItemFormController {
         getType();
         setCellValueFactory();
         loadAllItems();
+        getItemName();
     }
 
     private void setCellValueFactory() {
@@ -414,5 +419,47 @@ public class BrandNewItemFormController {
     @FXML
     void cmbtypeOnAction(ActionEvent actionEvent) {
 
+    }
+
+    public void txtSearchItemNameOnAction(ActionEvent actionEvent) throws SQLException {
+        String name = txtSearchItemName.getText();
+
+        BrandNewItem item = BrandNewItemRepo.searchById(name);
+        //System.out.println(item.getItemId());
+        ItemSupplierDetail isd = ItemSupplierDetailRepo.searchById(item.getItemId());
+        Supplier supplier = SupplierRepo.searchById(isd.getSupId());
+
+        if (item != null) {
+            txtItemId.setText(item.getItemId());
+            txtName.setText(item.getName());
+            txtDescription.setText(item.getDescription());
+            txtModel.setText(item.getModelNo());
+            cmbCategory.setValue(item.getCategory());
+            cmbBrand.setValue(item.getBrand());
+            cmbSupId.setValue(isd.getSupId());
+            lblSupCompany.setText(supplier.getCompanyName());
+            cmbType.setValue(item.getType());
+            txtWaranty.setText(item.getWarranty());
+            txtQty.setText(String.valueOf(isd.getQty()));
+
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
+        }
+    }
+    private void getItemName() {
+
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> telList = BrandNewItemRepo.getName();
+
+            for (String tel : telList) {
+                obList.add(tel);
+            }
+            TextFields.bindAutoCompletion(txtSearchItemName, obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

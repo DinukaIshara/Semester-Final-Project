@@ -31,11 +31,6 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></JFXButton>
-      <ImageView fitHeight="79.0" fitWidth="79.0" layoutX="563.0" layoutY="119.0" opacity="0.6">
-         <image>
-            <Image url="@../icon/icons8-user-48(1).png" />
-         </image>
-      </ImageView>
       <Label layoutX="476.0" layoutY="496.0" text="Do you don't have any account?">
          <font>
             <Font size="11.0" />

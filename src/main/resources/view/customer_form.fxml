@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="rootNode" prefHeight="890.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.CustomerFormController">
    <children>
-      <Pane layoutX="43.0" layoutY="104.0" prefHeight="285.0" prefWidth="998.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 20;" styleClass="shadow1" stylesheets="@../css/sidePane.css">
+      <Pane layoutX="43.0" layoutY="80.0" prefHeight="285.0" prefWidth="998.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 20;" styleClass="shadow1" stylesheets="@../css/sidePane.css">
          <children>
             <JFXButton buttonType="RAISED" layoutX="627.0" layoutY="220.0" onAction="#btnUpdateOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE">
                <font>
@@ -96,7 +96,7 @@
          </children>
       </Pane>
       <Label fx:id="lblCostId" layoutX="233.0" layoutY="36.0" />
-      <TableView fx:id="tblCustomer" layoutX="43.0" layoutY="423.0" prefHeight="421.0" prefWidth="998.0" stylesheets="@../css/sidePane.css">
+      <TableView fx:id="tblCustomer" layoutX="43.0" layoutY="435.0" prefHeight="421.0" prefWidth="998.0" stylesheets="@../css/sidePane.css">
          <columns>
             <TableColumn fx:id="colId" prefWidth="105.0" text="Customer Id" />
             <TableColumn fx:id="colName" prefWidth="142.0" text="Name" />
@@ -112,5 +112,10 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <TextField fx:id="txtSearchCustomers" layoutX="45.0" layoutY="388.0" onAction="#txtSearchCustomersOnAction" prefHeight="32.0" prefWidth="207.0" promptText="Search contact" style="-fx-background-radius: 15;" stylesheets="@../css/sidePane.css">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

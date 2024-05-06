@@ -65,6 +65,21 @@ public class BrandNewItemRepo {
 
     public static List<String> getCode() throws SQLException {
         String sql = "SELECT item_id FROM item";
+
+        ResultSet resultSet = DbConnection.getInstance()
+                .getConnection()
+                .prepareStatement(sql)
+                .executeQuery();
+
+        List<String> idList = new ArrayList<>();
+        while (resultSet.next()) {
+            idList.add(resultSet.getString(1));
+        }
+        return idList;
+    }
+
+    public static List<String> getName() throws SQLException {
+        String sql = "SELECT name FROM item";
         ResultSet resultSet = DbConnection.getInstance()
                 .getConnection()
                 .prepareStatement(sql)
@@ -95,6 +110,7 @@ public class BrandNewItemRepo {
                     resultSet.getString(7),
                     resultSet.getString(8),
                     resultSet.getString(9)
+
             );
         }
         return null;

@@ -7,13 +7,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import lk.ijse.chama.model.*;
+import lk.ijse.chama.model.tm.BrandNewItemTm;
 import lk.ijse.chama.model.tm.CartTm;
+import lk.ijse.chama.model.tm.EmployeeTm;
 import lk.ijse.chama.repository.*;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -27,6 +34,18 @@ import java.util.Optional;
 public class PPlaceOrderFormController {
 
     @FXML
+    private ScrollPane scrollPane;
+
+    @FXML
+    private GridPane gridPane;
+
+    @FXML
+    private TextField txtItemName;
+
+    @FXML
+    private TextField txtCustomerTel;
+
+    @FXML
     private Label lblLocation;
 
     @FXML
@@ -34,9 +53,6 @@ public class PPlaceOrderFormController {
 
     @FXML
     private TableColumn colTotal;
-
-    @FXML
-    private JFXComboBox cmbCustomerTel;
 
     @FXML
     private JFXButton btnAddToCart;
@@ -112,6 +128,10 @@ public class PPlaceOrderFormController {
 
     private ObservableList<CartTm> obList = FXCollections.observableArrayList();
 
+    private List<ProductCard> productCards = new ArrayList<>();
+
+    ObservableList<ProductCard> obbList = FXCollections.observableArrayList();
+
     public void initialize() {
         setDateAndTime();
         getCurrentOrderId();
@@ -120,6 +140,7 @@ public class PPlaceOrderFormController {
         setCellValueFactory();
         getTransportId();
         getPMethod();
+        addAl();
     }
 
     private void setCellValueFactory() {
@@ -128,6 +149,70 @@ public class PPlaceOrderFormController {
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
         colAction.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
+    }
+
+    private List<ProductCard> getData(){
+        List<ProductCard> productCards = new ArrayList<>();
+        ProductCard productCard;
+
+        for (int i = 0; i < 30; i++){
+            productCard = new ProductCard();
+
+            productCard.setItemName("Laptop");
+            productCard.setPrice(45);
+            productCard.setHandOnQty(8);
+            //productCard.setImage("src/main/resources/image/Turquoise Blue Shoes Realistic Product Promotion Facebook Post(1).png");
+
+            System.out.println("getData = "+productCard);
+
+
+            productCards.add(productCard);
+        }
+
+        return productCards;
+
+    }
+
+    private void addAl(){
+        productCards.addAll(getData());
+        System.out.println("getAl = "+productCards.addAll(getData()));
+
+        int col = 0;
+        int row = 1;
+
+        try {
+            for (int i = 0; i < productCards.size(); i++){
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/view/productCard.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+
+
+                ProductCardController productCardController = fxmlLoader.getController();
+                productCardController.setData(productCards.get(i));
+                System.out.println("get(i) = "+productCards.get(i));
+
+                if (col == 2){
+                    col = 0;
+                    row++;
+                }
+
+                gridPane.add(anchorPane, col++, row);
+
+                //set grid width
+                gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
+                gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
+                gridPane.setMaxWidth(Region.USE_PREF_SIZE);
+
+                //set grid height
+                gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
+                gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
+                gridPane.setMaxHeight(Region.USE_PREF_SIZE);
+
+                GridPane.setMargin(anchorPane, new Insets(10));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -140,7 +225,7 @@ public class PPlaceOrderFormController {
 
     @FXML
     void btnAddToCartOnAction(ActionEvent event) {
-        String code = cmbItemName.getValue();
+        String code = txtItemName.getText();
         int qty = Integer.parseInt(txtQty.getText());
         double unitPrice = Double.parseDouble(lblUnitPrice.getText());
         double total = qty * unitPrice;
@@ -235,20 +320,6 @@ public class PPlaceOrderFormController {
     }
 
     @FXML
-    void cmbCustomerTelOnAction(ActionEvent event) {
-        String tel = String.valueOf(cmbCustomerTel.getValue());
-        try {
-            Customer customer = CustomerRepo.searchById(tel);
-
-            lblCustName.setText(customer.getCName());
-            lblCustomerId.setText(customer.getCustId());
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @FXML
     void cmbItemNameOnAction(ActionEvent event) {
         String name = cmbItemName.getValue();
 
@@ -294,7 +365,27 @@ public class PPlaceOrderFormController {
             for (String code : codeList) {
                 obList.add(code);
             }
-            cmbItemName.setItems(obList);
+            TextFields.bindAutoCompletion(txtItemName,obList);
+            //cmbItemName.setItems(obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void txtItemNameOnAction(ActionEvent actionEvent) {
+        String name = txtItemName.getText();
+
+        try {
+            BrandNewItem item = BrandNewItemRepo.searchById(name);
+            ItemSupplierDetail itemDetail = ItemSupplierDetailRepo.searchById(name);
+            if(item != null) {
+                lblModel.setText(item.getCategory());
+                lblUnitPrice.setText(String.valueOf(itemDetail.getUnitPrice()));
+                lblQtyOnHand.setText(String.valueOf(itemDetail.getQty()));
+            }
+
+            txtQty.requestFocus();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -302,7 +393,22 @@ public class PPlaceOrderFormController {
     }
 
     private void getCustomerTel() {
+
         ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> telList = CustomerRepo.getTel();
+
+            for(String tel : telList) {
+                obList.add(tel);
+            }
+            TextFields.bindAutoCompletion(txtCustomerTel,obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        /*ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
             List<String> telList = CustomerRepo.getTel();
@@ -315,7 +421,7 @@ public class PPlaceOrderFormController {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     private void getCurrentOrderId() {
@@ -387,5 +493,21 @@ public class PPlaceOrderFormController {
 
     public void txtAmountOnAction(ActionEvent actionEvent) {
 
+    }
+
+    @FXML
+    void txtCustomerIdOnAction(ActionEvent actionEvent) {
+
+        String tel = txtCustomerTel.getText();
+
+        try {
+            Customer customer = CustomerRepo.searchById(tel);
+
+            lblCustName.setText(customer.getCName());
+            lblCustomerId.setText(customer.getCustId());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
