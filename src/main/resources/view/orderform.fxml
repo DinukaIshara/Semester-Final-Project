@@ -19,48 +19,48 @@
    <children>
       <AnchorPane fx:id="menuRootNode" layoutX="20.0" layoutY="21.0" prefHeight="850.0" prefWidth="651.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../css/sidePane.css">
          <children>
-            <Label layoutX="33.0" layoutY="36.0" text="Order code :">
+            <Label layoutX="30.0" layoutY="25.0" text="Order code :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblOrderCode" layoutX="170.0" layoutY="37.0">
+            <Label fx:id="lblOrderCode" layoutX="167.0" layoutY="26.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="362.0" layoutY="37.0" text="Order Date :">
+            <Label layoutX="359.0" layoutY="26.0" text="Order Date :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblOrderDate" layoutX="496.0" layoutY="37.0">
+            <Label fx:id="lblOrderDate" layoutX="493.0" layoutY="26.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="32.0" layoutY="112.0" text="Customer Tel :">
+            <Label layoutX="30.0" layoutY="110.0" text="Customer Tel :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtCustomerTel" layoutX="189.0" layoutY="108.0" onAction="#txtCustomerIdOnAction" prefHeight="30.0" prefWidth="171.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
-            <JFXButton buttonType="RAISED" layoutX="372.0" layoutY="109.0" onAction="#btnAddCustomerOnAction" style="-fx-background-color: green;" text="+" textFill="WHITE">
+            <TextField fx:id="txtCustomerTel" layoutX="187.0" layoutY="106.0" onAction="#txtCustomerIdOnAction" prefHeight="30.0" prefWidth="171.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <JFXButton buttonType="RAISED" layoutX="370.0" layoutY="107.0" onAction="#btnAddCustomerOnAction" style="-fx-background-color: green;" text="+" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <Label layoutX="32.0" layoutY="145.0" text="Customer Id :">
+            <Label layoutX="30.0" layoutY="140.0" text="Customer Id :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblCustomerId" layoutX="217.0" layoutY="145.0">
+            <Label fx:id="lblCustomerId" layoutX="215.0" layoutY="140.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="32.0" layoutY="169.0" text="Customer Name :">
+            <Label layoutX="30.0" layoutY="169.0" text="Customer Name :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -70,59 +70,58 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="32.0" layoutY="84.0" text="Order Time :">
+            <Label layoutX="30.0" layoutY="60.0" text="Order Time :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblOrderTime" layoutX="176.0" layoutY="78.0">
+            <Label fx:id="lblOrderTime" layoutX="174.0" layoutY="60.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="26.0" layoutY="200.0" text="Item Name :">
+            <Label layoutX="32.0" layoutY="213.0" text="Item Name :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtItemName" layoutX="28.0" layoutY="237.0" onAction="#txtItemNameOnAction" prefHeight="30.0" prefWidth="171.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
-            <JFXComboBox fx:id="cmbItemName" layoutX="22.0" layoutY="278.0" onAction="#cmbItemNameOnAction" prefHeight="33.0" prefWidth="168.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
-            <Label layoutX="225.0" layoutY="200.0" text="Category :">
+            <TextField fx:id="txtItemName" layoutX="34.0" layoutY="250.0" onAction="#txtItemNameOnAction" prefHeight="32.0" prefWidth="125.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <Label layoutX="184.0" layoutY="216.0" text="Category :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblModel" layoutX="245.0" layoutY="235.0">
+            <Label fx:id="lblModel" layoutX="204.0" layoutY="251.0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="354.0" layoutY="200.0" text="Unit Price:">
+            <Label layoutX="313.0" layoutY="216.0" text="Unit Price:">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblUnitPrice" layoutX="370.0" layoutY="234.0">
+            <Label fx:id="lblUnitPrice" layoutX="329.0" layoutY="250.0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="486.0" layoutY="200.0" text="Qty. On Hand:">
+            <Label layoutX="445.0" layoutY="216.0" text="Qty. On Hand:">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblQtyOnHand" layoutX="501.0" layoutY="237.0" prefHeight="19.0" prefWidth="126.0">
+            <Label fx:id="lblQtyOnHand" layoutX="460.0" layoutY="253.0" prefHeight="19.0" prefWidth="126.0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="544.0" layoutY="286.0" text="Qty:">
+            <Label layoutX="497.0" layoutY="272.0" text="Qty:">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtQty" layoutX="534.0" layoutY="321.0" onAction="#txtQtyOnAction" prefHeight="33.0" prefWidth="66.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <TextField fx:id="txtQty" layoutX="544.0" layoutY="267.0" onAction="#txtQtyOnAction" prefHeight="33.0" prefWidth="66.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <JFXButton fx:id="btnAddToCart" buttonType="RAISED" layoutX="507.0" layoutY="803.0" onAction="#btnAddToCartOnAction" prefHeight="33.0" prefWidth="120.0" style="-fx-background-color: #3498db;" text="Add to cart" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -135,33 +134,33 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Label layoutX="32.0" layoutY="317.0" text="Transport ID :">
+            <Label layoutX="34.0" layoutY="731.0" text="Transport ID :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="cmbTransportId" layoutX="32.0" layoutY="347.0" onAction="#cmbTransportIdOnAction" prefHeight="33.0" prefWidth="168.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
-            <Label layoutX="235.0" layoutY="317.0" text="Location">
+            <JFXComboBox fx:id="cmbTransportId" layoutX="34.0" layoutY="761.0" onAction="#cmbTransportIdOnAction" prefHeight="33.0" prefWidth="168.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
+            <Label layoutX="237.0" layoutY="731.0" text="Location">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblLocation" layoutX="251.0" layoutY="352.0">
+            <Label fx:id="lblLocation" layoutX="253.0" layoutY="766.0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="360.0" layoutY="317.0" text="Transport Cost">
+            <Label layoutX="362.0" layoutY="731.0" text="Transport Cost">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblTransportCost" layoutX="376.0" layoutY="351.0">
+            <Label fx:id="lblTransportCost" layoutX="378.0" layoutY="765.0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="scrollPane" layoutX="63.0" layoutY="393.0" prefHeight="400.0" prefWidth="521.0" styleClass="transparent" stylesheets="@../css/style.css">
+            <ScrollPane fx:id="scrollPane" layoutX="64.0" layoutY="313.0" prefHeight="400.0" prefWidth="521.0" style="-fx-background-color: #e8e8e8;" stylesheets="@../css/style.css">
                <content>
                   <GridPane fx:id="gridPane" prefHeight="18.0" prefWidth="61.0">
                     <rowConstraints>
