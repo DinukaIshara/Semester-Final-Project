@@ -21,10 +21,10 @@ public class Regex {
                 filed = "\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b";
                 break;
             case ADDRESS:
-                filed = "";
+                filed = "10";
                 break;
             case CONTACT:
-                filed = "";
+                filed = "1";
                 break;
             case NIC:
                 filed = "";
