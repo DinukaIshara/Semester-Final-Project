@@ -1,28 +1,13 @@
 package lk.ijse.chama.controller;
 
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import lk.ijse.chama.model.BrandNewItem;
+import lk.ijse.chama.MyListener;
 import lk.ijse.chama.model.ProductCard;
 
-import java.util.Objects;
-
 public class ProductCardController {
-
-
-    public Button btnAddToCart;
-    @FXML
-    private Button btnAddtoCart;
-
-    @FXML
-    private AnchorPane card_form;
 
     @FXML
     private ImageView itemImage;
@@ -36,14 +21,14 @@ public class ProductCardController {
     @FXML
     private Label lblPrice;
 
-    @FXML
-    private TextField txtQty;
-
     private ProductCard productCard;
 
+    private MyListener myListener;
 
-    public void setData(ProductCard productCard) {
+
+    public void setData(ProductCard productCard, MyListener myListener) {
         this.productCard = productCard;
+        this.myListener = myListener;
 
         lblItemName.setText(productCard.getItemName());
         lblPrice.setText(String.valueOf(productCard.getPrice()));
@@ -54,13 +39,9 @@ public class ProductCardController {
         //System.out.println(productCard.getImage());
 
 
-        System.out.println("setData = " + productCard);
-
-
     }
-
     @FXML
-    public void btnAddToCartOnAction(ActionEvent actionEvent) {
-
+    public void click(javafx.scene.input.MouseEvent mouseEvent) {
+        myListener.onClickListener(productCard);
     }
 }

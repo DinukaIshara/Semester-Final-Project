@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ProductCard {
+    private String itemId;
     private String itemName;
     private double price;
     //private String image;
     private int handOnQty;
+    private String category;
 }

@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
+import lk.ijse.chama.MyListener;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.BrandNewItemTm;
 import lk.ijse.chama.model.tm.CartTm;
@@ -33,6 +34,10 @@ import java.util.Optional;
 
 public class PPlaceOrderFormController {
 
+    public AnchorPane addToCartItemRootNode;
+    public Label lblItemName;
+    public Label lblItemId;
+    public Label lblCatagory;
     @FXML
     private ScrollPane scrollPane;
 
@@ -58,9 +63,6 @@ public class PPlaceOrderFormController {
     private JFXButton btnAddToCart;
 
     @FXML
-    private JFXComboBox<String> cmbItemName;
-
-    @FXML
     private TableColumn<?, ?> colAction;
 
     @FXML
@@ -74,12 +76,6 @@ public class PPlaceOrderFormController {
 
     @FXML
     private Label lblCustName;
-
-    @FXML
-    private Label lblCustName1;
-
-    @FXML
-    private Label lblModel;
 
     @FXML
     private Label lblNetTotal;
@@ -130,13 +126,17 @@ public class PPlaceOrderFormController {
 
     private List<ProductCard> productCards = new ArrayList<>();
 
+    ProductCard pc = null;
+
+    MyListener myListener;
+
     List<BrandNewItem> itemList = BrandNewItemRepo.getAll();
 
     public void initialize() {
         setDateAndTime();
         getCurrentOrderId();
         getCustomerTel();
-        getItemName();
+        //getItemName();
         setCellValueFactory();
         getTransportId();
         getPMethod();
@@ -152,7 +152,6 @@ public class PPlaceOrderFormController {
     }
 
     private List<ProductCard> getData(){
-        ProductCard pc = null;
 
         try {
             //List<BrandNewItem> itemList = BrandNewItemRepo.getAll();
@@ -160,20 +159,25 @@ public class PPlaceOrderFormController {
             for(ItemSupplierDetail itemSupplier : supplierDetail) {
 
                 String item_name = null;
+                String item_cat = null;
 
 
-                for (BrandNewItem brandNewItemTm : itemList){
-                    if (brandNewItemTm.getItemId().equals(itemSupplier.getItemId())){
-                        item_name =   brandNewItemTm.getName();
+                for (BrandNewItem item : itemList){
+                    if (item.getItemId().equals(itemSupplier.getItemId())){
+                        item_name =   item.getName();
+                        item_cat = item.getCategory();
                     }
                 }
 
 
                 pc = new ProductCard(
 
+                        itemSupplier.getItemId(),
                         item_name,
                         itemSupplier.getUnitPrice(),
-                        itemSupplier.getQty()
+                        itemSupplier.getQty(),
+                        item_cat
+
                 );
 
                 productCards.add(pc);
@@ -191,6 +195,17 @@ public class PPlaceOrderFormController {
         productCards.addAll(getData());
         System.out.println("getAl = "+productCards.addAll(getData()));
 
+        if (productCards.size() > 0){
+            setChosenItem(productCards.get(0));
+
+            myListener = new MyListener() {
+                @Override
+                public void onClickListener(ProductCard productCard) {
+                    setChosenItem(productCard);
+                }
+            };
+        }
+
         int col = 0;
         int row = 1;
 
@@ -202,7 +217,7 @@ public class PPlaceOrderFormController {
 
 
                 ProductCardController productCardController = fxmlLoader.getController();
-                productCardController.setData(productCards.get(i));
+                productCardController.setData(productCards.get(i), myListener);
                 System.out.println("get(i) = "+productCards.get(i));
 
                 if (col == 2){
@@ -229,6 +244,14 @@ public class PPlaceOrderFormController {
         }
     }
 
+    private void setChosenItem(ProductCard productCard){
+        lblItemName.setText(productCard.getItemName());
+        lblCatagory.setText(productCard.getCategory());
+        lblUnitPrice.setText(String.valueOf(productCard.getPrice()));
+        lblItemId.setText(productCard.getItemId());
+
+    }
+
     @FXML
     void btnAddCustomerOnAction(ActionEvent event) throws IOException {
         AnchorPane customerRootNode = FXMLLoader.load(this.getClass().getResource("/view/customer_form.fxml"));
@@ -239,7 +262,7 @@ public class PPlaceOrderFormController {
 
     @FXML
     void btnAddToCartOnAction(ActionEvent event) {
-        String code = txtItemName.getText();
+        String code = lblItemId.getText();//txtItemName.getText();
         int qty = Integer.parseInt(txtQty.getText());
         double unitPrice = Double.parseDouble(lblUnitPrice.getText());
         double total = qty * unitPrice;
@@ -334,26 +357,6 @@ public class PPlaceOrderFormController {
     }
 
     @FXML
-    void cmbItemNameOnAction(ActionEvent event) {
-        String name = cmbItemName.getValue();
-
-        try {
-            BrandNewItem item = BrandNewItemRepo.searchById(name);
-            ItemSupplierDetail itemDetail = ItemSupplierDetailRepo.searchById(name);
-            if(item != null) {
-                lblModel.setText(item.getCategory());
-                lblUnitPrice.setText(String.valueOf(itemDetail.getUnitPrice()));
-                lblQtyOnHand.setText(String.valueOf(itemDetail.getQty()));
-            }
-
-            txtQty.requestFocus();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @FXML
     void cmbPaymentMethod(ActionEvent event) {
 
     }
@@ -371,41 +374,6 @@ public class PPlaceOrderFormController {
         lblOrderTime.setText(String.valueOf(nowTime));
     }
 
-    private void getItemName() {
-        ObservableList<String> obList = FXCollections.observableArrayList();
-        try {
-            List<String> codeList = BrandNewItemRepo.getCode();
-
-            for (String code : codeList) {
-                obList.add(code);
-            }
-            TextFields.bindAutoCompletion(txtItemName,obList);
-            //cmbItemName.setItems(obList);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void txtItemNameOnAction(ActionEvent actionEvent) {
-        String name = txtItemName.getText();
-
-        try {
-            BrandNewItem item = BrandNewItemRepo.searchById(name);
-            ItemSupplierDetail itemDetail = ItemSupplierDetailRepo.searchById(name);
-            if(item != null) {
-                lblModel.setText(item.getCategory());
-                lblUnitPrice.setText(String.valueOf(itemDetail.getUnitPrice()));
-                lblQtyOnHand.setText(String.valueOf(itemDetail.getQty()));
-            }
-
-            txtQty.requestFocus();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void getCustomerTel() {
 
         ObservableList<String> obList = FXCollections.observableArrayList();
@@ -421,21 +389,6 @@ public class PPlaceOrderFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        /*ObservableList<String> obList = FXCollections.observableArrayList();
-
-        try {
-            List<String> telList = CustomerRepo.getTel();
-
-            for(String tel : telList) {
-                obList.add(tel);
-            }
-
-            cmbCustomerTel.setItems(obList);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }*/
     }
 
     private void getCurrentOrderId() {
