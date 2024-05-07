@@ -3,6 +3,7 @@ package lk.ijse.chama.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lk.ijse.chama.MyListener;
 import lk.ijse.chama.model.ProductCard;
@@ -32,10 +33,9 @@ public class ProductCardController {
 
         lblItemName.setText(productCard.getItemName());
         lblPrice.setText(String.valueOf(productCard.getPrice()));
-        lblHandOnQty.setText(String.valueOf(productCard.getHandOnQty()));
         //spinnerQty.setPromptText(String.valueOf(productCard.getQty()));
-        //Image image = new Image(productCard.getImage());
-        //itemImage.setImage(image);
+        Image image = new Image(productCard.getImage());
+        itemImage.setImage(image);
         //System.out.println(productCard.getImage());
 
 

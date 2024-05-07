@@ -11,6 +11,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -38,6 +40,9 @@ public class PPlaceOrderFormController {
     public Label lblItemName;
     public Label lblItemId;
     public Label lblCatagory;
+    public TextField txtSearchItem;
+    public Label lblHandOnQty;
+    public ImageView imageCart;
     @FXML
     private ScrollPane scrollPane;
 
@@ -136,7 +141,6 @@ public class PPlaceOrderFormController {
         setDateAndTime();
         getCurrentOrderId();
         getCustomerTel();
-        //getItemName();
         setCellValueFactory();
         getTransportId();
         getPMethod();
@@ -160,12 +164,14 @@ public class PPlaceOrderFormController {
 
                 String item_name = null;
                 String item_cat = null;
+                String path = null;
 
 
                 for (BrandNewItem item : itemList){
                     if (item.getItemId().equals(itemSupplier.getItemId())){
                         item_name =   item.getName();
                         item_cat = item.getCategory();
+                        path = item.getPath();
                     }
                 }
 
@@ -176,7 +182,8 @@ public class PPlaceOrderFormController {
                         item_name,
                         itemSupplier.getUnitPrice(),
                         itemSupplier.getQty(),
-                        item_cat
+                        item_cat,
+                        path
 
                 );
 
@@ -193,7 +200,6 @@ public class PPlaceOrderFormController {
 
     private void addAl(){
         productCards.addAll(getData());
-        System.out.println("getAl = "+productCards.addAll(getData()));
 
         if (productCards.size() > 0){
             setChosenItem(productCards.get(0));
@@ -201,6 +207,7 @@ public class PPlaceOrderFormController {
             myListener = new MyListener() {
                 @Override
                 public void onClickListener(ProductCard productCard) {
+
                     setChosenItem(productCard);
                 }
             };
@@ -218,7 +225,6 @@ public class PPlaceOrderFormController {
 
                 ProductCardController productCardController = fxmlLoader.getController();
                 productCardController.setData(productCards.get(i), myListener);
-                System.out.println("get(i) = "+productCards.get(i));
 
                 if (col == 2){
                     col = 0;
@@ -227,7 +233,7 @@ public class PPlaceOrderFormController {
 
                 gridPane.add(anchorPane, col++, row);
 
-                //set grid width
+                /*//set grid width
                 gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
                 gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
                 gridPane.setMaxWidth(Region.USE_PREF_SIZE);
@@ -235,7 +241,7 @@ public class PPlaceOrderFormController {
                 //set grid height
                 gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
                 gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                gridPane.setMaxHeight(Region.USE_PREF_SIZE);
+                gridPane.setMaxHeight(Region.USE_PREF_SIZE);*/
 
                 GridPane.setMargin(anchorPane, new Insets(10));
             }
@@ -244,11 +250,16 @@ public class PPlaceOrderFormController {
         }
     }
 
-    private void setChosenItem(ProductCard productCard){
-        lblItemName.setText(productCard.getItemName());
-        lblCatagory.setText(productCard.getCategory());
-        lblUnitPrice.setText(String.valueOf(productCard.getPrice()));
-        lblItemId.setText(productCard.getItemId());
+    private void setChosenItem(ProductCard productCard) {
+
+            lblItemName.setText(productCard.getItemName());
+            lblCatagory.setText(productCard.getCategory());
+            lblUnitPrice.setText(String.valueOf(productCard.getPrice()));
+            lblItemId.setText(productCard.getItemId());
+            lblHandOnQty.setText(String.valueOf(productCard.getHandOnQty()));
+            Image image = new Image(productCard.getImage());
+            imageCart.setImage(image);
+
 
     }
 
