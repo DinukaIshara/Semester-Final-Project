@@ -28,6 +28,8 @@ import org.controlsfx.control.textfield.TextFields;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class PPlaceOrderFormController {
     public TextField txtSearchItem;
     public Label lblHandOnQty;
     public ImageView imageCart;
+    public TextField txtItemNameSearch;
     @FXML
     private ScrollPane scrollPane;
 
@@ -141,6 +144,7 @@ public class PPlaceOrderFormController {
         setDateAndTime();
         getCurrentOrderId();
         getCustomerTel();
+        getItemName();
         setCellValueFactory();
         getTransportId();
         getPMethod();
@@ -233,15 +237,6 @@ public class PPlaceOrderFormController {
 
                 gridPane.add(anchorPane, col++, row);
 
-                /*//set grid width
-                gridPane.setMinWidth(Region.USE_COMPUTED_SIZE);
-                gridPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
-                gridPane.setMaxWidth(Region.USE_PREF_SIZE);
-
-                //set grid height
-                gridPane.setMinHeight(Region.USE_COMPUTED_SIZE);
-                gridPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
-                gridPane.setMaxHeight(Region.USE_PREF_SIZE);*/
 
                 GridPane.setMargin(anchorPane, new Insets(10));
             }
@@ -251,15 +246,13 @@ public class PPlaceOrderFormController {
     }
 
     private void setChosenItem(ProductCard productCard) {
-
-            lblItemName.setText(productCard.getItemName());
-            lblCatagory.setText(productCard.getCategory());
-            lblUnitPrice.setText(String.valueOf(productCard.getPrice()));
-            lblItemId.setText(productCard.getItemId());
-            lblHandOnQty.setText(String.valueOf(productCard.getHandOnQty()));
-            Image image = new Image(productCard.getImage());
-            imageCart.setImage(image);
-
+        lblItemName.setText(productCard.getItemName());
+        lblCatagory.setText(productCard.getCategory());
+        lblUnitPrice.setText(String.valueOf(productCard.getPrice()));
+        lblItemId.setText(productCard.getItemId());
+        lblHandOnQty.setText(String.valueOf(productCard.getHandOnQty()));
+        Image image = new Image(productCard.getImage(),281, 178, false, true);
+        imageCart.setImage(image);
 
     }
 
@@ -273,7 +266,7 @@ public class PPlaceOrderFormController {
 
     @FXML
     void btnAddToCartOnAction(ActionEvent event) {
-        String code = lblItemId.getText();//txtItemName.getText();
+        String code = lblItemName.getText();//txtItemName.getText();
         int qty = Integer.parseInt(txtQty.getText());
         double unitPrice = Double.parseDouble(lblUnitPrice.getText());
         double total = qty * unitPrice;
@@ -367,6 +360,21 @@ public class PPlaceOrderFormController {
         }
     }
 
+    private void getItemName() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+        try {
+            List<String> codeList = BrandNewItemRepo.getName();
+
+            for (String code : codeList) {
+                obList.add(code);
+            }
+            TextFields.bindAutoCompletion(txtItemNameSearch,obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @FXML
     void cmbPaymentMethod(ActionEvent event) {
 
@@ -381,8 +389,10 @@ public class PPlaceOrderFormController {
         LocalDate nowDate = LocalDate.now();
         lblOrderDate.setText(String.valueOf(nowDate));
 
-        LocalTime nowTime = LocalTime.now();
-        lblOrderTime.setText(String.valueOf(nowTime));
+        Time nowTime = Time.valueOf(LocalTime.now());
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm");
+        String time = simpleDateFormat1.format(nowTime);
+        lblOrderTime.setText(time);
     }
 
     private void getCustomerTel() {
@@ -483,6 +493,29 @@ public class PPlaceOrderFormController {
 
             lblCustName.setText(customer.getCName());
             lblCustomerId.setText(customer.getCustId());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void txtItemNameSearchOnAction(ActionEvent actionEvent) {
+        String name = txtItemNameSearch.getText();
+
+        try {
+            BrandNewItem item = BrandNewItemRepo.searchByName(name);
+            ItemSupplierDetail itemDetail = ItemSupplierDetailRepo.searchById(item.getItemId());
+            if(item != null) {
+                lblItemName.setText(item.getName());
+                lblItemId.setText(item.getItemId());
+                Image image = new Image(item.getPath(),281, 178, false, true);
+                imageCart.setImage(image);
+                lblCatagory.setText(item.getCategory());
+                lblUnitPrice.setText(String.valueOf(itemDetail.getUnitPrice()));
+                lblHandOnQty.setText(String.valueOf(itemDetail.getQty()));
+            }
+
+            txtQty.requestFocus();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

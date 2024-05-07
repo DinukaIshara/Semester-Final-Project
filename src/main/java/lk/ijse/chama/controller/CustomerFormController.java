@@ -234,21 +234,25 @@ public class CustomerFormController {
 
     @FXML
     void nameOnAction(ActionEvent event) {
-        addressOnAction(event);
+        txtAddress.requestFocus();
     }
 
     @FXML
     void addressOnAction(ActionEvent event) {
-        nicOnAction(event);
+        txtNIC.requestFocus();
     }
 
     @FXML
     void nicOnAction(ActionEvent event) {
-        telOnAction(event);
+        txtTel.requestFocus();
     }
 
     @FXML
     void telOnAction(ActionEvent event) {
+        txtEmail.requestFocus();
+    }
 
+    public void txtIdOnAction(ActionEvent actionEvent) {
+        txtName.requestFocus();
     }
 }

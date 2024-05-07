@@ -263,7 +263,6 @@ public class EmployeeFormController {
 
         if (file != null) {
 
-          //  Employee.setPath() = file.getAbsolutePath();
             image = new Image(file.toURI().toString(), 153, 176, false, true);
 
             ImgView.setImage(image);

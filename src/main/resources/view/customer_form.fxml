@@ -88,7 +88,7 @@
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <TextField fx:id="txtId" layoutX="153.0" layoutY="50.0" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtId" layoutX="153.0" layoutY="50.0" onAction="#txtIdOnAction" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>

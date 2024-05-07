@@ -89,9 +89,12 @@ public class LoginFormController {
     }
 
     @FXML
+    void txtUserNameOnAction(ActionEvent actionEvent) {
+        txtPassword.requestFocus();
+    }
+
+    @FXML
     void txtPasswordOnAction() throws IOException {
         btnLoginOnAction();
     }
-
-
 }

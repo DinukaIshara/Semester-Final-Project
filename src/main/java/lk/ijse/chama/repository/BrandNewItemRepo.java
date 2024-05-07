@@ -123,6 +123,30 @@ public class BrandNewItemRepo {
         return null;
     }
 
+    public static BrandNewItem searchByName(String name) throws SQLException {
+        String sql = "SELECT * FROM item WHERE name = ?";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        pstm.setObject(1, name);
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            return new BrandNewItem(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8),
+                    resultSet.getString(9)
+
+            );
+        }
+        return null;
+    }
+
     public static boolean update(List<OrderDetail> isList) throws SQLException {
         for (OrderDetail is : isList) {
             System.out.println("qtyUpdate Item");
