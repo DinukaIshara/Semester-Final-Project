@@ -33,10 +33,8 @@ public class ProductCardController {
 
         lblItemName.setText(productCard.getItemName());
         lblPrice.setText(String.valueOf(productCard.getPrice()));
-        //spinnerQty.setPromptText(String.valueOf(productCard.getQty()));
-        Image image = new Image(productCard.getImage(),190, 130, false, true);
+        Image image = new Image(productCard.getImage(),190, 155, false, true);
         itemImage.setImage(image);
-        //System.out.println(productCard.getImage());
 
 
     }

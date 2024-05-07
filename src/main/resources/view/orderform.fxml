@@ -45,7 +45,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtCustomerTel" layoutX="179.0" layoutY="83.0" onAction="#txtCustomerIdOnAction" prefHeight="30.0" prefWidth="171.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <TextField fx:id="txtCustomerTel" layoutX="179.0" layoutY="80.0" onAction="#txtCustomerIdOnAction" prefHeight="30.0" prefWidth="171.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <JFXButton buttonType="RAISED" layoutX="370.0" layoutY="84.0" onAction="#btnAddCustomerOnAction" style="-fx-background-color: green;" text="+" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -107,7 +107,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="scrollPane" layoutX="68.0" layoutY="346.0" prefHeight="464.0" prefWidth="521.0" styleClass="transparent" stylesheets="@../css/style.css">
+            <ScrollPane fx:id="scrollPane" layoutX="70.0" layoutY="326.0" prefHeight="509.0" prefWidth="516.0" styleClass="transparent" stylesheets="@../css/style.css">
                <content>
                   <GridPane fx:id="gridPane" prefHeight="18.0" prefWidth="61.0">
                     <rowConstraints>
@@ -116,7 +116,7 @@
                   </GridPane>
                </content>
             </ScrollPane>
-            <TextField fx:id="txtItemNameSearch" layoutX="30.0" layoutY="301.0" onAction="#txtItemNameSearchOnAction" prefHeight="30.0" prefWidth="171.0" promptText="Search Item" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <TextField fx:id="txtItemNameSearch" layoutX="30.0" layoutY="288.0" onAction="#txtItemNameSearchOnAction" prefHeight="30.0" prefWidth="171.0" promptText="Search Item" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <Line endX="488.0" layoutX="131.0" layoutY="66.0" startX="-100.0" />
             <Line endX="488.0" layoutX="129.0" layoutY="170.0" startX="-100.0" />
             <Line endX="488.0" layoutX="129.0" layoutY="274.0" startX="-100.0" />

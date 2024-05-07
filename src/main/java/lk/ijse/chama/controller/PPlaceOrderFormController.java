@@ -265,7 +265,7 @@ public class PPlaceOrderFormController {
     }
 
     @FXML
-    void btnAddToCartOnAction(ActionEvent event) {
+    void btnAddToCartOnAction() {
         String code = lblItemName.getText();//txtItemName.getText();
         int qty = Integer.parseInt(txtQty.getText());
         double unitPrice = Double.parseDouble(lblUnitPrice.getText());
@@ -382,7 +382,7 @@ public class PPlaceOrderFormController {
 
     @FXML
     void txtQtyOnAction(ActionEvent event) {
-
+        btnAddToCartOnAction();
     }
 
     private void setDateAndTime() {
