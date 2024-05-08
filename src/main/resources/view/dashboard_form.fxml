@@ -94,8 +94,8 @@
          <children>
             <Pane layoutX="21.0" layoutY="24.0" prefHeight="58.0" prefWidth="253.0" style="-fx-background-color: white; -fx-background-radius: 50;">
                <children>
-                  <TextField fx:id="txtOrderDate" layoutX="13.0" layoutY="8.0" prefHeight="43.0" prefWidth="149.0" promptText="order date" style="-fx-background-color: transparent;" />
-                  <JFXButton layoutX="163.0" layoutY="14.0" onAction="#btnSearchOrderDateOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-color: green; -fx-background-radius: 20;" text="Search" textFill="WHITE" />
+                  <TextField fx:id="txtOrderDate" layoutX="13.0" layoutY="8.0" onAction="#txtOrderDateOnAction" prefHeight="43.0" prefWidth="149.0" promptText="order date" style="-fx-background-color: transparent;" />
+                  <JFXButton layoutX="163.0" layoutY="14.0" onAction="#btnSearchOrderDateOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-radius: 20;" styleClass="sale" stylesheets="@../css/style.css" text="Search" textFill="WHITE" />
                </children>
             </Pane>
             <Label layoutX="40.0" layoutY="107.0" text="Order Count">

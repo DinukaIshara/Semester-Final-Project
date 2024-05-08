@@ -10,48 +10,49 @@
 
 <AnchorPane fx:id="rootNode" prefHeight="890.0" prefWidth="1080.0" style="-fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.SupplierFormController">
    <children>
-      <AnchorPane layoutX="25.0" layoutY="96.0" prefHeight="322.0" prefWidth="1025.0" style="-fx-background-color: E7E7E7FF; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../css/sidePane.css">
+      <AnchorPane layoutX="27.0" layoutY="96.0" prefHeight="284.0" prefWidth="1013.0" style="-fx-background-color: E7E7E7FF; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../css/sidePane.css">
          <children>
-            <Label layoutX="82.0" layoutY="52.0" prefHeight="21.0" prefWidth="115.0" text="Supplier ID :">
+            <Label layoutX="82.0" layoutY="46.0" prefHeight="21.0" prefWidth="115.0" text="Supplier ID :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtSupId" layoutX="204.0" layoutY="46.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
-            <Label layoutX="32.0" layoutY="113.0" prefHeight="21.0" prefWidth="165.0" text="Company Name :">
+            <TextField fx:id="txtSupId" layoutX="204.0" layoutY="40.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <Label layoutX="32.0" layoutY="98.0" prefHeight="21.0" prefWidth="165.0" text="Company Name :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtCompanyName" layoutX="205.0" layoutY="108.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
-            <Label layoutX="57.0" layoutY="175.0" prefHeight="21.0" prefWidth="136.0" text="Person Name :">
+            <TextField fx:id="txtCompanyName" layoutX="205.0" layoutY="93.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <Label layoutX="57.0" layoutY="151.0" prefHeight="21.0" prefWidth="136.0" text="Person Name :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtPersonName" layoutX="204.0" layoutY="169.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
-            <Label layoutX="550.0" layoutY="50.0" prefHeight="21.0" prefWidth="115.0" text="Contact No :">
+            <TextField fx:id="txtPersonName" layoutX="204.0" layoutY="145.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <Label layoutX="550.0" layoutY="44.0" prefHeight="21.0" prefWidth="115.0" text="Contact No :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtContact" layoutX="674.0" layoutY="44.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
-            <Label layoutX="574.0" layoutY="112.0" prefHeight="21.0" prefWidth="91.0" text="Location :">
+            <TextField fx:id="txtContact" layoutX="674.0" layoutY="38.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <Label layoutX="574.0" layoutY="97.0" prefHeight="21.0" prefWidth="91.0" text="Location :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtLoacation" layoutX="674.0" layoutY="106.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
-            <Label layoutX="599.0" layoutY="173.0" prefHeight="21.0" prefWidth="69.0" text="Email :">
+            <TextField fx:id="txtLoacation" layoutX="674.0" layoutY="91.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <Label layoutX="599.0" layoutY="149.0" prefHeight="21.0" prefWidth="69.0" text="Email :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtEmail" layoutX="675.0" layoutY="167.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
-            <JFXButton buttonType="RAISED" layoutX="487.0" layoutY="247.0" onAction="#btnSaveOnAction" prefHeight="41.0" prefWidth="108.0" styleClass="sale" stylesheets="@../css/style.css" text="Save" />
-            <JFXButton buttonType="RAISED" layoutX="616.0" layoutY="247.0" onAction="#btnUpdateOnAction" prefHeight="41.0" prefWidth="108.0" styleClass="sale" stylesheets="@../css/style.css" text="Update" />
-            <JFXButton buttonType="RAISED" layoutX="743.0" layoutY="247.0" onAction="#btnDeleteOnAction" prefHeight="41.0" prefWidth="108.0" styleClass="sale" stylesheets="@../css/style.css" text="Delete" />
-            <JFXButton buttonType="RAISED" layoutX="869.0" layoutY="247.0" onAction="#btnClearOnAction" prefHeight="41.0" prefWidth="108.0" styleClass="sale" stylesheets="@../css/style.css" text="Clear" />
+            <TextField fx:id="txtEmail" layoutX="674.0" layoutY="143.0" prefHeight="33.0" prefWidth="302.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <JFXButton buttonType="RAISED" layoutX="364.0" layoutY="215.0" onAction="#btnSaveOnAction" prefHeight="41.0" prefWidth="108.0" styleClass="sale" stylesheets="@../css/style.css" text="Save" />
+            <JFXButton buttonType="RAISED" layoutX="493.0" layoutY="215.0" onAction="#btnUpdateOnAction" prefHeight="41.0" prefWidth="108.0" styleClass="sale" stylesheets="@../css/style.css" text="Update" />
+            <JFXButton buttonType="RAISED" layoutX="620.0" layoutY="215.0" onAction="#btnDeleteOnAction" prefHeight="41.0" prefWidth="108.0" styleClass="sale" stylesheets="@../css/style.css" text="Delete" />
+            <JFXButton buttonType="RAISED" layoutX="746.0" layoutY="215.0" onAction="#btnClearOnAction" prefHeight="41.0" prefWidth="108.0" styleClass="sale" stylesheets="@../css/style.css" text="Clear" />
+            <JFXButton buttonType="RAISED" layoutX="872.0" layoutY="215.0" onAction="#btnSupplierReportOnAction" prefHeight="41.0" prefWidth="108.0" styleClass="sale" stylesheets="@../css/style.css" text="Report" />
          </children>
       </AnchorPane>
       <TableView fx:id="tblSupplier" layoutX="25.0" layoutY="441.0" prefHeight="421.0" prefWidth="1025.0" stylesheets="@../css/sidePane.css">
@@ -64,10 +65,15 @@
             <TableColumn fx:id="colEmail" prefWidth="223.0" text="Email" />
          </columns>
       </TableView>
-      <Label layoutX="389.0" layoutY="31.0" prefHeight="30.0" prefWidth="302.0" text="Supplier Management">
+      <Label layoutX="389.0" layoutY="31.0" prefHeight="30.0" prefWidth="302.0" text="Supplier Management" textFill="#00a0ff">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <TextField fx:id="txtSearchSupplier" layoutX="29.0" layoutY="397.0" onAction="#txtSearchSupplierOnAction" prefHeight="32.0" prefWidth="302.0" promptText="Search Company Name" style="-fx-background-radius: 15;" stylesheets="@../css/sidePane.css">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

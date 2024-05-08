@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="890.0" prefWidth="1080.0" style="-fx-background-color: #272727; -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.ReportFormController">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="251.0" prefHeight="70.0" prefWidth="239.0" style="-fx-background-color: green;" text="Cutomer Report" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="233.0" onAction="#btnCustomerReportOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Cutomer Report" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="334.0" prefHeight="70.0" prefWidth="239.0" style="-fx-background-color: green;" text="Employee Report" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="373.0" onAction="#btnEmployeeReportOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Employee Report" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="416.0" prefHeight="70.0" prefWidth="239.0" style="-fx-background-color: green;" text="Salary Report" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="500.0" onAction="#btnStockOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Stock Management" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="421.0" layoutY="500.0" prefHeight="70.0" prefWidth="239.0" style="-fx-background-color: green;" text="Stock Management" textFill="WHITE">
+      <TextField fx:id="txtSearchCustomerTel" layoutX="391.0" layoutY="201.0" onAction="#txtSearchCustomerTelOnAction" prefHeight="32.0" prefWidth="298.0" promptText="Customer MobileNumber" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
-      </JFXButton>
+      </TextField>
+      <TextField fx:id="txtSearchEmployeeId" layoutX="392.0" layoutY="341.0" onAction="#txtSearchEmployeeIdOnAction" prefHeight="32.0" prefWidth="298.0" promptText="Employee Mobile Number" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtSearchItemName" layoutX="391.0" layoutY="468.0" onAction="#txtSearchItemNameOnAction" prefHeight="32.0" prefWidth="298.0" promptText="Item Name" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

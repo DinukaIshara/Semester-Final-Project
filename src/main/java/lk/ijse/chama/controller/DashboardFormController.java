@@ -3,6 +3,7 @@ package lk.ijse.chama.controller;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
@@ -19,7 +20,6 @@ import lk.ijse.chama.model.tm.MostSellItemTm;
 import lk.ijse.chama.repository.*;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.awt.event.ActionEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -251,4 +251,7 @@ public class DashboardFormController {
         barChart.getData().addAll(series1);
     }
 
+    public void txtOrderDateOnAction(ActionEvent actionEvent) throws SQLException {
+        btnSearchOrderDateOnAction();
+    }
 }

@@ -10,17 +10,28 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.Supplier;
 import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.model.tm.SupplierTm;
 import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.SupplierRepo;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SupplierFormController {
+
+    @FXML
+    private TextField txtSearchSupplier;
 
     @FXML
     private TableColumn<?, ?> colCompanyName;
@@ -67,6 +78,7 @@ public class SupplierFormController {
     public void initialize() {
         setCellValueFactory();
         loadAllSuppliers();
+        supplierCompanyName();
     }
 
     private void setCellValueFactory() {
@@ -172,5 +184,51 @@ public class SupplierFormController {
 
     public void btnClearOnAction(ActionEvent actionEvent) {
         clearFields();
+    }
+
+    @FXML
+    void btnSupplierReportOnAction(ActionEvent event) throws Exception {
+        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/SupplerItemReport.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        Map<String,Object> data = new HashMap<>();
+        data.put("supId",txtSupId.getText());
+
+        JasperPrint jasperPrint =
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
+    }
+
+    public void supplierCompanyName() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> nameList = SupplierRepo.getName();
+
+            for (String name : nameList) {
+                obList.add(name);
+            }
+            TextFields.bindAutoCompletion(txtSearchSupplier, obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void txtSearchSupplierOnAction(ActionEvent actionEvent) throws SQLException {
+        String name = txtSearchSupplier.getText();
+
+        Supplier supplier = SupplierRepo.searchByName(name);
+        if (supplier != null) {
+            txtSupId.setText(supplier.getSupId());
+            txtCompanyName.setText(supplier.getCompanyName());
+            txtPersonName.setText(supplier.getPersonName());
+            txtLoacation.setText(supplier.getLocation());
+            txtEmail.setText(supplier.getEmail());
+            txtContact.setText(supplier.getTel());
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
+        }
     }
 }

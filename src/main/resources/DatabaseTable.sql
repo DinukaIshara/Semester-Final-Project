@@ -68,8 +68,8 @@ CREATE TABLE orders(
 
 CREATE TABLE supplier(
                          sup_id VARCHAR(5) PRIMARY KEY,
-                         person_name VARCHAR(20),
                          company_name VARCHAR(20),
+                         person_name VARCHAR(20),
                          contact_no INT,
                          location VARCHAR(20),
                          email VARCHAR(40)
