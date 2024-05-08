@@ -2,12 +2,12 @@
 <!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EmployeeReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c08ac501-93f9-46e8-b27f-cf6f96b55aa9">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (4)"/>
 	<subDataset name="Dataset1" uuid="b1978d2b-75a4-48cc-ab40-25a5f9226ffd">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (2)"/>
 		<queryString language="SQL">
-			<![CDATA[SELECT * FROM  chama_computers.employee ]]>
+			<![CDATA[SELECT * FROM  chama_computers.employee]]>
 		</queryString>
 		<field name="emp_id" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.name" value="emp_id"/>
@@ -92,7 +92,9 @@
 	</subDataset>
 	<parameter name="emp_id" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT * FROM  chama_computers.employee WHERE  chama_computers.employee.emp_id = $P{emp_id}]]>
+		<![CDATA[SELECT *
+ FROM  chama_computers.employee
+ WHERE  chama_computers.employee.emp_id = $P{emp_id}]]>
 	</queryString>
 	<field name="emp_id" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="emp_id"/>
@@ -186,7 +188,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="133" splitType="Stretch">
+		<band height="114" splitType="Stretch">
 			<image>
 				<reportElement x="-21" y="-20" width="595" height="130" uuid="ca56e468-da53-407d-974a-a35376292c11"/>
 				<imageExpression><![CDATA["/home/ijse/Desktop/JDBC/chamaComputersNew/src/main/resources/report img/chama report hedder.png"]]></imageExpression>
@@ -194,7 +196,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="115" splitType="Stretch">
+		<band height="143" splitType="Stretch">
 			<textField>
 				<reportElement x="13" y="28" width="180" height="30" uuid="6278195e-bec9-4982-8e37-1f08a308df8c"/>
 				<textElement>
@@ -209,14 +211,20 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{emp_id}]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement x="406" y="0" width="104" height="115" uuid="ac05bfae-715e-47b4-aebd-3462abbcb675"/>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="394" y="0" width="120" height="140" uuid="ac05bfae-715e-47b4-aebd-3462abbcb675"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
 				<imageExpression><![CDATA[$F{path}]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="439" splitType="Stretch">
+		<band height="430" splitType="Stretch">
 			<textField>
 				<reportElement x="62" y="43" width="110" height="30" uuid="1c24ad52-b077-4ab2-b713-e3f5ea5fdf6c"/>
 				<textElement>

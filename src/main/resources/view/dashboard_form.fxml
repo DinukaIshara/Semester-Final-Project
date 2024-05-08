@@ -103,9 +103,9 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblOrderCountlab" layoutX="95.0" layoutY="146.0" textFill="#0077ff">
+            <Label fx:id="lblOrderCountlab" layoutX="88.0" layoutY="146.0" text="0" textFill="#0077ff">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
             <Label layoutX="219.0" layoutY="107.0" text="Item Qty">
@@ -113,9 +113,9 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblItemQty" layoutX="255.0" layoutY="146.0" textFill="#0077ff">
+            <Label fx:id="lblItemQty" layoutX="251.0" layoutY="146.0" text="0" textFill="#0077ff">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
             <ImageView fitHeight="140.0" fitWidth="155.0" layoutX="358.0" layoutY="30.0">

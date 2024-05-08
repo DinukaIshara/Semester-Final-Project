@@ -11,6 +11,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.model.tm.EmployeeTm;
@@ -19,6 +20,8 @@ import lk.ijse.chama.repository.*;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.awt.event.ActionEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -67,6 +70,7 @@ public class DashboardFormController {
         loadMostSellItemTable();
         loadAll();
         getOrderDate();
+        lineChart1();
 
         try {
             pieChartConnect();
@@ -139,7 +143,7 @@ public class DashboardFormController {
     }
 
     public void pieChartConnect() throws SQLException {
-        ObservableList<MostSellItemTm> obList = FXCollections.observableArrayList();
+        //ObservableList<MostSellItemTm> obList = FXCollections.observableArrayList();
 
         List<MostSellItemTm> itemList = DashboardRepo.getMostSellItem();
         BrandNewItem item;
@@ -187,4 +191,64 @@ public class DashboardFormController {
         lblOrderCountlab.setText(String.valueOf(dailyOrders.getCountOr()));
         lblItemQty.setText(String.valueOf(dailyOrders.getCountQty()));
     }
+
+    public void lineChart1(){
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("Chama Computers");
+
+        String sql = "SELECT\n" +
+                "    DATE_FORMAT(MIN(o.order_date), '%Y-%m-%d') AS WeekStartDate,\n" +
+                "    DATE_FORMAT(MAX(o.order_date), '%Y-%m-%d') AS WeekEndDate,\n" +
+                "    COUNT(DISTINCT o.order_id) AS WeeklyOrders,\n" +
+                "    SUM(od.qty * od.unit_price) AS TotalAmount\n" +
+                "FROM\n" +
+                "    orders o\n" +
+                "JOIN \n" +
+                "    order_detail od ON o.order_id = od.order_id\n" +
+                "WHERE\n" +
+                "    o.order_date BETWEEN (SELECT MIN(order_date) FROM orders) AND (SELECT MAX(order_date) FROM orders)\n" +
+                "GROUP BY\n" +
+                "    YEARWEEK(o.order_date, 1)\n" +
+                "ORDER BY\n" +
+                "    WeekStartDate;";
+
+        PreparedStatement stm = null;
+        try {
+            stm = DbConnection.getInstance().getConnection().prepareStatement(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        ResultSet rst = null;
+        try {
+            rst = stm.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        while (true) {
+            try {
+                if (!rst.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            String date = null;
+            try {
+                date = rst.getString(2);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            int count = 0;
+            try {
+                count = rst.getInt(4);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            series1.getData().add(new XYChart.Data<>(date, count));
+        }
+        barChart.getData().addAll(series1);
+    }
+
 }

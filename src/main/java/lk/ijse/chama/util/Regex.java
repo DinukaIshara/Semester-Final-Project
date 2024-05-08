@@ -18,13 +18,13 @@ public class Regex {
                 filed = "^[A-z|\\\\s]{3,}$";
                 break;
             case EMAIL:
-                filed = "\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b";
+                filed = "^[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$";
                 break;
             case ADDRESS:
-                filed = "10";
+                filed = "^([A-z0-9]|[-/,.@+]|\\\\s){4,}$";
                 break;
             case CONTACT:
-                filed = "1";
+                filed = "^([+]94{1,3}|[0])([1-9]{2})([0-9]){7}$";
                 break;
             case NIC:
                 filed = "";

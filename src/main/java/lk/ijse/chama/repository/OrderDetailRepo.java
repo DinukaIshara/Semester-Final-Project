@@ -37,29 +37,4 @@ public class OrderDetailRepo {
         return pstm.executeUpdate() > 0;    //false ->  |
     }
 
-    /*public static List<OrderDetail> searchById(List<Order> id) throws SQLException {
-        String sql = "SELECT * FROM customer WHERE order_id = ?";
-
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        List<OrderDetail> orList = new ArrayList<>();
-        ResultSet resultSet = pstm.executeQuery();
-
-        for (Order detail : id) {
-            pstm.setObject(1, detail.getOrderId());
-
-
-            if (resultSet.next()) {
-                String order_id = resultSet.getString(1);
-                String item_id = resultSet.getString(2);
-                int qty = resultSet.getInt(3);
-                double unit_price = resultSet.getDouble(4);
-
-                OrderDetail orderDetail = new OrderDetail(order_id, item_id, qty, unit_price);
-                orList.add(orderDetail);
-            }
-        }
-        return null;
-    }*/
 }
