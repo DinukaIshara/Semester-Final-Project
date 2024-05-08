@@ -1,10 +1,15 @@
 package lk.ijse.chama.repository;
 
 import lk.ijse.chama.db.DbConnection;
+import lk.ijse.chama.model.Customer;
+import lk.ijse.chama.model.Order;
 import lk.ijse.chama.model.OrderDetail;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailRepo {
@@ -31,4 +36,30 @@ public class OrderDetailRepo {
 
         return pstm.executeUpdate() > 0;    //false ->  |
     }
+
+    /*public static List<OrderDetail> searchById(List<Order> id) throws SQLException {
+        String sql = "SELECT * FROM customer WHERE order_id = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        List<OrderDetail> orList = new ArrayList<>();
+        ResultSet resultSet = pstm.executeQuery();
+
+        for (Order detail : id) {
+            pstm.setObject(1, detail.getOrderId());
+
+
+            if (resultSet.next()) {
+                String order_id = resultSet.getString(1);
+                String item_id = resultSet.getString(2);
+                int qty = resultSet.getInt(3);
+                double unit_price = resultSet.getDouble(4);
+
+                OrderDetail orderDetail = new OrderDetail(order_id, item_id, qty, unit_price);
+                orList.add(orderDetail);
+            }
+        }
+        return null;
+    }*/
 }

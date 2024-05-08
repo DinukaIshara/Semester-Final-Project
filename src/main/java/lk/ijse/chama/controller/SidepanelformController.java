@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.repository.CustomerRepo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -35,20 +38,11 @@ public class SidepanelformController {
     public void initialize() throws IOException {
         setDate();
         loadDashboardForm();
-        //loadUserName();
     }
     private void setDate() {
         LocalDate nowDate = LocalDate.now();
         lblDate.setText(String.valueOf(nowDate));
     }
-    private void setLoadUserName(String st) throws Exception{
-        String sql = "SELECT user_name, password FROM users WHERE user_name = ?";
-
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, st);
-    }
-
 
     private void loadDashboardForm() throws IOException {
         AnchorPane dashRootNode = FXMLLoader.load(this.getClass().getResource("/view/dashboard_form.fxml"));
@@ -127,5 +121,8 @@ public class SidepanelformController {
 
     }
 
+    public void setUserName(String userName){
+        lblUserName.setText(userName);
+    }
 
 }

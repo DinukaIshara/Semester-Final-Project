@@ -4,6 +4,7 @@ package lk.ijse.chama.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -49,7 +50,7 @@ public class LoginFormController {
             String dbPw = resultSet.getString("password");
 
             if(pw.equals(dbPw)) {
-                navigateToTheDashboard();
+                navigateToTheDashboard(user_name);
             } else {
                 new Alert(Alert.AlertType.ERROR, "sorry! password is incorrect!").show();
             }
@@ -59,18 +60,16 @@ public class LoginFormController {
         }
     }
 
-    private void navigateToTheDashboard() throws IOException {
-        AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/view/sidepanelform.fxml"));
-
-        Scene scene = new Scene(rootNode);
-
-        Stage stage = (Stage)this.rootNode.getScene().getWindow();
-
+    private void navigateToTheDashboard(String user_name) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/sidepanelform.fxml"));
+        Parent dashboardRoot = loader.load();
+        SidepanelformController controller = loader.getController();
+        controller.setUserName(user_name); // Pass the username to the DashboardFormController
+        Scene scene = new Scene(dashboardRoot);
+        Stage stage = (Stage) rootNode.getScene().getWindow();
         stage.setScene(scene);
-        stage.setTitle("Dashboard");
-
         stage.centerOnScreen();
-        stage.show();
+        stage.setTitle("Dashboard Form");
     }
 
     @FXML

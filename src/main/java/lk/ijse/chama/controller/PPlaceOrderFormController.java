@@ -17,11 +17,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import lk.ijse.chama.MyListener;
+import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.BrandNewItemTm;
 import lk.ijse.chama.model.tm.CartTm;
 import lk.ijse.chama.model.tm.EmployeeTm;
 import lk.ijse.chama.repository.*;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -32,9 +37,7 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class PPlaceOrderFormController {
 
@@ -46,6 +49,7 @@ public class PPlaceOrderFormController {
     public Label lblHandOnQty;
     public ImageView imageCart;
     public TextField txtItemNameSearch;
+    public JFXButton btnOrderReceipt;
     @FXML
     private ScrollPane scrollPane;
 
@@ -323,7 +327,7 @@ public class PPlaceOrderFormController {
     }
 
     @FXML
-    void btnPlaceOrderOnAction(ActionEvent event) {
+    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException {
         String orderId = lblOrderCode.getText();
         String cusId = lblCustomerId.getText();
         String transId = String.valueOf(cmbTransportId.getValue());
@@ -333,13 +337,15 @@ public class PPlaceOrderFormController {
         var order = new Order(orderId, cusId, transId, date, payment);
 
         List<OrderDetail> odList = new ArrayList<>();
+        BrandNewItem item;
 
         for (int i = 0; i < tblOrder.getItems().size(); i++) {
             CartTm tm = obList.get(i);
+            item = BrandNewItemRepo.searchByName(tm.getItemName());
 
             OrderDetail od = new OrderDetail(
                     orderId,
-                    tm.getItemName(),
+                    item.getItemId(),
                     tm.getQty(),
                     tm.getUnitPrice()
             );
@@ -520,5 +526,26 @@ public class PPlaceOrderFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void btnOrderReceiptOnAction(ActionEvent actionEvent) throws Exception {
+        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/OrderBill.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        Map<String,Object> data = new HashMap<>();
+        data.put("oId",lblOrderCode.getText());
+        data.put("netAm", String.valueOf(getNetTotal()));
+
+        JasperPrint jasperPrint =
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
+    }
+
+    private double getNetTotal() {
+        int netTotal = 0;
+        for (int i = 0; i < tblOrder.getItems().size(); i++) {
+            netTotal += (double) colTotal.getCellData(i);
+        }
+        return netTotal;
     }
 }

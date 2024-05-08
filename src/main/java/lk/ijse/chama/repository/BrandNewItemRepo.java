@@ -149,7 +149,7 @@ public class BrandNewItemRepo {
 
     public static boolean update(List<OrderDetail> isList) throws SQLException {
         for (OrderDetail is : isList) {
-            System.out.println("qtyUpdate Item");
+            System.out.println(is.getItemCode() + "qtyUpdate Item - " + is.getQty());
             boolean isUpdateQty = updateQty(is.getItemCode(), is.getQty());
             if(!isUpdateQty) {
                 return false;

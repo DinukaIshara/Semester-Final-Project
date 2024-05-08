@@ -149,7 +149,7 @@
                </font>
             </Label>
             <JFXButton buttonType="RAISED" layoutX="224.0" layoutY="792.0" onAction="#btnPlaceOrderOnAction" prefHeight="43.0" prefWidth="126.0" styleClass="sale" stylesheets="@../css/style.css" text="Place Order" />
-            <JFXButton buttonType="RAISED" layoutX="36.0" layoutY="792.0" prefHeight="43.0" prefWidth="126.0" styleClass="sale" stylesheets="@../css/style.css" text="Cancel" />
+            <JFXButton fx:id="btnOrderReceipt" buttonType="RAISED" layoutX="36.0" layoutY="792.0" onAction="#btnOrderReceiptOnAction" prefHeight="43.0" prefWidth="126.0" styleClass="sale" stylesheets="@../css/style.css" text="Recipt" />
             <Label fx:id="lblChange" layoutX="205.0" layoutY="680.0">
                <font>
                   <Font name="System Bold" size="18.0" />
