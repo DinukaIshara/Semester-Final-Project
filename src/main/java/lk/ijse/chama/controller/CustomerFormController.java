@@ -12,6 +12,7 @@ import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.tm.CartTm;
 import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.repository.CustomerRepo;
+import lk.ijse.chama.util.Regex;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.sql.SQLException;

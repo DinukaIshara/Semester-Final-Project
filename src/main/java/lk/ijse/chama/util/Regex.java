@@ -30,10 +30,13 @@ public class Regex {
                 filed = "";
                 break;
             case SALARY:
-                filed = "";
+                filed = "^([0-9]){1,}[.]([0-9]){1,}$";
                 break;
             case AGE:
                 filed = "";
+                break;
+            case PASSWORD:
+                filed = "^(?=.\\d)(?=.[a-z])(?=.[A-Z])(?=.[a-zA-Z]).{8,}$";
                 break;
         }
 
@@ -55,14 +58,12 @@ public class Regex {
         return false;
     }
 
-    public static boolean setTextColor(TextField location, JFXTextField textField){
+    public static boolean setTextColor(TextField location, javafx.scene.control.TextField textField){
         if (Regex.isTextFieldValid(location, textField.getText())){
-            textField.setFocusColor(Paint.valueOf("Green"));
-            textField.setUnFocusColor(Paint.valueOf("Green"));
+            textField.setStyle("-fx-border-color: green;");
             return true;
         }else {
-            textField.setFocusColor(Paint.valueOf("Red"));
-            textField.setUnFocusColor(Paint.valueOf("Red"));
+            textField.setStyle("-fx-border-color: red;");
             return false;
         }
     }

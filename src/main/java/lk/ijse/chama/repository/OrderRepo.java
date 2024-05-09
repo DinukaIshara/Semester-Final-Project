@@ -16,7 +16,7 @@ import java.util.List;
 
 public class OrderRepo {
     public static String getCurrentId() throws SQLException {
-        String sql = "SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1";
+        String sql = "SELECT CONCAT('O', MAX(CAST(SUBSTRING(order_id, 2) AS UNSIGNED))) AS max_order_id FROM orders";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
 

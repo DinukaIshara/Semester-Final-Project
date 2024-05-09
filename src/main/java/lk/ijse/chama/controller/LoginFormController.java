@@ -9,9 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.chama.db.DbConnection;
+import lk.ijse.chama.util.Regex;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -95,5 +97,13 @@ public class LoginFormController {
     @FXML
     void txtPasswordOnAction() throws IOException {
         btnLoginOnAction();
+    }
+
+    public void txtUserNameOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.NAME,txtUserName);
+    }
+
+    public void txtPasswordOnActionKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PASSWORD,txtPassword);
     }
 }

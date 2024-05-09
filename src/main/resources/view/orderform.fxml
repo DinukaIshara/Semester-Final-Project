@@ -92,7 +92,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblLocation" layoutX="298.0" layoutY="224.0" textFill="#0066ff">
+            <Label fx:id="lblLocation" layoutX="251.0" layoutY="224.0" textFill="#0066ff">
                <font>
                   <Font size="18.0" />
                </font>
@@ -102,7 +102,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblTransportCost" layoutX="423.0" layoutY="223.0" textFill="#0066ff">
+            <Label fx:id="lblTransportCost" layoutX="500.0" layoutY="223.0" textFill="#0066ff">
                <font>
                   <Font size="18.0" />
                </font>
@@ -155,15 +155,15 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="addToCartItemRootNode" layoutX="24.0" layoutY="22.0" prefHeight="355.0" prefWidth="323.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../css/sidePane.css">
+            <AnchorPane fx:id="addToCartItemRootNode" layoutX="17.0" layoutY="22.0" prefHeight="355.0" prefWidth="334.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../css/sidePane.css">
                <children>
                   <Label layoutX="191.0" layoutY="255.0" text="Qty:">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtQty" layoutX="238.0" layoutY="250.0" onAction="#txtQtyOnAction" prefHeight="33.0" prefWidth="66.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
-                  <JFXButton fx:id="btnAddToCart" buttonType="RAISED" layoutX="186.0" layoutY="300.0" onAction="#btnAddToCartOnAction" prefHeight="33.0" prefWidth="120.0" style="-fx-background-color: #3498db;" styleClass="sale" stylesheets="@../css/style.css" text="Add to cart" textFill="WHITE">
+                  <TextField fx:id="txtQty" layoutX="249.0" layoutY="250.0" onAction="#txtQtyOnAction" prefHeight="33.0" prefWidth="66.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+                  <JFXButton fx:id="btnAddToCart" buttonType="RAISED" layoutX="199.0" layoutY="300.0" onAction="#btnAddToCartOnAction" prefHeight="33.0" prefWidth="120.0" styleClass="sale" stylesheets="@../css/style.css" text="Add to cart" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
