@@ -43,7 +43,7 @@
                   <Font name="System Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="lblOrderCount" layoutX="114.0" layoutY="139.0" prefHeight="31.0" prefWidth="18.0" text="0" textFill="#008fff">
+            <Label fx:id="lblOrderCount" layoutX="107.0" layoutY="139.0" prefHeight="31.0" prefWidth="49.0" text="0" textFill="#008fff">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>

@@ -15,19 +15,6 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderRepo {
-    public static String getCurrentId() throws SQLException {
-        String sql = "SELECT CONCAT('O', MAX(CAST(SUBSTRING(order_id, 2) AS UNSIGNED))) AS max_order_id FROM orders";
-        PreparedStatement pstm = DbConnection.getInstance().getConnection()
-                .prepareStatement(sql);
-
-        ResultSet resultSet = pstm.executeQuery();
-        if(resultSet.next()) {
-            String orderId = resultSet.getString(1);
-            return orderId;
-        }
-        return null;
-    }
-
     public static boolean save(Order order) throws SQLException {
         String sql = "INSERT INTO orders VALUES(?, ?, ?, ? ,?)";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
@@ -79,6 +66,20 @@ public class OrderRepo {
             dateList.add(id);
         }
         return dateList;
+    }
+
+    public static String getLastOId() throws SQLException {
+        String sql = "SELECT order_id FROM orders ORDER BY CAST(SUBSTRING(order_id, 2) AS UNSIGNED) DESC LIMIT 1;";
+
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            String orderId = resultSet.getString(1);
+            return orderId;
+        }
+        return null;
     }
 
     /*public static List<Order> searchByDate(String date) throws SQLException {

@@ -62,7 +62,7 @@ CREATE TABLE orders(
                        tr_id VARCHAR(5),
                        CONSTRAINT FOREIGN KEY(tr_id) REFERENCES transport(tr_id) on Delete Cascade on Update Cascade,
                        order_date DATE,
-                       payment VARCHAR(10)
+                       payment TEXT
 );
 
 

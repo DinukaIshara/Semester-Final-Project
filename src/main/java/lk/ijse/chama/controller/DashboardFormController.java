@@ -70,7 +70,7 @@ public class DashboardFormController {
         loadMostSellItemTable();
         loadAll();
         getOrderDate();
-        lineChart1();
+        barChart();
 
         try {
             pieChartConnect();
@@ -192,7 +192,7 @@ public class DashboardFormController {
         lblItemQty.setText(String.valueOf(dailyOrders.getCountQty()));
     }
 
-    public void lineChart1(){
+    public void barChart(){
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("Chama Computers");
 

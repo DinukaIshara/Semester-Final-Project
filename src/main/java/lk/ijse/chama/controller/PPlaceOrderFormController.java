@@ -99,9 +99,6 @@ public class PPlaceOrderFormController {
     private Label lblOrderDate;
 
     @FXML
-    private Label lblQtyOnHand;
-
-    @FXML
     private Label lblUnitPrice;
 
     @FXML
@@ -114,9 +111,6 @@ public class PPlaceOrderFormController {
     private TableView<CartTm> tblOrder;
 
     @FXML
-    private TextField txtAmount;
-
-    @FXML
     private TextField txtQty;
 
     @FXML
@@ -124,9 +118,6 @@ public class PPlaceOrderFormController {
 
     @FXML
     private JFXComboBox<String> cmbTransportId;
-
-    @FXML
-    private Label lblChange;
 
     @FXML
     private Label lblTransportCost;
@@ -357,7 +348,9 @@ public class PPlaceOrderFormController {
         try {
             boolean isPlaced = PlaceOrderRepo.placeOrder(po);
             if(isPlaced) {
+                getLastOrderId();
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
+                clear();
             } else {
                 new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
             }
@@ -418,16 +411,19 @@ public class PPlaceOrderFormController {
         }
     }
 
-    private void getCurrentOrderId() {
-        try {
-            String currentId = OrderRepo.getCurrentId();
+    private String getCurrentOrderId() {
+        String nextOrderId = "";
 
-            String nextOrderId = generateNextOrderId(currentId);
+        try {
+            String currentId = OrderRepo.getLastOId();
+
+            nextOrderId = generateNextOrderId(currentId);
             lblOrderCode.setText(nextOrderId);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return nextOrderId;
     }
 
     private String generateNextOrderId(String currentId) {
@@ -485,10 +481,6 @@ public class PPlaceOrderFormController {
         }
     }
 
-    public void txtAmountOnAction(ActionEvent actionEvent) {
-
-    }
-
     @FXML
     void txtCustomerIdOnAction(ActionEvent actionEvent) {
 
@@ -533,7 +525,7 @@ public class PPlaceOrderFormController {
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
         Map<String,Object> data = new HashMap<>();
-        data.put("oId",lblOrderCode.getText());
+        data.put("oId",getLastOrderId());
         data.put("netAm", String.valueOf(getNetTotal()));
 
         JasperPrint jasperPrint =
@@ -547,5 +539,36 @@ public class PPlaceOrderFormController {
             netTotal += (double) colTotal.getCellData(i);
         }
         return netTotal;
+    }
+
+    private String getLastOrderId(){
+        String orderId;
+        try {
+            orderId = OrderRepo.getLastOId();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return orderId;
+    }
+
+    private void clearCellValueFactory() {
+        colItemName.setCellValueFactory(new PropertyValueFactory<>(""));
+        colQty.setCellValueFactory(new PropertyValueFactory<>(""));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>(""));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>(""));
+        colAction.setCellValueFactory(new PropertyValueFactory<>(""));
+    }
+    private void clear() {
+        txtItemNameSearch.setText("");
+        txtCustomerTel.setText("");
+        lblCustomerId.setText("");
+        lblCustName.setText("");
+        cmbTransportId.setValue("");
+        cmbPaymentMethod.setValue("");
+        lblNetTotal.setText("");
+        lblLocation.setText("");
+        lblTransportCost.setText("");
+        getCurrentOrderId();
     }
 }
