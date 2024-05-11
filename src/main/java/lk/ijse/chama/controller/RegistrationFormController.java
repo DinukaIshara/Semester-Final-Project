@@ -6,9 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.chama.db.DbConnection;
+import lk.ijse.chama.util.Regex;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -46,11 +48,14 @@ public class RegistrationFormController {
         String password = txtPassword.getText();
 
         try {
-            boolean isSaved = saveUser(userName, password);
-            if(isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "user saved!").show();
-                callLogIn();
+            if(isValied()){
+                boolean isSaved = saveUser(userName, password);
+                if(isSaved) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "user saved!").show();
+                    callLogIn();
+                }
             }
+
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (IOException e) {
@@ -92,5 +97,19 @@ public class RegistrationFormController {
     @FXML
     void txtPasswordOnAction() {
         registrationOnAction();
+    }
+
+    public boolean isValied(){
+        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.NAME,txtUserName)) return false;
+        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PASSWORD,txtPassword)) return false;
+        return true;
+    }
+
+    public void txtUserNameOnKeyAction(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.NAME,txtUserName);
+    }
+
+    public void txtPasswordOnKeyAction(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PASSWORD,txtPassword);
     }
 }

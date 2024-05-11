@@ -34,7 +34,9 @@ public class LoginFormController {
         String pw = txtPassword.getText();
 
         try {
-            checkCredential(userName, pw);
+            if(isValied()) {
+                checkCredential(userName, pw);
+            }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -105,5 +107,11 @@ public class LoginFormController {
 
     public void txtPasswordOnActionKeyReleased(KeyEvent keyEvent) {
         Regex.setTextColor(lk.ijse.chama.util.TextField.PASSWORD,txtPassword);
+    }
+
+    public boolean isValied(){
+        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.NAME,txtUserName)) return false;
+        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PASSWORD,txtPassword)) return false;
+        return true;
     }
 }
