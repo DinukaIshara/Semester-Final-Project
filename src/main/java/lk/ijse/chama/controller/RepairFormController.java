@@ -19,6 +19,7 @@ import java.util.List;
 
 public class RepairFormController {
 
+    public TextField txtSearchRepair;
     @FXML
     private TextField txtCustomerTel;
 
@@ -231,5 +232,13 @@ public class RepairFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void txtSearchRepairOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void btnSearchRepairOnAction(ActionEvent actionEvent) {
+
     }
 }

@@ -120,7 +120,7 @@
             </Label>
             <ImageView fitHeight="140.0" fitWidth="155.0" layoutX="358.0" layoutY="30.0">
                <image>
-                  <Image url="@../image/order%20dayly.png" />
+                  <Image url="@../image/order dayly.png" />
                </image>
             </ImageView>
          </children>

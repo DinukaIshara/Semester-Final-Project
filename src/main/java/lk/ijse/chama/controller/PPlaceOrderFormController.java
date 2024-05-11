@@ -206,7 +206,6 @@ public class PPlaceOrderFormController {
             myListener = new MyListener() {
                 @Override
                 public void onClickListener(ProductCard productCard) {
-
                     setChosenItem(productCard);
                 }
             };
@@ -231,32 +230,11 @@ public class PPlaceOrderFormController {
                 }
 
                 gridPane.add(anchorPane, col++, row);
-
-
                 GridPane.setMargin(anchorPane, new Insets(10));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private void setChosenItem(ProductCard productCard) {
-        lblItemName.setText(productCard.getItemName());
-        lblCatagory.setText(productCard.getCategory());
-        lblUnitPrice.setText(String.valueOf(productCard.getPrice()));
-        lblItemId.setText(productCard.getItemId());
-        lblHandOnQty.setText(String.valueOf(productCard.getHandOnQty()));
-        Image image = new Image(productCard.getImage(),281, 178, false, true);
-        imageCart.setImage(image);
-
-    }
-
-    @FXML
-    void btnAddCustomerOnAction(ActionEvent event) throws IOException {
-        AnchorPane customerRootNode = FXMLLoader.load(this.getClass().getResource("/view/customer_form.fxml"));
-        rootNode.getChildren().clear();
-        rootNode.getChildren().add(customerRootNode);
-
     }
 
     @FXML
@@ -317,6 +295,25 @@ public class PPlaceOrderFormController {
         lblNetTotal.setText(String.valueOf(netTotal));
     }
 
+    private void setChosenItem(ProductCard productCard) {
+        lblItemName.setText(productCard.getItemName());
+        lblCatagory.setText(productCard.getCategory());
+        lblUnitPrice.setText(String.valueOf(productCard.getPrice()));
+        lblItemId.setText(productCard.getItemId());
+        lblHandOnQty.setText(String.valueOf(productCard.getHandOnQty()));
+        Image image = new Image(productCard.getImage(),281, 178, false, true);
+        imageCart.setImage(image);
+
+    }
+
+    @FXML
+    void btnAddCustomerOnAction(ActionEvent event) throws IOException {
+        AnchorPane customerRootNode = FXMLLoader.load(this.getClass().getResource("/view/customer_form.fxml"));
+        rootNode.getChildren().clear();
+        rootNode.getChildren().add(customerRootNode);
+
+    }
+
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) throws SQLException {
         String orderId = lblOrderCode.getText();
@@ -359,6 +356,11 @@ public class PPlaceOrderFormController {
         }
     }
 
+    @FXML
+    void cmbPaymentMethod(ActionEvent event) {
+
+    }
+
     private void getItemName() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
@@ -372,11 +374,6 @@ public class PPlaceOrderFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @FXML
-    void cmbPaymentMethod(ActionEvent event) {
-
     }
 
     @FXML
@@ -411,6 +408,15 @@ public class PPlaceOrderFormController {
         }
     }
 
+    private String generateNextOrderId(String currentId) {
+        if(currentId != null) {
+            String[] split = currentId.split("O");  //" ", "2"
+            int idNum = Integer.parseInt(split[1]);
+            return "O" + ++idNum;
+        }
+        return "O1";
+    }
+
     private String getCurrentOrderId() {
         String nextOrderId = "";
 
@@ -426,14 +432,6 @@ public class PPlaceOrderFormController {
         return nextOrderId;
     }
 
-    private String generateNextOrderId(String currentId) {
-        if(currentId != null) {
-            String[] split = currentId.split("O");  //" ", "2"
-            int idNum = Integer.parseInt(split[1]);
-            return "O" + ++idNum;
-        }
-        return "O1";
-    }
 
     private void getTransportId() {
         ObservableList<String> obList = FXCollections.observableArrayList();
@@ -526,17 +524,21 @@ public class PPlaceOrderFormController {
 
         Map<String,Object> data = new HashMap<>();
         data.put("oId",getLastOrderId());
-        data.put("netAm", String.valueOf(getNetTotal()));
+        data.put("netAm", String.valueOf(gettNetTotal()));
 
         JasperPrint jasperPrint =
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
     }
 
-    private double getNetTotal() {
-        int netTotal = 0;
-        for (int i = 0; i < tblOrder.getItems().size(); i++) {
-            netTotal += (double) colTotal.getCellData(i);
+
+    private double gettNetTotal() {
+        double netTotal = 0.0;
+        try {
+            System.out.println(getLastOrderId());
+            netTotal = OrderRepo.getNetTot(getLastOrderId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return netTotal;
     }
@@ -552,13 +554,28 @@ public class PPlaceOrderFormController {
         return orderId;
     }
 
-    private void clearCellValueFactory() {
+   /* private void clearCellValueFactory() {
         colItemName.setCellValueFactory(new PropertyValueFactory<>(""));
         colQty.setCellValueFactory(new PropertyValueFactory<>(""));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>(""));
         colTotal.setCellValueFactory(new PropertyValueFactory<>(""));
         colAction.setCellValueFactory(new PropertyValueFactory<>(""));
     }
+
+    private void setNullValue() {
+        String code = "";
+        int qty = Integer.parseInt(null);
+        double unitPrice = Double.parseDouble(null);
+        double total = Double.parseDouble(null);
+        JFXButton btnRemove = null;
+
+        ObservableList<CartTm> nullList =
+
+        tblOrder.setItems(setNullValue());
+
+        tblOrder.refresh();
+    }*/
+
     private void clear() {
         txtItemNameSearch.setText("");
         txtCustomerTel.setText("");
@@ -570,5 +587,6 @@ public class PPlaceOrderFormController {
         lblLocation.setText("");
         lblTransportCost.setText("");
         getCurrentOrderId();
+        tblOrder.refresh();
     }
 }

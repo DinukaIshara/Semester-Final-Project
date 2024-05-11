@@ -89,19 +89,7 @@ public class CustomerFormController {
 
     @FXML
     void txtSearchCustomersOnAction(ActionEvent event) throws SQLException {
-        String tel = txtSearchCustomers.getText();
-
-        Customer customer = CustomerRepo.searchById(String.valueOf(tel));
-        if (customer != null) {
-            txtId.setText(customer.getCustId());
-            txtName.setText(customer.getCName());
-            txtNIC.setText(customer.getCNIC());
-            txtAddress.setText(customer.getCAddress());
-            txtEmail.setText(customer.getCEmail());
-            txtTel.setText(customer.getContactNo());
-        } else {
-            new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
-        }
+        btnSearchCustomersOnAction();
     }
 
     private void getCustomerTel() {
@@ -255,5 +243,21 @@ public class CustomerFormController {
 
     public void txtIdOnAction(ActionEvent actionEvent) {
         txtName.requestFocus();
+    }
+
+    public void btnSearchCustomersOnAction() throws SQLException {
+        String tel = txtSearchCustomers.getText();
+
+        Customer customer = CustomerRepo.searchById(String.valueOf(tel));
+        if (customer != null) {
+            txtId.setText(customer.getCustId());
+            txtName.setText(customer.getCName());
+            txtNIC.setText(customer.getCNIC());
+            txtAddress.setText(customer.getCAddress());
+            txtEmail.setText(customer.getCEmail());
+            txtTel.setText(customer.getContactNo());
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
+        }
     }
 }

@@ -82,6 +82,22 @@ public class OrderRepo {
         return null;
     }
 
+    public static double getNetTot(String oId) throws SQLException {
+        String sql = "SELECT SUM(od.qty * od.unit_price) AS net_total FROM orders o JOIN order_detail od ON o.order_id = od.order_id WHERE o.order_id = ? GROUP BY o.order_id;";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+        System.out.println(oId);
+        pstm.setString(1, oId);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            double netTot = resultSet.getDouble(1);
+            System.out.println(netTot);
+            return netTot;
+        }
+        return 0.0;
+    }
+
     /*public static List<Order> searchByDate(String date) throws SQLException {
         String sql = "SELECT * FROM orders WHERE order_date = ?";
 

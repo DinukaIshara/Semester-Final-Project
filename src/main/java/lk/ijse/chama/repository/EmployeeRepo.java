@@ -105,4 +105,33 @@ public class EmployeeRepo {
         }
         return idList;
     }
+
+    public static Employee searchById(String id) throws SQLException {
+        String sql = "SELECT * FROM employee WHERE emp_id = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, id);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+
+            String emp_id = resultSet.getString(1);
+            String name = resultSet.getString(2);
+            String address = resultSet.getString(3);
+            String nic = resultSet.getString(4);
+            String position =resultSet.getString(5);
+            String contact = resultSet.getString(6);
+            Date dateOfBirth = resultSet.getDate(7);
+            Date enrollDate = resultSet.getDate(8);
+            String email =resultSet.getString(9);
+            double sallary = resultSet.getDouble(10);
+            String path = resultSet.getString(11);
+
+            return new Employee(emp_id, name, address, nic, position, contact, dateOfBirth, enrollDate, email, sallary, path);
+        }
+
+        return null;
+    }
+
 }

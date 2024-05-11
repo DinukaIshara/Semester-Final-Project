@@ -13,138 +13,138 @@
 
 <AnchorPane fx:id="rootNode" prefHeight="890.0" prefWidth="1080.0" style="-fx-background-color: transperant; -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.EmployeeFormController">
    <children>
-      <AnchorPane layoutX="21.0" layoutY="82.0" prefHeight="467.0" prefWidth="1031.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 15;" styleClass="shadow1" stylesheets="@../css/sidePane.css">
+      <AnchorPane layoutX="21.0" layoutY="73.0" prefHeight="433.0" prefWidth="1031.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 15;" styleClass="shadow1" stylesheets="@../css/sidePane.css">
          <children>
-            <Pane fx:id="main_pain" layoutX="58.0" layoutY="264.0" prefHeight="176.0" prefWidth="153.0" style="-fx-background-color: white;">
+            <Pane fx:id="main_pain" layoutX="58.0" layoutY="235.0" prefHeight="176.0" prefWidth="153.0" style="-fx-background-color: white;">
                <children>
                   <ImageView fx:id="ImgView" fitHeight="176.0" fitWidth="153.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
-            <JFXButton buttonType="RAISED" layoutX="254.0" layoutY="334.0" onAction="#btnImportImgOnAction" prefHeight="37.0" prefWidth="112.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Import" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="543.0" layoutY="349.0" onAction="#btnUpdateOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="562.0" layoutY="393.0" onAction="#btnUpdateOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="775.0" layoutY="349.0" onAction="#btnClearOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Clear" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="794.0" layoutY="393.0" onAction="#btnClearOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Clear" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="419.0" layoutY="349.0" onAction="#btnSaveOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Add" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="438.0" layoutY="393.0" onAction="#btnSaveOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Add" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="661.0" layoutY="349.0" onAction="#btnDeleteOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Delete" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="680.0" layoutY="393.0" onAction="#btnDeleteOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Delete" textFill="WHITE">
+            <Label layoutX="36.0" layoutY="194.0" prefHeight="21.0" prefWidth="175.0" text="NIC">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNIC" layoutX="230.0" layoutY="190.0" onAction="#nicOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="547.0" layoutY="291.0" prefHeight="21.0" prefWidth="174.0" text="Position">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPosition" layoutX="741.0" layoutY="286.0" onAction="#telOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtSallary" layoutX="741.0" layoutY="236.0" onAction="#nameOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="547.0" layoutY="238.0" prefHeight="21.0" prefWidth="174.0" text="Basic Sallary">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="22.0" prefHeight="37.0" prefWidth="170.0" text="Employee ID">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtId" layoutX="229.0" layoutY="28.0" onAction="#nameOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="35.0" layoutY="86.0" prefWidth="174.0" text="Name">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtName" layoutX="229.0" layoutY="82.0" onAction="#nameOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="35.0" layoutY="140.0" prefHeight="21.0" prefWidth="174.0" text="Address">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtAddress" layoutX="229.0" layoutY="137.0" onAction="#addressOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="545.0" layoutY="31.0" prefHeight="21.0" prefWidth="174.0" text="Telephone Number">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtTel" layoutX="739.0" layoutY="27.0" onAction="#telOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="545.0" layoutY="87.0" prefHeight="21.0" prefWidth="174.0" text="Date of Birth">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="txtDOB" layoutX="739.0" layoutY="82.0" prefHeight="28.0" prefWidth="245.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+            <Label layoutX="545.0" layoutY="139.0" prefHeight="21.0" prefWidth="186.0" text="Date of registration">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="txtEnrollDate" layoutX="741.0" layoutY="134.0" prefHeight="28.0" prefWidth="245.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+            <Label layoutX="546.0" layoutY="188.0" prefHeight="21.0" prefWidth="174.0" text="Email">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtEmail" layoutX="741.0" layoutY="185.0" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </TextField>
+            <JFXButton buttonType="RAISED" layoutX="892.0" layoutY="349.0" onAction="#btnEmployeeReportOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Report" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <Label layoutX="36.0" layoutY="211.0" prefHeight="21.0" prefWidth="175.0" text="NIC">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtNIC" layoutX="230.0" layoutY="207.0" onAction="#nicOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="547.0" layoutY="308.0" prefHeight="21.0" prefWidth="174.0" text="Position">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtPosition" layoutX="741.0" layoutY="303.0" onAction="#telOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="txtSallary" layoutX="741.0" layoutY="253.0" onAction="#nameOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="547.0" layoutY="255.0" prefHeight="21.0" prefWidth="174.0" text="Basic Sallary">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="35.0" layoutY="39.0" prefHeight="37.0" prefWidth="170.0" text="Employee ID">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtId" layoutX="229.0" layoutY="45.0" onAction="#nameOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="35.0" layoutY="103.0" prefWidth="174.0" text="Name">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtName" layoutX="229.0" layoutY="99.0" onAction="#nameOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="35.0" layoutY="157.0" prefHeight="21.0" prefWidth="174.0" text="Address">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtAddress" layoutX="229.0" layoutY="154.0" onAction="#addressOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="545.0" layoutY="48.0" prefHeight="21.0" prefWidth="174.0" text="Telephone Number">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtTel" layoutX="739.0" layoutY="44.0" onAction="#telOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="545.0" layoutY="104.0" prefHeight="21.0" prefWidth="174.0" text="Date of Birth">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <DatePicker fx:id="txtDOB" layoutX="739.0" layoutY="99.0" prefHeight="28.0" prefWidth="245.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
-            <Label layoutX="545.0" layoutY="156.0" prefHeight="21.0" prefWidth="186.0" text="Date of registration">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <DatePicker fx:id="txtEnrollDate" layoutX="741.0" layoutY="151.0" prefHeight="28.0" prefWidth="245.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
-            <Label layoutX="546.0" layoutY="205.0" prefHeight="21.0" prefWidth="174.0" text="Email">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtEmail" layoutX="741.0" layoutY="202.0" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </TextField>
-            <JFXButton buttonType="RAISED" layoutX="911.0" layoutY="393.0" onAction="#btnEmployeeReportOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Report" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="229.0" layoutY="273.0" onAction="#btnImportImgOnAction" prefHeight="37.0" prefWidth="112.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Import" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
          </children>
       </AnchorPane>
-      <TableView fx:id="tblCustomer" layoutX="25.0" layoutY="572.0" prefHeight="283.0" prefWidth="1031.0" stylesheets="@../css/sidePane.css">
+      <TableView fx:id="tblCustomer" layoutX="25.0" layoutY="586.0" prefHeight="283.0" prefWidth="1031.0" stylesheets="@../css/sidePane.css">
          <columns>
             <TableColumn fx:id="colName" prefWidth="119.0" text="Name" />
             <TableColumn fx:id="colAddress" prefWidth="133.0" text="Address" />
@@ -156,10 +156,16 @@
             <TableColumn fx:id="colDOR" prefWidth="102.0" text="D O Rejistar" />
          </columns>
       </TableView>
-      <Label layoutX="399.0" layoutY="20.0" prefHeight="37.0" prefWidth="332.0" text="Employee Management" textFill="#0088ff">
+      <Label layoutX="375.0" layoutY="16.0" prefHeight="37.0" prefWidth="332.0" text="Employee Management" textFill="#0088ff">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <Pane layoutX="25.0" layoutY="527.0" prefHeight="47.0" prefWidth="253.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 50;">
+         <children>
+            <TextField fx:id="txtSearchEmployee" layoutX="14.0" layoutY="2.0" onAction="#txtSearchEmployeeOnAction" prefHeight="43.0" prefWidth="149.0" promptText="Employee Id" style="-fx-background-color: transparent;" />
+            <JFXButton layoutX="163.0" layoutY="8.0" onAction="#btnSearchEmployeeOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-radius: 20;" styleClass="sale" stylesheets="@../css/style.css" text="Search" textFill="WHITE" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

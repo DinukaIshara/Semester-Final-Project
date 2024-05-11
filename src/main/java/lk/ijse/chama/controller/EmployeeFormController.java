@@ -11,13 +11,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import lk.ijse.chama.db.DbConnection;
+import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.Employee;
 import lk.ijse.chama.model.tm.EmployeeTm;
+import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.EmployeeRepo;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.File;
 import java.sql.Date;
@@ -30,6 +33,7 @@ public class EmployeeFormController {
 
     public ImageView ImgView;
     public Pane main_pain;
+    public TextField txtSearchEmployee;
     @FXML
     private TextField txtSallary;
 
@@ -90,9 +94,6 @@ public class EmployeeFormController {
     private TextField txtPosition;
 
     @FXML
-    private TextField txtSearch;
-
-    @FXML
     private TextField txtTel;
 
     private Image image;
@@ -100,6 +101,7 @@ public class EmployeeFormController {
     public void initialize() {
         setCellValueFactory();
         loadAllEmployee();
+        getEmpId();
     }
 
     private void setCellValueFactory() {
@@ -279,5 +281,52 @@ public class EmployeeFormController {
         JasperPrint jasperPrint =
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
+    }
+
+    private void getEmpId() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> telList = EmployeeRepo.getId();
+
+            for(String tel : telList) {
+                obList.add(tel);
+            }
+            TextFields.bindAutoCompletion(txtSearchEmployee,obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void txtSearchEmployeeOnAction(ActionEvent actionEvent) {
+        try {
+            btnSearchEmployeeOnAction();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnSearchEmployeeOnAction() throws SQLException {
+        String tel = txtSearchEmployee.getText();
+
+        Employee emp = EmployeeRepo.searchById(String.valueOf(tel));
+        if (emp != null) {
+            txtId.setText(emp.getEmpId());
+            txtName.setText(emp.getEmpName());
+            txtAddress.setText(emp.getEmpAddress());
+            txtNIC.setText(emp.getEmpNic());
+            txtPosition.setText(emp.getPosition());
+            txtTel.setText(emp.getEmpTel());
+            txtDOB.setValue(emp.getDob().toLocalDate());
+            txtEnrollDate.setValue(emp.getDateRegister().toLocalDate());
+            txtEmail.setText(emp.getEmpEmail());
+            txtSallary.setText(String.valueOf(emp.getSalary()));
+            image = new Image(emp.getPath(), 153, 176, false, true);
+            ImgView.setImage(image);
+
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
+        }
     }
 }
