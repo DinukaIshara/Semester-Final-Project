@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.tm.CartTm;
@@ -248,7 +249,7 @@ public class CustomerFormController {
     public void btnSearchCustomersOnAction() throws SQLException {
         String tel = txtSearchCustomers.getText();
 
-        Customer customer = CustomerRepo.searchById(String.valueOf(tel));
+        Customer customer = CustomerRepo.searchByTel(String.valueOf(tel));
         if (customer != null) {
             txtId.setText(customer.getCustId());
             txtName.setText(customer.getCName());
@@ -259,5 +260,21 @@ public class CustomerFormController {
         } else {
             new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
         }
+    }
+
+    public void txtNicOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtTelOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtEmailOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtCustIdOnKeyRelesed(KeyEvent keyEvent) {
+
     }
 }

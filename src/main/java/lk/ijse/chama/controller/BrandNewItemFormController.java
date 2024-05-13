@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import lk.ijse.chama.model.*;
@@ -26,6 +27,9 @@ import java.util.List;
 
 public class BrandNewItemFormController {
 
+    public TextField txtCategory;
+    public TextField txtBrand;
+    public TextField txtSupplierId;
     @FXML
     private TextField txtSearchItemName;
 
@@ -40,15 +44,6 @@ public class BrandNewItemFormController {
 
     @FXML
     private JFXComboBox cmbType;
-
-    @FXML
-    private JFXComboBox<String> cmbBrand;
-
-    @FXML
-    private JFXComboBox<String> cmbCategory;
-
-    @FXML
-    private JFXComboBox<String> cmbSupId;
 
     @FXML
     private TableColumn<?, ?> colBrand;
@@ -129,12 +124,13 @@ public class BrandNewItemFormController {
         try {
             List<BrandNewItem> itemList = BrandNewItemRepo.getAll();
             List<ItemSupplierDetail> supplierDetail = ItemSupplierDetailRepo.getAll();
+            List<Supplier> suppliers = SupplierRepo.getAll();
             BrandNewItemTm tm = null;
                 for(ItemSupplierDetail itemSupplier : supplierDetail) {
-
                     String item_name = null;
                     String item_category = null;
                     String item_brand = null;
+                    String supplierCompany = null;
 
 
                     for (BrandNewItem brandNewItemTm : itemList){
@@ -145,16 +141,21 @@ public class BrandNewItemFormController {
                         }
                     }
 
+                    for(Supplier supplier: suppliers){
+                        if(supplier.getSupId().equals(itemSupplier.getSupId())){
+                            supplierCompany = supplier.getCompanyName();
+                        }
+                    }
+
 
                     tm = new BrandNewItemTm(
-
                         itemSupplier.getItemId(),
                         item_name,
                         item_category,
                         item_brand,
                         itemSupplier.getUnitPrice(),
                         itemSupplier.getQty(),
-                        itemSupplier.getSupId()
+                        supplierCompany
                     );
 
                 obList.add(tm);
@@ -184,9 +185,23 @@ public class BrandNewItemFormController {
         obList.add("Asus");
         obList.add("Acer");
         obList.add("Toshiba");
-        obList.add("E-Vist");
+        obList.add("Dell");
+        obList.add("Lenovo");
+        obList.add("Huawei");
+        obList.add("Adata");
+        obList.add("Corsair");
+        obList.add("T-Force");
+        obList.add("Cooler Master");
+        obList.add("Armaggeddon");
+        obList.add("Gamdias");
+        obList.add("Fantech");
+        obList.add("ProLink");
+        obList.add("Jadel");
+        obList.add("Logitech");
+        obList.add("AMD");
+        obList.add("INTEL");
 
-        cmbBrand.setItems(obList);
+        TextFields.bindAutoCompletion(txtBrand,obList);
 
     }
 
@@ -195,9 +210,9 @@ public class BrandNewItemFormController {
 
         obList.add("Laptop");
         obList.add("Monitor");
-        obList.add("Keyboard");
-        obList.add("Mouse");
-        obList.add("Headset");
+        obList.add("Keyboard & Mouse");
+        obList.add("Casing");
+        obList.add("Headset & Speaker");
         obList.add("Processor");
         obList.add("Motherboard");
         obList.add("Memory");
@@ -205,7 +220,7 @@ public class BrandNewItemFormController {
         obList.add("Graphic Card");
         obList.add("Combo Pack");
 
-        cmbCategory.setItems(obList);
+        TextFields.bindAutoCompletion(txtCategory,obList);
     }
 
     @FXML
@@ -241,16 +256,16 @@ public class BrandNewItemFormController {
         txtQty.setText("");
         txtUnitPrice.setText("");
         txtWaranty.setText("");
-        cmbBrand.setValue(null);
+        txtBrand.setText("");
         cmbType.setValue(null);
-        cmbCategory.setValue(null);
-        cmbSupId.setValue(null);
+        txtCategory.setText("");
+        txtSupplierId.setText("");
         lblSupCompanyName.setText("");
 
     }
 
     @FXML
-    void btnPicImportOnAction(ActionEvent event) {
+    void btnPicImportOnAction() {
         FileChooser openFile = new FileChooser();
         openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg"));
 
@@ -258,7 +273,6 @@ public class BrandNewItemFormController {
 
         if (file != null) {
 
-            //  Employee.setPath() = file.getAbsolutePath();
             image = new Image(file.toURI().toString(), 200, 200, false, true);
 
             itemImage.setImage(image);
@@ -269,8 +283,8 @@ public class BrandNewItemFormController {
     void btnSaveItemOnAction(ActionEvent event) {
         String itemId = txtItemId.getText();
         String name = txtName.getText();
-        String category = cmbCategory.getValue();
-        String brand = cmbBrand.getValue();
+        String category = txtCategory.getText();
+        String brand = txtBrand.getText();
         String modelNo = txtModel.getText();
         String warranty = txtWaranty.getText();;
         String description = txtDescription.getText();
@@ -280,7 +294,7 @@ public class BrandNewItemFormController {
         var item = new BrandNewItem(itemId, name, category, brand, modelNo, warranty, description, type, path);
 
         itemId = txtItemId.getText();
-        String supId = cmbSupId.getValue();
+        String supId = txtSupplierId.getText();
         int handOnQty = Integer.parseInt(txtQty.getText());
         double unitPrice = Double.parseDouble(txtUnitPrice.getText());
 
@@ -305,8 +319,8 @@ public class BrandNewItemFormController {
     void btnUpdateItemOnAction(ActionEvent event) {
         String itemId = txtItemId.getText();
         String name = txtName.getText();
-        String category = cmbCategory.getValue();
-        String brand = cmbBrand.getValue();
+        String category = txtCategory.getText();
+        String brand = txtBrand.getText();
         String modelNo = txtModel.getText();
         String warranty = txtWaranty.getText();
         String type = String.valueOf(cmbType.getValue());
@@ -317,7 +331,7 @@ public class BrandNewItemFormController {
         var item = new BrandNewItem(itemId, name, category, brand, modelNo, warranty, description, type, path);
 
         itemId = txtItemId.getText();
-        String supId = cmbSupId.getValue();
+        String supId = txtSupplierId.getText();
         int handOnQty = Integer.parseInt(txtQty.getText());
         double unitPrice = Double.parseDouble(txtUnitPrice.getText());
 
@@ -338,27 +352,13 @@ public class BrandNewItemFormController {
         }
     }
 
-    @FXML
-    void cmbBarandOnAction(ActionEvent event) {
-        String code = cmbBrand.getValue();
-    }
-
-    @FXML
-    void cmbCategoryOnAction(ActionEvent event) {
-
+    public void btnClearOnAction(ActionEvent actionEvent) {
+        clearFields();
     }
 
     @FXML
     void cmbSupIdOnAction(ActionEvent event) {
-        String id = String.valueOf(cmbSupId.getValue());
-        try {
-            Supplier supplier = SupplierRepo.searchById(id);
 
-            lblSupCompanyName.setText(supplier.getCompanyName());
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
     private void getSupplierId() {
         ObservableList<String> obList = FXCollections.observableArrayList();
@@ -370,62 +370,26 @@ public class BrandNewItemFormController {
                 obList.add(id);
             }
 
-            cmbSupId.setItems(obList);
+            //cmbSupId.setItems(obList);
+            TextFields.bindAutoCompletion(txtSupplierId, obList);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @FXML
-    void txtDescriptionOnAction(ActionEvent event) {
-
+    public void txtSearchItemNameOnAction(ActionEvent actionEvent) {
+        try {
+            btnSearchItemNameOnAction();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @FXML
-    void txtItemId(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtModelOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtNameOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtQtyOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtUnitPriceOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtWarantyOnAction(ActionEvent event) {
-
-    }
-
-    public void btnClearOnAction(ActionEvent actionEvent) {
-
-    }
-
-    @FXML
-    void cmbtypeOnAction(ActionEvent actionEvent) {
-
-    }
-
-    public void txtSearchItemNameOnAction(ActionEvent actionEvent) throws SQLException {
+    public void btnSearchItemNameOnAction() throws SQLException {
         String name = txtSearchItemName.getText();
 
-        BrandNewItem item = BrandNewItemRepo.searchById(name);
-        //System.out.println(item.getItemId());
+        BrandNewItem item = BrandNewItemRepo.searchByName(name);
         ItemSupplierDetail isd = ItemSupplierDetailRepo.searchById(item.getItemId());
         Supplier supplier = SupplierRepo.searchById(isd.getSupId());
 
@@ -434,16 +398,24 @@ public class BrandNewItemFormController {
             txtName.setText(item.getName());
             txtDescription.setText(item.getDescription());
             txtModel.setText(item.getModelNo());
-            cmbCategory.setValue(item.getCategory());
-            cmbBrand.setValue(item.getBrand());
-            cmbSupId.setValue(isd.getSupId());
-            lblSupCompany.setText(supplier.getCompanyName());
+            txtCategory.setText(item.getCategory());
+            txtBrand.setText(item.getBrand());
+            if(isd != null) {
+                txtSupplierId.setText(isd.getSupId());
+                txtQty.setText(String.valueOf(isd.getQty()));
+                txtUnitPrice.setText(String.valueOf(isd.getUnitPrice()));
+            }
+            if(supplier != null) {
+                lblSupCompany.setText(supplier.getCompanyName());
+            }
             cmbType.setValue(item.getType());
             txtWaranty.setText(item.getWarranty());
-            txtQty.setText(String.valueOf(isd.getQty()));
+            image = new Image(item.getPath(), 153, 176, false, true);
+            itemImage.setImage(image);
+
 
         } else {
-            new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
+            new Alert(Alert.AlertType.INFORMATION, "Item not found!").show();
         }
     }
     private void getItemName() {
@@ -461,5 +433,75 @@ public class BrandNewItemFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    void txtDescriptionOnAction(ActionEvent event) {
+        txtSupplierId.requestFocus();
+    }
+
+    @FXML
+    void txtItemId(ActionEvent event) {
+        txtName.requestFocus();
+    }
+
+    @FXML
+    void txtModelOnAction(ActionEvent event) {
+        txtWaranty.requestFocus();
+    }
+
+    @FXML
+    void txtNameOnAction(ActionEvent event) {
+        txtCategory.requestFocus();
+    }
+
+    @FXML
+    void txtQtyOnAction(ActionEvent event) {
+        txtUnitPrice.requestFocus();
+    }
+
+    @FXML
+    void txtUnitPriceOnAction(ActionEvent event) {
+        btnPicImportOnAction();
+    }
+
+    @FXML
+    void txtWarantyOnAction(ActionEvent event) {
+        txtQty.requestFocus();
+    }
+
+    @FXML
+    void cmbtypeOnAction(ActionEvent actionEvent) {
+        txtModel.requestFocus();
+    }
+
+    public void txtCategoryOnAction(ActionEvent actionEvent) {
+        txtBrand.requestFocus();
+    }
+
+    public void txtBrandOnAction(ActionEvent actionEvent) {
+        txtDescription.requestFocus();
+    }
+
+    public void txtSupplierIdOnAction(ActionEvent actionEvent) {
+        String id = String.valueOf(txtSupplierId.getText());
+        try {
+            Supplier supplier = SupplierRepo.searchById(id);
+
+            lblSupCompanyName.setText(supplier.getCompanyName());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        cmbType.requestFocus();
+    }
+
+    public void txtQtyOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtUnitPriceOnKeyRelesed(KeyEvent keyEvent) {
+
     }
 }

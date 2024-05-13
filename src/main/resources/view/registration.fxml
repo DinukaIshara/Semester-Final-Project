@@ -26,8 +26,8 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <TextField fx:id="txtUserName" layoutX="73.0" layoutY="283.0" onAction="#userNameOnAction" onKeyReleased="#txtUserNameOnKeyAction" prefHeight="44.0" prefWidth="269.0" promptText="\@User Name" style="-fx-background-radius: 15;" />
-      <TextField fx:id="txtPassword" layoutX="73.0" layoutY="344.0" onAction="#txtPasswordOnAction" onKeyReleased="#txtPasswordOnKeyAction" prefHeight="44.0" prefWidth="269.0" promptText="\@Password" style="-fx-background-radius: 15;" />
+      <TextField fx:id="txtUserName" layoutX="73.0" layoutY="283.0" onAction="#userNameOnAction" onKeyReleased="#txtUserNameOnKeyAction" prefHeight="44.0" prefWidth="269.0" promptText="\@User Name" style="-fx-background-radius: 5;" />
+      <TextField fx:id="txtPassword" layoutX="73.0" layoutY="344.0" onAction="#txtPasswordOnAction" onKeyReleased="#txtPasswordOnKeyAction" prefHeight="44.0" prefWidth="269.0" promptText="\@Password" style="-fx-background-radius: 5;" />
       <JFXButton buttonType="RAISED" layoutX="102.0" layoutY="442.0" onAction="#registrationOnAction" prefHeight="44.0" prefWidth="205.0" style="-fx-background-color: #05BEF3; -fx-background-radius: 20;" text="Register" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />

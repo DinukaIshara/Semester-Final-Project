@@ -34,9 +34,9 @@ public class LoginFormController {
         String pw = txtPassword.getText();
 
         try {
-            if(isValied()) {
+            //if(isValied()) {
                 checkCredential(userName, pw);
-            }
+            //}
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }

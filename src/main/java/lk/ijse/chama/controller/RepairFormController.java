@@ -6,11 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.RepairTm;
 import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.RepairRepo;
+import lk.ijse.chama.model.Repair;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.sql.SQLException;
@@ -75,6 +77,23 @@ public class RepairFormController {
         getCustomerTel();
         loadAllRepair();
         setCellValueFactory();
+        getRepairId();
+    }
+
+    private void getRepairId() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> idList = RepairRepo.getId();
+
+            for (String id : idList) {
+                obList.add(id);
+            }
+            TextFields.bindAutoCompletion(txtSearchRepair, obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setCellValueFactory() {
@@ -224,7 +243,7 @@ public class RepairFormController {
     public void txtCustomerTelOnAction(ActionEvent actionEvent) {
         String tel = txtCustomerTel.getText();
         try {
-            Customer customer = CustomerRepo.searchById(tel);
+            Customer customer = CustomerRepo.searchByTel(tel);
 
             lblCustomerName.setText(customer.getCName());
             lblCustomerId.setText(customer.getCustId());
@@ -235,10 +254,56 @@ public class RepairFormController {
     }
 
     public void txtSearchRepairOnAction(ActionEvent actionEvent) {
+        try {
+            btnSearchRepairOnAction();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnSearchRepairOnAction() throws SQLException {
+        String id = txtSearchRepair.getText();
+
+        Repair rep = RepairRepo.searchById(String.valueOf(id));
+        if (rep != null) {
+            txtRepairId.setText(rep.getRepairId());
+            lblCustomerId.setText(rep.getCustId());
+            txtItemName.setText(rep.getItemName());
+            Customer cust = CustomerRepo.searchById(rep.getCustId());
+            if (cust != null) {
+                txtCustomerTel.setText(cust.getContactNo());
+                lblCustomerName.setText(cust.getCName());
+            }
+            //txtReceiveDate.setValue(rep.getReciveDate());
+            //txtReturnDate.setValue(rep.getReturnDate().toLocalDate());
+            txtDescription.setText(rep.getDescription());
+            txtCost.setText(String.valueOf(rep.getCost()));
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
+        }
+    }
+
+    public void txtRidOnAction(ActionEvent actionEvent) {
 
     }
 
-    public void btnSearchRepairOnAction(ActionEvent actionEvent) {
+    public void txtItemNameOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtDescriptionOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtCostOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtRepairIdOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtCostOnKeyRelesed(KeyEvent keyEvent) {
 
     }
 }

@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import lk.ijse.chama.MyListener;
 import lk.ijse.chama.model.ProductCard;
 
-public class ProductCardController {
+public class ItemCardController {
 
     @FXML
     private ImageView itemImage;

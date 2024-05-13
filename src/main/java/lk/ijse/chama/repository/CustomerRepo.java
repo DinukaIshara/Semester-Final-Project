@@ -51,12 +51,34 @@ public class CustomerRepo {
 
         return pstm.executeUpdate() > 0;
     }
-    public static Customer searchById(String tel) throws SQLException {
+    public static Customer searchByTel(String tel) throws SQLException {
         String sql = "SELECT * FROM customer WHERE contact_no = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setObject(1, tel);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            String cus_id = resultSet.getString(1);
+            String name = resultSet.getString(2);
+            String address = resultSet.getString(3);
+            String nic = resultSet.getString(4);
+            String contact =resultSet.getString(5);
+            String email = resultSet.getString(6);
+
+            return new Customer(cus_id, name, address, nic, contact, email);
+        }
+
+        return null;
+    }
+
+    public static Customer searchById(String id) throws SQLException {
+        String sql = "SELECT * FROM customer WHERE cust_id = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, id);
 
         ResultSet resultSet = pstm.executeQuery();
         if (resultSet.next()) {

@@ -9,20 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.Customer;
-import lk.ijse.chama.repository.CustomerRepo;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
 
 public class SidepanelformController {
 
@@ -63,7 +52,7 @@ public class SidepanelformController {
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) throws IOException {
-        AnchorPane placeOrRootNode = FXMLLoader.load(this.getClass().getResource("/view/orderform.fxml"));
+        AnchorPane placeOrRootNode = FXMLLoader.load(this.getClass().getResource("/view/PlaceOrderForm.fxml"));
         childRootNode.getChildren().clear();
         childRootNode.getChildren().add(placeOrRootNode);
     }
@@ -115,10 +104,6 @@ public class SidepanelformController {
 
         stage.centerOnScreen();
         stage.setTitle("Login Form");
-    }
-
-    public void userIconClick(MouseEvent mouseEvent) {
-
     }
 
     public void setUserName(String userName){

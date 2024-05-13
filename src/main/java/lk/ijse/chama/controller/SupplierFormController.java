@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.Customer;
@@ -216,7 +217,15 @@ public class SupplierFormController {
     }
 
     @FXML
-    void txtSearchSupplierOnAction(ActionEvent actionEvent) throws SQLException {
+    void txtSearchSupplierOnAction(ActionEvent actionEvent){
+        try {
+            btnSearchSupplierOnAction();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnSearchSupplierOnAction()  throws SQLException {
         String name = txtSearchSupplier.getText();
 
         Supplier supplier = SupplierRepo.searchByName(name);
@@ -230,5 +239,37 @@ public class SupplierFormController {
         } else {
             new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
         }
+    }
+
+    public void txtSupIdOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtConpanyNameOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtPersonNameOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtcontactNameOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtContactNoOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtLocationOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtEmailOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtSupIdOnKeyRelesed(KeyEvent keyEvent) {
+
     }
 }

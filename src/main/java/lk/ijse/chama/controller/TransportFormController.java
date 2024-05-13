@@ -9,19 +9,24 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.Supplier;
 import lk.ijse.chama.model.Transport;
 import lk.ijse.chama.model.tm.SupplierTm;
 import lk.ijse.chama.model.tm.TransportTm;
+import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.SupplierRepo;
 import lk.ijse.chama.repository.TransportRepo;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class TransportFormController {
 
+    public TextField txtSearchLocation;
     @FXML
     private TableColumn<?, ?> colCost;
 
@@ -61,6 +66,7 @@ public class TransportFormController {
     public void initialize() {
         setCellValueFactory();
         loadAllTransport();
+        getLoaction();
     }
 
     private void setCellValueFactory() {
@@ -167,4 +173,72 @@ public class TransportFormController {
         txtCost.setText("");
     }
 
+    public void txtSearchLocationOnAction(ActionEvent actionEvent) {
+        try {
+            btnSearchLocationOnAction();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void getLoaction() {
+
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> locationList = TransportRepo.getlocation();
+
+            for (String location : locationList) {
+                obList.add(location);
+            }
+            TextFields.bindAutoCompletion(txtSearchLocation, obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnSearchLocationOnAction() throws SQLException {
+        String location = txtSearchLocation.getText();
+
+        Transport tr = TransportRepo.searchByLocation(location);
+        if (tr != null) {
+            txtId.setText(tr.getTrId());
+            txtVehicalNo.setText(tr.getVehicalNo());
+            txtDriverName.setText(tr.getDriverName());
+            txtLocation.setText(tr.getLocation());
+            txtCost.setText(String.valueOf(tr.getCost()));
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "Location not found!").show();
+        }
+    }
+
+    public void txtTrIdOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtVehicalNoOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtVehicalNoOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtDriverNameOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtLocationOnAction(ActionEvent actionEvent) {
+
+
+    }
+
+    public void txtcostOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtTrIdOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
 }

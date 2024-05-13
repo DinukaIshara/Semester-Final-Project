@@ -45,7 +45,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtNIC" layoutX="230.0" layoutY="190.0" onAction="#nicOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtNIC" layoutX="230.0" layoutY="190.0" onAction="#nicOnAction" onKeyReleased="#txtNicOnKeyRelesed" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
@@ -55,12 +55,12 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtPosition" layoutX="741.0" layoutY="286.0" onAction="#telOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtPosition" layoutX="741.0" layoutY="286.0" onAction="#txtPositionOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="txtSallary" layoutX="741.0" layoutY="236.0" onAction="#nameOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtSallary" layoutX="741.0" layoutY="236.0" onAction="#txtSalOnAction" onKeyReleased="#txtSalOnKeyRelesed" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
@@ -75,7 +75,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtId" layoutX="229.0" layoutY="28.0" onAction="#nameOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtId" layoutX="229.0" layoutY="28.0" onAction="#txtIdOnAction" onKeyReleased="#txtEmpIdOnKeyRelesed" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
@@ -95,7 +95,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtAddress" layoutX="229.0" layoutY="137.0" onAction="#addressOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtAddress" layoutX="229.0" layoutY="137.0" onAction="#addressOnAction" onKeyReleased="#txtAddressOnKeyRelesed" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
@@ -105,7 +105,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtTel" layoutX="739.0" layoutY="27.0" onAction="#telOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtTel" layoutX="739.0" layoutY="27.0" onAction="#telOnAction" onKeyReleased="#txtTelOnKeyRelesed" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
@@ -115,19 +115,19 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <DatePicker fx:id="txtDOB" layoutX="739.0" layoutY="82.0" prefHeight="28.0" prefWidth="245.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+            <DatePicker fx:id="txtDOB" layoutX="739.0" layoutY="82.0" onAction="#txtDOBOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
             <Label layoutX="545.0" layoutY="139.0" prefHeight="21.0" prefWidth="186.0" text="Date of registration">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <DatePicker fx:id="txtEnrollDate" layoutX="741.0" layoutY="134.0" prefHeight="28.0" prefWidth="245.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+            <DatePicker fx:id="txtEnrollDate" layoutX="741.0" layoutY="134.0" onAction="#txtRegDateOnAction" prefHeight="28.0" prefWidth="245.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
             <Label layoutX="546.0" layoutY="188.0" prefHeight="21.0" prefWidth="174.0" text="Email">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtEmail" layoutX="741.0" layoutY="185.0" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtEmail" layoutX="741.0" layoutY="185.0" onAction="#txtEmailOnAction" onKeyReleased="#txtEmailOnKeyRelesed" prefHeight="28.0" prefWidth="245.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>

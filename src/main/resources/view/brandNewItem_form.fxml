@@ -8,13 +8,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootNode" prefHeight="890.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.BrandNewItemFormController">
    <children>
       <AnchorPane layoutX="26.0" layoutY="82.0" prefHeight="391.0" prefWidth="1032.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../css/sidePane.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="82.0">
          <children>
-            <TextField fx:id="txtQty" layoutX="587.0" layoutY="181.0" onAction="#txtQtyOnAction" prefHeight="28.0" prefWidth="60.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <TextField fx:id="txtQty" layoutX="587.0" layoutY="181.0" onAction="#txtQtyOnAction" onKeyReleased="#txtQtyOnKeyRelesed" prefHeight="28.0" prefWidth="60.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <Label layoutX="526.0" layoutY="183.0" prefHeight="21.0" prefWidth="48.0" text="Qty :">
                <font>
                   <Font size="18.0" />
@@ -26,7 +27,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtUnitPrice" layoutX="587.0" layoutY="231.0" onAction="#txtUnitPriceOnAction" prefHeight="28.0" prefWidth="124.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <TextField fx:id="txtUnitPrice" layoutX="587.0" layoutY="231.0" onAction="#txtUnitPriceOnAction" onKeyReleased="#txtUnitPriceOnKeyRelesed" prefHeight="28.0" prefWidth="124.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <Label layoutX="470.0" layoutY="234.0" prefHeight="21.0" prefWidth="104.0" text="Unit Price :">
                <font>
                   <Font size="18.0" />
@@ -50,30 +51,30 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="cmbCategory" layoutX="186.0" layoutY="127.0" onAction="#cmbCategoryOnAction" prefHeight="28.0" prefWidth="178.0" style="-fx-background-color: white;" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
             <Label layoutX="33.0" layoutY="131.0" prefHeight="21.0" prefWidth="158.0" text="Item Category :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
+            <TextField fx:id="txtCategory" layoutX="187.0" layoutY="127.0" onAction="#txtCategoryOnAction" prefHeight="28.0" prefWidth="178.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <Label layoutX="107.0" layoutY="183.0" prefHeight="21.0" prefWidth="70.0" text="Brand :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="cmbBrand" layoutX="186.0" layoutY="178.0" onAction="#cmbBarandOnAction" prefHeight="28.0" prefWidth="178.0" style="-fx-background-color: white;" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
-            <TextField fx:id="txtDescription" layoutX="186.0" layoutY="229.0" onAction="#txtDescriptionOnAction" prefHeight="28.0" prefWidth="178.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <TextField fx:id="txtBrand" layoutX="187.0" layoutY="179.0" onAction="#txtBrandOnAction" prefHeight="28.0" prefWidth="178.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <TextField fx:id="txtDescription" layoutX="186.0" layoutY="229.0" onAction="#txtDescriptionOnAction" prefHeight="32.0" prefWidth="272.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <Label layoutX="58.0" layoutY="231.0" prefHeight="21.0" prefWidth="124.0" text="Description :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="61.0" layoutY="276.0" prefHeight="21.0" prefWidth="116.0" text="Supplier ID :">
+            <Label layoutX="61.0" layoutY="279.0" prefHeight="21.0" prefWidth="116.0" text="Supplier ID :">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="cmbSupId" layoutX="185.0" layoutY="273.0" onAction="#cmbSupIdOnAction" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: white;" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
+            <TextField fx:id="txtSupplierId" layoutX="187.0" layoutY="275.0" onAction="#txtSupplierIdOnAction" prefHeight="32.0" prefWidth="95.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <JFXButton buttonType="RAISED" layoutX="302.0" layoutY="272.0" onAction="#btnAddNewSupplierOnAction" prefHeight="38.0" prefWidth="77.0" styleClass="sale" stylesheets="@../css/style.css" text="+ New" textFill="WHITE" />
             <Label layoutX="393.0" layoutY="276.0" prefHeight="21.0" prefWidth="178.0" text="Supplier Company :">
                <font>
@@ -119,10 +120,11 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="txtSearchItemName" layoutX="27.0" layoutY="519.0" onAction="#txtSearchItemNameOnAction" prefHeight="32.0" prefWidth="207.0" promptText="Search Name" style="-fx-background-radius: 15;" stylesheets="@../css/sidePane.css">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="14.0" />
-         </font>
-      </TextField>
+      <Pane layoutX="26.0" layoutY="512.0" prefHeight="47.0" prefWidth="272.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 50;">
+         <children>
+            <TextField fx:id="txtSearchItemName" layoutX="14.0" layoutY="2.0" onAction="#txtSearchItemNameOnAction" prefHeight="43.0" prefWidth="165.0" promptText="Search Item" style="-fx-background-color: transparent;" />
+            <JFXButton layoutX="185.0" layoutY="8.0" onAction="#btnSearchItemNameOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-radius: 20;" styleClass="sale" stylesheets="@../css/style.css" text="Search" textFill="WHITE" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

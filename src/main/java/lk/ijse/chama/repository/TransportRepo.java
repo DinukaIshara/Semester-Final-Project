@@ -75,8 +75,8 @@ public class TransportRepo {
         return transList;
     }
 
-    public static List<String> getTel() throws SQLException {
-        String sql = "SELECT tr_id FROM transport";
+    public static List<String> getLoca() throws SQLException {
+        String sql = "SELECT location FROM transport";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
 
@@ -90,25 +90,61 @@ public class TransportRepo {
         return idList;
     }
 
-    public static Transport searchById(String id) throws SQLException {
-        String sql = "SELECT * FROM transport WHERE tr_id = ?";
+    public static Transport searchByLoca(String location) throws SQLException {
+        String sql = "SELECT * FROM transport WHERE location = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, id);
+        pstm.setObject(1, location);
 
         ResultSet resultSet = pstm.executeQuery();
         if (resultSet.next()) {
             String tr_id = resultSet.getString(1);
             String vehicalNo = resultSet.getString(2);
             String driverName = resultSet.getString(3);
-            String location = resultSet.getString(4);
+            String loca = resultSet.getString(4);
             double cost =resultSet.getDouble(5);
 
-            return new Transport(tr_id, vehicalNo, driverName, location, cost);
+            return new Transport(tr_id, vehicalNo, driverName, loca, cost);
         }
 
         return null;
     }
 
+    public static Transport searchByLocation(String loc) throws SQLException {
+        String sql = "SELECT * FROM transport WHERE location = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, loc);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            String tr_id = resultSet.getString(1);
+            String ve_no = resultSet.getString(2);
+            String driver_name = resultSet.getString(3);
+            String location = resultSet.getString(4);
+            double transport_cost =resultSet.getDouble(5);
+
+            return new Transport(tr_id, ve_no, driver_name, location, transport_cost);
+        }
+
+        return null;
+    }
+
+    public static List<String> getlocation() throws SQLException {
+        String sql = "SELECT location FROM transport";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        List<String> locationList = new ArrayList<>();
+
+        ResultSet resultSet = pstm.executeQuery();
+        while (resultSet.next()) {
+            String location = resultSet.getString(1);
+            locationList.add(location);
+        }
+        return locationList;
+
+    }
 }

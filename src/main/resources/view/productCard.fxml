@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="card_form" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#click" prefHeight="226.0" prefWidth="230.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../css/sidePane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.ProductCardController">
+<AnchorPane fx:id="card_form" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#click" prefHeight="226.0" prefWidth="230.0" style="-fx-background-color: white; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../css/sidePane.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.ItemCardController">
    <children>
       <ImageView fx:id="itemImage" fitHeight="155.0" fitWidth="190.0" layoutX="20.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="lblItemName" layoutX="14.0" layoutY="9.0" prefHeight="21.0" prefWidth="190.0" text="Keyboard">

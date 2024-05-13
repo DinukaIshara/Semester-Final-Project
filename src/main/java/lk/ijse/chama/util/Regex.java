@@ -26,6 +26,12 @@ public class Regex {
             case SID:
                 filed = "^([S][0-9]{3,10})$";
                 break;
+            case RPID:
+                filed = "^([RP][0-9]{3,10})$";
+                break;
+            case TID:
+                filed = "^([TR][0-9]{3,10})$";
+                break;
             case NAME:
                 filed = "^[A-Za-z]{3,}(?:\\s[A-Za-z]{3,})?$"; //   /"^[A-z|\\\\s]{3,}$"/   /"^[A-Za-z]+(?:\\s[A-Za-z]+)?$"/
                 break;

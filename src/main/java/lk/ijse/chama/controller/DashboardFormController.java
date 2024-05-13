@@ -157,7 +157,7 @@ public class DashboardFormController {
             pieChartData.forEach(data ->
                     data.nameProperty().bind(
                             Bindings.concat(
-                                    data.getName(), " amount: ", data.pieValueProperty()
+                                    data.getName(), "     qty: ", data.pieValueProperty()
                             )
                     )
             );

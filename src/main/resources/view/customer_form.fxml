@@ -58,7 +58,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtNIC" layoutX="669.0" layoutY="34.0" onAction="#nicOnAction" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtNIC" layoutX="669.0" layoutY="34.0" onAction="#nicOnAction" onKeyReleased="#txtNicOnKeyRelesed" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
@@ -68,7 +68,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtTel" layoutX="669.0" layoutY="85.0" onAction="#telOnAction" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtTel" layoutX="669.0" layoutY="85.0" onAction="#telOnAction" onKeyReleased="#txtTelOnKeyRelesed" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
@@ -78,7 +78,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtEmail" layoutX="669.0" layoutY="134.0" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtEmail" layoutX="669.0" layoutY="134.0" onKeyReleased="#txtEmailOnKeyRelesed" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>
@@ -88,7 +88,7 @@
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </JFXButton>
-            <TextField fx:id="txtId" layoutX="153.0" layoutY="37.0" onAction="#txtIdOnAction" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtId" layoutX="153.0" layoutY="37.0" onAction="#txtIdOnAction" onKeyReleased="#txtCustIdOnKeyRelesed" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>

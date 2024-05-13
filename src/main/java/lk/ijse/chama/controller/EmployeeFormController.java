@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -328,5 +329,53 @@ public class EmployeeFormController {
         } else {
             new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
         }
+    }
+
+    public void txtNicOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtPositionOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtSalOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtSalOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtIdOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtAddressOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtTelOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtDOBOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtRegDateOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtEmailOnAction(ActionEvent actionEvent) {
+
+    }
+
+    public void txtEmailOnKeyRelesed(KeyEvent keyEvent) {
+
+    }
+
+    public void txtEmpIdOnKeyRelesed(KeyEvent keyEvent) {
+
     }
 }

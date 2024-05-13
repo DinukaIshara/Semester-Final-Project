@@ -78,4 +78,41 @@ public class RepairRepo {
         return pstm.executeUpdate() > 0;
     }
 
+    public static List<String> getId() throws SQLException {
+        String sql = "SELECT rep_id FROM repair";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        List<String> idList = new ArrayList<>();
+
+        ResultSet resultSet = pstm.executeQuery();
+        while (resultSet.next()) {
+            String id = resultSet.getString(1);
+            idList.add(id);
+        }
+        return idList;
+    }
+
+    public static Repair searchById(String id) throws SQLException {
+        String sql = "SELECT * FROM repair WHERE rep_id = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, id);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            String rep_id = resultSet.getString(1);
+            Date recive = resultSet.getDate(2);
+            Date retu = resultSet.getDate(3);
+            double cost = resultSet.getDouble(4);
+            String description =resultSet.getString(5);
+            String cust_id = resultSet.getString(6);
+            String itemName = resultSet.getString(7);
+
+            return new Repair(rep_id, recive, retu, cost, description, cust_id, itemName);
+        }
+
+        return null;
+    }
 }

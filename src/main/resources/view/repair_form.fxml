@@ -36,7 +36,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="txtRepairId" prefHeight="29.0" prefWidth="171.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+                        <TextField fx:id="txtRepairId" onAction="#txtRidOnAction" onKeyReleased="#txtRepairIdOnKeyRelesed" prefHeight="29.0" prefWidth="171.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
                      </children>
                      <padding>
                         <Insets left="20.0" />
@@ -120,7 +120,7 @@
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtItemName" layoutX="209.0" layoutY="181.0" prefHeight="30.0" prefWidth="170.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+                  <TextField fx:id="txtItemName" layoutX="209.0" layoutY="179.0" onAction="#txtItemNameOnAction" prefHeight="30.0" prefWidth="170.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
                </children>
             </Pane>
             <Pane layoutX="498.0" layoutY="20.0" prefHeight="174.0" prefWidth="525.0">
@@ -191,7 +191,7 @@
                               <Insets right="30.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="txtDescription" onMouseClicked="#checkCustomerIsSelect" prefHeight="32.0" prefWidth="295.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+                        <TextField fx:id="txtDescription" onAction="#txtDescriptionOnAction" onMouseClicked="#checkCustomerIsSelect" prefHeight="32.0" prefWidth="295.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="14.0" />
                            </font>
@@ -211,7 +211,7 @@
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtCost" layoutX="196.0" layoutY="126.0" onMouseClicked="#checkCustomerIsSelect" prefHeight="32.0" prefWidth="295.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+                  <TextField fx:id="txtCost" layoutX="196.0" layoutY="126.0" onAction="#txtCostOnAction" onKeyReleased="#txtCostOnKeyRelesed" onMouseClicked="#checkCustomerIsSelect" prefHeight="32.0" prefWidth="295.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>

@@ -15,19 +15,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import lk.ijse.chama.MyListener;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.*;
-import lk.ijse.chama.model.tm.BrandNewItemTm;
 import lk.ijse.chama.model.tm.CartTm;
-import lk.ijse.chama.model.tm.EmployeeTm;
 import lk.ijse.chama.repository.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
@@ -39,17 +35,18 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 
-public class PPlaceOrderFormController {
+public class PlaceOrderFormController {
 
     public AnchorPane addToCartItemRootNode;
     public Label lblItemName;
     public Label lblItemId;
     public Label lblCatagory;
-    public TextField txtSearchItem;
     public Label lblHandOnQty;
     public ImageView imageCart;
     public TextField txtItemNameSearch;
     public JFXButton btnOrderReceipt;
+    public TextField txtLocation;
+    public Label lblTrId;
     @FXML
     private ScrollPane scrollPane;
 
@@ -57,22 +54,13 @@ public class PPlaceOrderFormController {
     private GridPane gridPane;
 
     @FXML
-    private TextField txtItemName;
-
-    @FXML
     private TextField txtCustomerTel;
-
-    @FXML
-    private Label lblLocation;
 
     @FXML
     private JFXComboBox cmbPaymentMethod;
 
     @FXML
     private TableColumn colTotal;
-
-    @FXML
-    private JFXButton btnAddToCart;
 
     @FXML
     private TableColumn<?, ?> colAction;
@@ -117,9 +105,6 @@ public class PPlaceOrderFormController {
     private Label lblOrderTime;
 
     @FXML
-    private JFXComboBox<String> cmbTransportId;
-
-    @FXML
     private Label lblTransportCost;
 
     @FXML
@@ -141,7 +126,7 @@ public class PPlaceOrderFormController {
         getCustomerTel();
         getItemName();
         setCellValueFactory();
-        getTransportId();
+        getTransportLocation();
         getPMethod();
         addAl();
     }
@@ -185,14 +170,12 @@ public class PPlaceOrderFormController {
                         path
 
                 );
-
                 productCards.add(pc);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return productCards;
 
     }
@@ -221,7 +204,7 @@ public class PPlaceOrderFormController {
                 AnchorPane anchorPane = fxmlLoader.load();
 
 
-                ProductCardController productCardController = fxmlLoader.getController();
+                ItemCardController productCardController = fxmlLoader.getController();
                 productCardController.setData(productCards.get(i), myListener);
 
                 if (col == 2){
@@ -239,7 +222,7 @@ public class PPlaceOrderFormController {
 
     @FXML
     void btnAddToCartOnAction() {
-        String code = lblItemName.getText();//txtItemName.getText();
+        String code = lblItemName.getText();
         int qty = Integer.parseInt(txtQty.getText());
         double unitPrice = Double.parseDouble(lblUnitPrice.getText());
         double total = qty * unitPrice;
@@ -318,7 +301,7 @@ public class PPlaceOrderFormController {
     void btnPlaceOrderOnAction(ActionEvent event) throws SQLException {
         String orderId = lblOrderCode.getText();
         String cusId = lblCustomerId.getText();
-        String transId = String.valueOf(cmbTransportId.getValue());
+        String transId = String.valueOf(lblTrId.getText());
         Date date = Date.valueOf(LocalDate.now());
         String payment = String.valueOf(cmbPaymentMethod.getValue());
 
@@ -433,17 +416,17 @@ public class PPlaceOrderFormController {
     }
 
 
-    private void getTransportId() {
+    private void getTransportLocation() {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> telList = TransportRepo.getTel();
+            List<String> locationList = TransportRepo.getLoca();
 
-            for(String tel : telList) {
-                obList.add(tel);
+            for(String location : locationList) {
+                obList.add(location);
             }
 
-            cmbTransportId.setItems(obList);
+            TextFields.bindAutoCompletion(txtLocation,obList);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -462,21 +445,7 @@ public class PPlaceOrderFormController {
 
     @FXML
     void cmbTransportIdOnAction(ActionEvent actionEvent) {
-        String id = cmbTransportId.getValue();
 
-        try {
-            Transport tr = TransportRepo.searchById(id);
-            if(tr != null) {
-                lblLocation.setText(tr.getLocation());
-                lblTransportCost.setText(String.valueOf(tr.getCost()));
-
-            }
-
-            txtQty.requestFocus();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @FXML
@@ -485,7 +454,7 @@ public class PPlaceOrderFormController {
         String tel = txtCustomerTel.getText();
 
         try {
-            Customer customer = CustomerRepo.searchById(tel);
+            Customer customer = CustomerRepo.searchByTel(tel);
 
             lblCustName.setText(customer.getCName());
             lblCustomerId.setText(customer.getCustId());
@@ -496,6 +465,10 @@ public class PPlaceOrderFormController {
     }
 
     public void txtItemNameSearchOnAction(ActionEvent actionEvent) {
+        btnItemNameSearchOnAction();
+    }
+
+    public void btnItemNameSearchOnAction() {
         String name = txtItemNameSearch.getText();
 
         try {
@@ -554,39 +527,35 @@ public class PPlaceOrderFormController {
         return orderId;
     }
 
-   /* private void clearCellValueFactory() {
-        colItemName.setCellValueFactory(new PropertyValueFactory<>(""));
-        colQty.setCellValueFactory(new PropertyValueFactory<>(""));
-        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>(""));
-        colTotal.setCellValueFactory(new PropertyValueFactory<>(""));
-        colAction.setCellValueFactory(new PropertyValueFactory<>(""));
-    }
-
-    private void setNullValue() {
-        String code = "";
-        int qty = Integer.parseInt(null);
-        double unitPrice = Double.parseDouble(null);
-        double total = Double.parseDouble(null);
-        JFXButton btnRemove = null;
-
-        ObservableList<CartTm> nullList =
-
-        tblOrder.setItems(setNullValue());
-
-        tblOrder.refresh();
-    }*/
-
     private void clear() {
         txtItemNameSearch.setText("");
         txtCustomerTel.setText("");
         lblCustomerId.setText("");
         lblCustName.setText("");
-        cmbTransportId.setValue("");
+        txtLocation.setText("");
         cmbPaymentMethod.setValue("");
         lblNetTotal.setText("");
-        lblLocation.setText("");
+        lblTrId.setText("");
         lblTransportCost.setText("");
         getCurrentOrderId();
         tblOrder.refresh();
+    }
+
+    public void txtLocationOnAction(ActionEvent actionEvent) {
+        String location = txtLocation.getText();
+
+        try {
+            Transport tr = TransportRepo.searchByLoca(location);
+            if(tr != null) {
+                lblTrId.setText(tr.getTrId());
+                lblTransportCost.setText(String.valueOf(tr.getCost()));
+
+            }
+
+            txtQty.requestFocus();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
