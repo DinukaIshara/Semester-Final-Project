@@ -84,13 +84,19 @@ public class ItemSupplierDetailRepo {
         return null;
     }
 
-    public static boolean delete(String id) throws SQLException {
-        String sql = "DELETE FROM item_supplier_detail WHERE item_id = ?";
+    /*public static boolean delete(String id) throws SQLException {
+        String sql = "DELETE FROM item_supplier_detail WHERE item_id = ? ";
+
+        System.out.println(id);
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setObject(1, id);
 
-        return pstm.executeUpdate() > 0;
-    }
+        boolean tx = pstm.executeUpdate() > 0;
+
+        System.out.println(tx);
+
+        return tx;
+    }*/
 }

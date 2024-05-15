@@ -48,7 +48,7 @@
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtAddress" layoutX="153.0" layoutY="138.0" onAction="#addressOnAction" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+            <TextField fx:id="txtAddress" layoutX="153.0" layoutY="138.0" onAction="#addressOnAction" onKeyReleased="#txtAddressOnKeyRelesed" prefHeight="32.0" prefWidth="298.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                <font>
                   <Font name="Arial Rounded MT Bold" size="14.0" />
                </font>

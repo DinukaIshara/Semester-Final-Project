@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import lk.ijse.chama.MyListener;
@@ -20,6 +21,7 @@ import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.CartTm;
 import lk.ijse.chama.repository.*;
+import lk.ijse.chama.util.Regex;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -462,6 +464,8 @@ public class PlaceOrderFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        txtLocation.requestFocus();
     }
 
     public void txtItemNameSearchOnAction(ActionEvent actionEvent) {
@@ -538,7 +542,7 @@ public class PlaceOrderFormController {
         lblTrId.setText("");
         lblTransportCost.setText("");
         getCurrentOrderId();
-        tblOrder.refresh();
+        tblOrder.getItems().clear();
     }
 
     public void txtLocationOnAction(ActionEvent actionEvent) {
@@ -557,5 +561,22 @@ public class PlaceOrderFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        txtItemNameSearch.requestFocus();
+    }
+
+    public void txtQtyOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty);
+    }
+
+    public void txtTelOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtCustomerTel);
+    }
+
+    public boolean isValidate(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtCustomerTel))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty))return false;
+
+        return true;
     }
 }

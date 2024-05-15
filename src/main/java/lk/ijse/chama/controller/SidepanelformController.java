@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.chama.model.BrandNewItem;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -61,6 +62,7 @@ public class SidepanelformController {
         AnchorPane itemRootNode = FXMLLoader.load(this.getClass().getResource("/view/brandNewItem_form.fxml"));
         childRootNode.getChildren().clear();
         childRootNode.getChildren().add(itemRootNode);
+
     }
 
     public void btnEmployeeOnAction(ActionEvent actionEvent) throws IOException {

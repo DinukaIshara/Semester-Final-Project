@@ -46,7 +46,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtCustomerTel" layoutX="179.0" layoutY="80.0" onAction="#txtCustomerIdOnAction" prefHeight="30.0" prefWidth="171.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+            <TextField fx:id="txtCustomerTel" layoutX="179.0" layoutY="80.0" onAction="#txtCustomerIdOnAction" onKeyReleased="#txtTelOnKeyRelesed" prefHeight="30.0" prefWidth="171.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <JFXButton buttonType="RAISED" layoutX="370.0" layoutY="84.0" onAction="#btnAddCustomerOnAction" style="-fx-background-color: green;" text="+" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -168,7 +168,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtQty" layoutX="249.0" layoutY="250.0" onAction="#txtQtyOnAction" prefHeight="33.0" prefWidth="66.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+                  <TextField fx:id="txtQty" layoutX="249.0" layoutY="250.0" onAction="#txtQtyOnAction" onKeyReleased="#txtQtyOnKeyRelesed" prefHeight="33.0" prefWidth="66.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
                   <JFXButton fx:id="btnAddToCart" buttonType="RAISED" layoutX="199.0" layoutY="300.0" onAction="#btnAddToCartOnAction" prefHeight="33.0" prefWidth="120.0" styleClass="sale" stylesheets="@../css/style.css" text="Add to cart" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

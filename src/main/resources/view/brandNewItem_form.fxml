@@ -44,7 +44,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtItemId" layoutX="187.0" layoutY="23.0" onAction="#txtItemId" prefHeight="28.0" prefWidth="95.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" AnchorPane.bottomAnchor="364.0" AnchorPane.leftAnchor="187.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="23.0" />
+            <TextField fx:id="txtItemId" layoutX="187.0" layoutY="23.0" onAction="#txtItemId" onKeyReleased="#txtitemIdOnKeyRelese" prefHeight="28.0" prefWidth="95.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" AnchorPane.bottomAnchor="364.0" AnchorPane.leftAnchor="187.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="23.0" />
             <TextField fx:id="txtName" layoutX="187.0" layoutY="76.0" onAction="#txtNameOnAction" prefHeight="28.0" prefWidth="178.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <Label layoutX="57.0" layoutY="78.0" prefHeight="21.0" prefWidth="124.0" text="Item Name  :">
                <font>

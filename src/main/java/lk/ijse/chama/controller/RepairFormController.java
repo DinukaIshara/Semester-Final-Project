@@ -4,17 +4,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.RepairTm;
 import lk.ijse.chama.repository.CustomerRepo;
+import lk.ijse.chama.repository.EmployeeRepo;
 import lk.ijse.chama.repository.RepairRepo;
 import lk.ijse.chama.model.Repair;
+import lk.ijse.chama.util.Regex;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -147,13 +152,25 @@ public class RepairFormController {
         }
     }
     @FXML
-    void btnAddCustomerOnAction(ActionEvent event) {
-
+    void btnAddCustomerOnAction(ActionEvent event) throws IOException {
+        AnchorPane customerRootNode = FXMLLoader.load(this.getClass().getResource("/view/customer_form.fxml"));
+        customerRootNode.getChildren().clear();
+        customerRootNode.getChildren().add(customerRootNode);
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtRepairId.getText();
 
+        try {
+            boolean isDeleted = RepairRepo.delete(id);
+            if(isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Repair deleted!").show();
+                initialize();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     @FXML
@@ -208,21 +225,6 @@ public class RepairFormController {
         }
     }
 
-    @FXML
-    void checkCustomerIsSelect(MouseEvent event) {
-
-    }
-
-    @FXML
-    void dpReceiveDateOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void dpReturnDateOnAction(ActionEvent event) {
-
-    }
-
     public void btnClearOnAction(ActionEvent actionEvent) {
         clearFields();
     }
@@ -251,6 +253,8 @@ public class RepairFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        txtItemName.requestFocus();
     }
 
     public void txtSearchRepairOnAction(ActionEvent actionEvent) {
@@ -282,17 +286,31 @@ public class RepairFormController {
             new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
         }
     }
+    @FXML
+    void checkCustomerIsSelect(MouseEvent event) {
+
+    }
+
+    @FXML
+    void dpReceiveDateOnAction(ActionEvent event) {
+        txtReturnDate.requestFocus();
+    }
+
+    @FXML
+    void dpReturnDateOnAction(ActionEvent event) {
+        txtDescription.requestFocus();
+    }
 
     public void txtRidOnAction(ActionEvent actionEvent) {
-
+        txtCustomerTel.requestFocus();
     }
 
     public void txtItemNameOnAction(ActionEvent actionEvent) {
-
+        txtReceiveDate.requestFocus();
     }
 
     public void txtDescriptionOnAction(ActionEvent actionEvent) {
-
+        txtCost.requestFocus();
     }
 
     public void txtCostOnAction(ActionEvent actionEvent) {
@@ -300,10 +318,17 @@ public class RepairFormController {
     }
 
     public void txtRepairIdOnKeyRelesed(KeyEvent keyEvent) {
-
+        Regex.setTextColor(lk.ijse.chama.util.TextField.RPID,txtRepairId);
     }
 
     public void txtCostOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtCost);
+    }
 
+    public boolean isValidate(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.RPID,txtRepairId))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtCost))return false;
+
+        return true;
     }
 }

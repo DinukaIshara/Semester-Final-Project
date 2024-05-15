@@ -13,8 +13,8 @@ public class BrandNewItem {
     private String category;
     private String brand;
     private String modelNo;
-    private String warranty;
     private String description;
+    private String warranty;
     private String type;
     private String path;
 }

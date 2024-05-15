@@ -17,7 +17,7 @@ import java.util.List;
 public class BrandNewItemRepo {
 
     public static boolean save(BrandNewItem bi) throws SQLException {
-        System.out.println("SaveBrandNew Item start");
+        System.out.println("item : " + bi);
         String sql = "INSERT INTO item VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
@@ -181,14 +181,16 @@ public class BrandNewItemRepo {
         pstm.setObject(4, brandNewItem.getModelNo());
         pstm.setObject(5, brandNewItem.getDescription());
         pstm.setObject(6, brandNewItem.getWarranty());
-        pstm.setObject(9, brandNewItem.getType());
-        pstm.setObject(7, brandNewItem.getPath());
-        pstm.setObject(8, brandNewItem.getItemId());
+        pstm.setObject(7, brandNewItem.getType());
+        pstm.setObject(8, brandNewItem.getPath());
+        pstm.setObject(9, brandNewItem.getItemId());
 
         return pstm.executeUpdate() > 0;
     }
     public static boolean delete(String id) throws SQLException {
         String sql = "DELETE FROM item WHERE item_id = ?";
+
+        System.out.println(id);
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);

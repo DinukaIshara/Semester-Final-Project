@@ -35,7 +35,7 @@ public class EmployeeRepo {
     }
 
     public static boolean update(Employee employee) throws SQLException {
-        String sql = "UPDATE employee SET name = ?, address = ?, nic = ?, position = ?, contact_no = ?, dob = ?, enroll_date = ?, email = ?, basic_salary = ? WHERE emp_id = ?";
+        String sql = "UPDATE employee SET name = ?, address = ?, nic = ?, position = ?, contact = ?, dob = ?, enroll_date = ?, email = ?, basic_salary = ?, path = ? WHERE emp_id = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -48,7 +48,8 @@ public class EmployeeRepo {
         pstm.setObject(7, employee.getDateRegister());
         pstm.setObject(8, employee.getEmpEmail());
         pstm.setObject(9, employee.getSalary());
-        //pstm.setObject(10, employee.getPath());
+        pstm.setObject(10, employee.getPath());
+        pstm.setObject(11, employee.getEmpId());
 
         return pstm.executeUpdate() > 0;
     }

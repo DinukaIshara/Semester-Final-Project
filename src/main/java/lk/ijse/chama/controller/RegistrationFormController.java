@@ -77,7 +77,7 @@ public class RegistrationFormController {
 
     @FXML
     void userNameOnAction(ActionEvent event) {
-
+        txtPassword.requestFocus();
     }
 
     public void callLogIn() throws IOException {

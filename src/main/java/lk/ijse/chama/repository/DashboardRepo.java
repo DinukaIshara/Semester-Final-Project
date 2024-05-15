@@ -26,10 +26,10 @@ public class DashboardRepo {
 
         while (resultSet.next()) {
             String id = resultSet.getString(1);
-            int name = resultSet.getInt(2);
-            int address = resultSet.getInt(3);
+            int count = resultSet.getInt(2);
+            int sumQty = resultSet.getInt(3);
 
-            MostSellItemTm mostSellItem = new MostSellItemTm(id, name, address);
+            MostSellItemTm mostSellItem = new MostSellItemTm(id, count, sumQty);
             sellItem.add(mostSellItem);
         }
         return sellItem;

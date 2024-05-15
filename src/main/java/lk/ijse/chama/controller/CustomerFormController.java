@@ -262,19 +262,34 @@ public class CustomerFormController {
         }
     }
 
-    public void txtNicOnKeyRelesed(KeyEvent keyEvent) {
+    public void txtCustIdOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.CID,txtId);
+    }
 
+    public void txtNicOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.NIC,txtNIC);
     }
 
     public void txtTelOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtTel);
+    }
 
+    public void txtAddressOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.ADDRESS,txtAddress);
     }
 
     public void txtEmailOnKeyRelesed(KeyEvent keyEvent) {
-
+        Regex.setTextColor(lk.ijse.chama.util.TextField.EMAIL,txtEmail);
     }
 
-    public void txtCustIdOnKeyRelesed(KeyEvent keyEvent) {
+    public boolean isValidate(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.CID,txtId)) return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.NIC,txtNIC)) return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.ADDRESS,txtAddress))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtTel)) return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.EMAIL,txtEmail)) return false;
 
+        return true;
     }
+
 }

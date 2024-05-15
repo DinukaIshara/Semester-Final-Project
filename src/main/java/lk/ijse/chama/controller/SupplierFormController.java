@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +15,7 @@ import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.model.tm.SupplierTm;
 import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.SupplierRepo;
+import lk.ijse.chama.util.Regex;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -242,34 +240,42 @@ public class SupplierFormController {
     }
 
     public void txtSupIdOnAction(ActionEvent actionEvent) {
-
+        txtCompanyName.requestFocus();
     }
 
     public void txtConpanyNameOnAction(ActionEvent actionEvent) {
-
+        txtPersonName.requestFocus();
     }
 
     public void txtPersonNameOnAction(ActionEvent actionEvent) {
-
+        txtContact.requestFocus();
     }
 
     public void txtcontactNameOnAction(ActionEvent actionEvent) {
-
+        txtLoacation.requestFocus();
     }
 
     public void txtContactNoOnKeyRelesed(KeyEvent keyEvent) {
-
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtContact);
     }
 
     public void txtLocationOnAction(ActionEvent actionEvent) {
-
-    }
-
-    public void txtEmailOnKeyRelesed(KeyEvent keyEvent) {
-
+        txtEmail.requestFocus();
     }
 
     public void txtSupIdOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.SID,txtSupId);
+    }
 
+    public void txtEmailOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.EMAIL,txtEmail);
+    }
+
+    public boolean isValidat(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.SID,txtSupId))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.EMAIL,txtEmail))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtContact))return false;
+
+        return true;
     }
 }

@@ -15,14 +15,14 @@ public class SaveBrandNewItemRepo {
         connection.setAutoCommit(false);
 
         try {
-            System.out.println("Road to ItemSave");
+            System.out.println("Road to ItemSave" + bni.getBrandNewItem());
             boolean isItemSave = BrandNewItemRepo.save(bni.getBrandNewItem());
-            System.out.println("isItemSaved");
+            System.out.println("isItemSaved" + isItemSave);
 
             if (isItemSave) {
-               System.out.println("Road to ItemSupplierSave");
+               System.out.println("Road to ItemSupplierSave" + bni.getItemSupplier());
                boolean isItemSupplierDetailSaved = ItemSupplierDetailRepo.save(bni.getItemSupplier());
-               System.out.println("isItemSupplierSaved");
+               System.out.println("isItemSupplierSaved" + isItemSupplierDetailSaved);
 
                if (isItemSupplierDetailSaved) {
                     connection.commit();
@@ -44,14 +44,14 @@ public class SaveBrandNewItemRepo {
         connection.setAutoCommit(false);
 
         try {
-            System.out.println("Road to ItemSave");
+            System.out.println("Road to ItemUpdate = " + si.getBrandNewItem());
             boolean isItemUpdate = BrandNewItemRepo.update(si.getBrandNewItem());
-            System.out.println("isItemSaved");
+            System.out.println("isItemUpdated");
 
             if (isItemUpdate) {
-                System.out.println("Road to ItemSupplierSave");
+                System.out.println("Road to ItemSupplierUpdate = " + si.getItemSupplier());
                 boolean isItemSupplierDetailUpdate = ItemSupplierDetailRepo.update(si.getItemSupplier());
-                System.out.println("isItemSupplierSaved");
+                System.out.println("isItemSupplierUpdated");
 
                 if (isItemSupplierDetailUpdate) {
                     connection.commit();
@@ -67,4 +67,5 @@ public class SaveBrandNewItemRepo {
             connection.setAutoCommit(true);
         }
     }
+
 }

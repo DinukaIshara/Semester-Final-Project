@@ -17,6 +17,7 @@ import lk.ijse.chama.model.Employee;
 import lk.ijse.chama.model.tm.EmployeeTm;
 import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.EmployeeRepo;
+import lk.ijse.chama.util.Regex;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -234,31 +235,11 @@ public class EmployeeFormController {
     }
 
     @FXML
-    void addressOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void nameOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void nicOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void telOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void dobOnAction(ActionEvent actionEvent) {
 
     }
 
-    public void btnImportImgOnAction(ActionEvent actionEvent) {
+    public void btnImportImgOnAction() {
         FileChooser openFile = new FileChooser();
         openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg"));
 
@@ -331,51 +312,83 @@ public class EmployeeFormController {
         }
     }
 
-    public void txtNicOnKeyRelesed(KeyEvent keyEvent) {
+    @FXML
+    void addressOnAction(ActionEvent event) {
+        txtNIC.requestFocus();
+    }
 
+    @FXML
+    void nameOnAction(ActionEvent event) {
+        txtAddress.requestFocus();
+    }
+
+    @FXML
+    void nicOnAction(ActionEvent event) {
+        txtTel.requestFocus();
+    }
+
+    @FXML
+    void telOnAction(ActionEvent event) {
+        txtDOB.requestFocus();
+    }
+
+    public void txtNicOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.NIC,txtNIC);
     }
 
     public void txtPositionOnAction(ActionEvent actionEvent) {
+        btnImportImgOnAction();
 
     }
 
     public void txtSalOnAction(ActionEvent actionEvent) {
-
+        txtPosition.requestFocus();
     }
 
     public void txtSalOnKeyRelesed(KeyEvent keyEvent) {
-
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtSallary);
     }
 
     public void txtIdOnAction(ActionEvent actionEvent) {
-
+        txtName.requestFocus();
     }
 
     public void txtAddressOnKeyRelesed(KeyEvent keyEvent) {
-
+        Regex.setTextColor(lk.ijse.chama.util.TextField.ADDRESS,txtAddress);
     }
 
     public void txtTelOnKeyRelesed(KeyEvent keyEvent) {
-
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtTel);
     }
 
     public void txtDOBOnAction(ActionEvent actionEvent) {
-
+        txtEnrollDate.requestFocus();
     }
 
     public void txtRegDateOnAction(ActionEvent actionEvent) {
-
+        txtEmail.requestFocus();
     }
 
     public void txtEmailOnAction(ActionEvent actionEvent) {
-
+        txtSallary.requestFocus();
     }
 
     public void txtEmailOnKeyRelesed(KeyEvent keyEvent) {
-
+        Regex.setTextColor(lk.ijse.chama.util.TextField.EMAIL,txtEmail);
     }
 
     public void txtEmpIdOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.EID,txtId);
+    }
 
+    public boolean isValidate(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.EID,txtId))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.NIC,txtNIC))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.ADDRESS,txtAddress))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtTel))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.EMAIL,txtEmail))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtSallary))return false;
+
+        return true;
     }
 }

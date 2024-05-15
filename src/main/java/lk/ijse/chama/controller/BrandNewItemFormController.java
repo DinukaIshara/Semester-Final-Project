@@ -17,6 +17,7 @@ import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.BrandNewItemTm;
 import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.repository.*;
+import lk.ijse.chama.util.Regex;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.File;
@@ -99,6 +100,7 @@ public class BrandNewItemFormController {
     private Image image;
 
     public void initialize() {
+        //txtItemId.requestFocus();
         getSupplierId();
         getBrand();
         getCategory();
@@ -237,12 +239,9 @@ public class BrandNewItemFormController {
         try {
             boolean isItemDeleted = BrandNewItemRepo.delete(id);
             if(isItemDeleted) {
-                boolean isItemDetailDelete = ItemSupplierDetailRepo.delete(id);
-                if(isItemDetailDelete){
-                    new Alert(Alert.AlertType.CONFIRMATION, "item deleted!").show();
-                    clearFields();
-                    initialize();
-                }
+                new Alert(Alert.AlertType.CONFIRMATION, "item deleted!").show();
+                clearFields();
+                initialize();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -291,7 +290,7 @@ public class BrandNewItemFormController {
         String type = String.valueOf(cmbType.getValue());
         String path = image.getUrl();
 
-        var item = new BrandNewItem(itemId, name, category, brand, modelNo, warranty, description, type, path);
+        var item = new BrandNewItem(itemId, name, category, brand, modelNo, description, warranty, type, path);
 
         itemId = txtItemId.getText();
         String supId = txtSupplierId.getText();
@@ -325,10 +324,9 @@ public class BrandNewItemFormController {
         String warranty = txtWaranty.getText();
         String type = String.valueOf(cmbType.getValue());
         String description = txtDescription.getText();
-
         String path = image.getUrl();
 
-        var item = new BrandNewItem(itemId, name, category, brand, modelNo, warranty, description, type, path);
+        var item = new BrandNewItem(itemId, name, category, brand, modelNo, description, warranty, type, path);
 
         itemId = txtItemId.getText();
         String supId = txtSupplierId.getText();
@@ -339,6 +337,7 @@ public class BrandNewItemFormController {
 
         SaveBrandNewItem si = new SaveBrandNewItem(item, itemSupplier);
         try {
+            System.out.println("si = " + si);
             boolean isPlaced = SaveBrandNewItemRepo.updateBrandNewItem(si);
             if(isPlaced) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Update Item!").show();
@@ -441,7 +440,7 @@ public class BrandNewItemFormController {
     }
 
     @FXML
-    void txtItemId(ActionEvent event) {
+    public void txtItemId(ActionEvent event) {
         txtName.requestFocus();
     }
 
@@ -485,8 +484,10 @@ public class BrandNewItemFormController {
 
     public void txtSupplierIdOnAction(ActionEvent actionEvent) {
         String id = String.valueOf(txtSupplierId.getText());
+
+        Supplier supplier;
         try {
-            Supplier supplier = SupplierRepo.searchById(id);
+            supplier = SupplierRepo.searchById(id);
 
             lblSupCompanyName.setText(supplier.getCompanyName());
 
@@ -497,11 +498,24 @@ public class BrandNewItemFormController {
         cmbType.requestFocus();
     }
 
-    public void txtQtyOnKeyRelesed(KeyEvent keyEvent) {
+    public void txtitemIdOnKeyRelese(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.IID,txtItemId);
+    }
 
+    public void txtQtyOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty);
     }
 
     public void txtUnitPriceOnKeyRelesed(KeyEvent keyEvent) {
-
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtUnitPrice);
     }
+
+    public boolean isValied(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.IID,txtItemId))return false;
+        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty)) return false;
+        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtUnitPrice)) return false;
+        return true;
+    }
+
+
 }
