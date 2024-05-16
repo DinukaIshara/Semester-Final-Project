@@ -1,6 +1,5 @@
 package lk.ijse.chama.model;
 
-import javafx.scene.image.Image;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ProductCard {
+public class ItemCard {
     private String itemId;
     private String itemName;
     private double price;

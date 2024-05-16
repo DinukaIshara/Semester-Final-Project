@@ -7,10 +7,8 @@ import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.ItemSupplierDetail;
 import lk.ijse.chama.model.OrderDetail;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class BrandNewItemRepo {
         pstm.setString(2, bi.getName());
         pstm.setString(3, bi.getCategory());
         pstm.setString(4, bi.getBrand());
-        pstm.setString(5, bi.getModelNo());
+        pstm.setDate(5, Date.valueOf(bi.getStockDate()));
         pstm.setString(6, bi.getDescription());
         pstm.setString(7, bi.getWarranty());
         pstm.setString(8, bi.getType());
@@ -53,13 +51,13 @@ public class BrandNewItemRepo {
                 String name = resultSet.getString(2);
                 String category = resultSet.getString(3);
                 String brand = resultSet.getString(4);
-                String modelNo = resultSet.getString(5);
+                LocalDate date = resultSet.getDate(5).toLocalDate();
                 String warranty = resultSet.getString(6);
                 String description = resultSet.getString(7);
                 String type = resultSet.getString(8);
                 String path = resultSet.getString(9);
 
-                BrandNewItem item = new BrandNewItem(id, name, category, brand, modelNo, warranty, description, type, path);
+                BrandNewItem item = new BrandNewItem(id, name, category, brand, date, warranty, description, type, path);
                 itemList.add(item);
             }
         } catch (SQLException e) {
@@ -70,19 +68,19 @@ public class BrandNewItemRepo {
         return itemList;
     }
 
-    public static List<String> getCode() throws SQLException {
-        String sql = "SELECT item_id FROM item";
+    public static List<String> getDate() throws SQLException {
+        String sql = "SELECT date FROM item";
 
         ResultSet resultSet = DbConnection.getInstance()
                 .getConnection()
                 .prepareStatement(sql)
                 .executeQuery();
 
-        List<String> idList = new ArrayList<>();
+        List<String> dateList = new ArrayList<>();
         while (resultSet.next()) {
-            idList.add(resultSet.getString(1));
+            dateList.add(resultSet.getString(1));
         }
-        return idList;
+        return dateList;
     }
 
     public static List<String> getName() throws SQLException {
@@ -112,7 +110,7 @@ public class BrandNewItemRepo {
                     resultSet.getString(2),
                     resultSet.getString(3),
                     resultSet.getString(4),
-                    resultSet.getString(5),
+                    resultSet.getDate(5).toLocalDate(),
                     resultSet.getString(6),
                     resultSet.getString(7),
                     resultSet.getString(8),
@@ -136,7 +134,7 @@ public class BrandNewItemRepo {
                     resultSet.getString(2),
                     resultSet.getString(3),
                     resultSet.getString(4),
-                    resultSet.getString(5),
+                    resultSet.getDate(5).toLocalDate(),
                     resultSet.getString(6),
                     resultSet.getString(7),
                     resultSet.getString(8),
@@ -171,14 +169,14 @@ public class BrandNewItemRepo {
     }
 
     public static boolean update(BrandNewItem brandNewItem) throws SQLException {
-        String sql = "UPDATE item SET name = ?, category = ?, brand = ?, model_no = ?, description = ?, warranty = ?, type = ?, path = ? WHERE item_id = ?";
+        String sql = "UPDATE item SET name = ?, category = ?, brand = ?, date = ?, description = ?, warranty = ?, type = ?, path = ? WHERE item_id = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setObject(1, brandNewItem.getName());
         pstm.setObject(2, brandNewItem.getCategory());
         pstm.setObject(3, brandNewItem.getBrand());
-        pstm.setObject(4, brandNewItem.getModelNo());
+        pstm.setObject(4, brandNewItem.getStockDate());
         pstm.setObject(5, brandNewItem.getDescription());
         pstm.setObject(6, brandNewItem.getWarranty());
         pstm.setObject(7, brandNewItem.getType());

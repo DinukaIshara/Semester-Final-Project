@@ -15,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.BrandNewItemTm;
-import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.repository.*;
 import lk.ijse.chama.util.Regex;
 import org.controlsfx.control.textfield.TextFields;
@@ -23,14 +22,23 @@ import org.controlsfx.control.textfield.TextFields;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 public class BrandNewItemFormController {
 
-    public TextField txtCategory;
-    public TextField txtBrand;
-    public TextField txtSupplierId;
+    @FXML
+    private TextField txtCategory;
+
+    @FXML
+    private TextField txtBrand;
+
+    @FXML
+    private TextField txtSupplierId;
+
+    @FXML
+    private DatePicker txtDate;
+
     @FXML
     private TextField txtSearchItemName;
 
@@ -83,9 +91,6 @@ public class BrandNewItemFormController {
     private TextField txtItemId;
 
     @FXML
-    private TextField txtModel;
-
-    @FXML
     private TextField txtName;
 
     @FXML
@@ -99,8 +104,7 @@ public class BrandNewItemFormController {
 
     private Image image;
 
-    public void initialize() {
-        //txtItemId.requestFocus();
+    public void initialize() { // The method that is called first when the page is loaded
         getSupplierId();
         getBrand();
         getCategory();
@@ -110,7 +114,7 @@ public class BrandNewItemFormController {
         getItemName();
     }
 
-    private void setCellValueFactory() {
+    private void setCellValueFactory() { // Set ItemTm in column
         colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -120,7 +124,7 @@ public class BrandNewItemFormController {
         colSupCompany.setCellValueFactory(new PropertyValueFactory<>("supplierId"));
     }
 
-    private void loadAllItems() {
+    private void loadAllItems() { // Load All Items In ItemTm Table
         ObservableList<BrandNewItemTm> obList = FXCollections.observableArrayList();
 
         try {
@@ -169,7 +173,121 @@ public class BrandNewItemFormController {
         }
     }
 
-    private void getType() {
+    @FXML
+    void btnSaveItemOnAction(ActionEvent event) {
+        String itemId = txtItemId.getText();
+        String name = txtName.getText();
+        String category = txtCategory.getText();
+        String brand = txtBrand.getText();
+        LocalDate date = txtDate.getValue();
+        String warranty = txtWaranty.getText();;
+        String description = txtDescription.getText();
+        String type = String.valueOf(cmbType.getValue());
+        String path = image.getUrl();
+
+        var item = new BrandNewItem(itemId, name, category, brand, date, description, warranty, type, path); //Set Item Table Data
+
+        itemId = txtItemId.getText();
+        String supId = txtSupplierId.getText();
+        int handOnQty = Integer.parseInt(txtQty.getText());
+        double unitPrice = Double.parseDouble(txtUnitPrice.getText());
+
+        var itemSupplier = new ItemSupplierDetail(itemId,supId,handOnQty,unitPrice); //Set Item Supplier Table Data
+
+        SaveBrandNewItem si = new SaveBrandNewItem(item, itemSupplier);
+        try {
+            if(isValied()) { // Add Validation
+                boolean isPlaced = SaveBrandNewItemRepo.saveBrandNewItem(si); // Transaction
+                if (isPlaced) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Save Item!").show();
+                    clearFields();
+                    initialize();
+                } else {
+                    new Alert(Alert.AlertType.WARNING, "Item Save Unsuccessfully!").show();
+                }
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void btnUpdateItemOnAction(ActionEvent event) { // Update Item
+        String itemId = txtItemId.getText();
+        String name = txtName.getText();
+        String category = txtCategory.getText();
+        String brand = txtBrand.getText();
+        LocalDate date = txtDate.getValue();
+        String warranty = txtWaranty.getText();
+        String type = String.valueOf(cmbType.getValue());
+        String description = txtDescription.getText();
+        String path = image.getUrl();
+
+        var item = new BrandNewItem(itemId, name, category, brand, date, description, warranty, type, path); //Set Item Table Data
+
+        itemId = txtItemId.getText();
+        String supId = txtSupplierId.getText();
+        int handOnQty = Integer.parseInt(txtQty.getText());
+        double unitPrice = Double.parseDouble(txtUnitPrice.getText());
+
+        var itemSupplier = new ItemSupplierDetail(itemId,supId,handOnQty,unitPrice); //Set Item Supplier Table Data
+
+        SaveBrandNewItem si = new SaveBrandNewItem(item, itemSupplier);
+        try {
+            if(isValied()) { // Add Validation
+                boolean isPlaced = SaveBrandNewItemRepo.updateBrandNewItem(si); // Transaction
+                if (isPlaced) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Update Item!").show();
+                    clearFields();
+                    initialize(); // Reload
+                } else {
+                    new Alert(Alert.AlertType.WARNING, "Item Update Unsuccessfully!").show();
+                }
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void clearFields() {
+        txtItemId.setText("");
+        txtName.setText("");
+        txtDescription.setText("");
+        txtDate.setValue(null);
+        txtQty.setText("");
+        txtUnitPrice.setText("");
+        txtWaranty.setText("");
+        txtBrand.setText("");
+        cmbType.setValue(null);
+        txtCategory.setText("");
+        txtSupplierId.setText("");
+        lblSupCompanyName.setText("");
+
+    }
+
+    public void btnClearOnAction(ActionEvent actionEvent) { // Clear Text Field Data
+        clearFields();
+    }
+
+    @FXML
+    void btnDeleteItemOnAction(ActionEvent event) { // Delete Item
+        String id = txtItemId.getText();
+
+        try {
+            if(isValied()) { // Add Validation
+                boolean isItemDeleted = BrandNewItemRepo.delete(id); //
+                if (isItemDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "item deleted!").show();
+                    clearFields();
+                    initialize(); // Reload Page
+                }
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void getType() { // Set Item types
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         obList.add("Brand New");
@@ -179,7 +297,7 @@ public class BrandNewItemFormController {
 
     }
 
-    private void getBrand() {
+    private void getBrand() { // Set Item Brands
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         obList.add("Hp");
@@ -207,7 +325,7 @@ public class BrandNewItemFormController {
 
     }
 
-    private void getCategory(){
+    private void getCategory(){ // Set Item Category
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         obList.add("Laptop");
@@ -226,140 +344,26 @@ public class BrandNewItemFormController {
     }
 
     @FXML
-    void btnAddNewSupplierOnAction(ActionEvent event) throws IOException {
+    void btnAddNewSupplierOnAction(ActionEvent event) throws IOException { // Add New Supplier
         AnchorPane supRootNode = FXMLLoader.load(this.getClass().getResource("/view/supplier_form.fxml"));
         rootNode.getChildren().clear();
         rootNode.getChildren().add(supRootNode);
     }
 
     @FXML
-    void btnDeleteItemOnAction(ActionEvent event) {
-        String id = txtItemId.getText();
-
-        try {
-            boolean isItemDeleted = BrandNewItemRepo.delete(id);
-            if(isItemDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "item deleted!").show();
-                clearFields();
-                initialize();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-    private void clearFields() {
-        txtItemId.setText("");
-        txtName.setText("");
-        txtDescription.setText("");
-        txtModel.setText("");
-        txtQty.setText("");
-        txtUnitPrice.setText("");
-        txtWaranty.setText("");
-        txtBrand.setText("");
-        cmbType.setValue(null);
-        txtCategory.setText("");
-        txtSupplierId.setText("");
-        lblSupCompanyName.setText("");
-
-    }
-
-    @FXML
-    void btnPicImportOnAction() {
+    void btnPicImportOnAction() { // Search Image Path in Your PC
         FileChooser openFile = new FileChooser();
         openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg"));
 
         File file = openFile.showOpenDialog(imgRootNode.getScene().getWindow());
 
         if (file != null) {
-
             image = new Image(file.toURI().toString(), 200, 200, false, true);
-
             itemImage.setImage(image);
         }
     }
 
-    @FXML
-    void btnSaveItemOnAction(ActionEvent event) {
-        String itemId = txtItemId.getText();
-        String name = txtName.getText();
-        String category = txtCategory.getText();
-        String brand = txtBrand.getText();
-        String modelNo = txtModel.getText();
-        String warranty = txtWaranty.getText();;
-        String description = txtDescription.getText();
-        String type = String.valueOf(cmbType.getValue());
-        String path = image.getUrl();
-
-        var item = new BrandNewItem(itemId, name, category, brand, modelNo, description, warranty, type, path);
-
-        itemId = txtItemId.getText();
-        String supId = txtSupplierId.getText();
-        int handOnQty = Integer.parseInt(txtQty.getText());
-        double unitPrice = Double.parseDouble(txtUnitPrice.getText());
-
-        var itemSupplier = new ItemSupplierDetail(itemId,supId,handOnQty,unitPrice);
-
-        SaveBrandNewItem si = new SaveBrandNewItem(item, itemSupplier);
-        try {
-            boolean isPlaced = SaveBrandNewItemRepo.saveBrandNewItem(si);
-            if(isPlaced) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Save Item!").show();
-                clearFields();
-                initialize();
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Item Save Unsuccessfully!").show();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    @FXML
-    void btnUpdateItemOnAction(ActionEvent event) {
-        String itemId = txtItemId.getText();
-        String name = txtName.getText();
-        String category = txtCategory.getText();
-        String brand = txtBrand.getText();
-        String modelNo = txtModel.getText();
-        String warranty = txtWaranty.getText();
-        String type = String.valueOf(cmbType.getValue());
-        String description = txtDescription.getText();
-        String path = image.getUrl();
-
-        var item = new BrandNewItem(itemId, name, category, brand, modelNo, description, warranty, type, path);
-
-        itemId = txtItemId.getText();
-        String supId = txtSupplierId.getText();
-        int handOnQty = Integer.parseInt(txtQty.getText());
-        double unitPrice = Double.parseDouble(txtUnitPrice.getText());
-
-        var itemSupplier = new ItemSupplierDetail(itemId,supId,handOnQty,unitPrice);
-
-        SaveBrandNewItem si = new SaveBrandNewItem(item, itemSupplier);
-        try {
-            System.out.println("si = " + si);
-            boolean isPlaced = SaveBrandNewItemRepo.updateBrandNewItem(si);
-            if(isPlaced) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Update Item!").show();
-                clearFields();
-                initialize();
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Item Update Unsuccessfully!").show();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    public void btnClearOnAction(ActionEvent actionEvent) {
-        clearFields();
-    }
-
-    @FXML
-    void cmbSupIdOnAction(ActionEvent event) {
-
-    }
-    private void getSupplierId() {
+    private void getSupplierId() { // Get Supplier ID and Assign Text Field
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
@@ -369,8 +373,7 @@ public class BrandNewItemFormController {
                 obList.add(id);
             }
 
-            //cmbSupId.setItems(obList);
-            TextFields.bindAutoCompletion(txtSupplierId, obList);
+            TextFields.bindAutoCompletion(txtSupplierId, obList); //Assign
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -388,15 +391,15 @@ public class BrandNewItemFormController {
     public void btnSearchItemNameOnAction() throws SQLException {
         String name = txtSearchItemName.getText();
 
-        BrandNewItem item = BrandNewItemRepo.searchByName(name);
-        ItemSupplierDetail isd = ItemSupplierDetailRepo.searchById(item.getItemId());
-        Supplier supplier = SupplierRepo.searchById(isd.getSupId());
+        BrandNewItem item = BrandNewItemRepo.searchByName(name); // Get Item name wise Item Details
+        ItemSupplierDetail isd = ItemSupplierDetailRepo.searchById(item.getItemId()); // Get Item id wise Item Supplier Details
+        Supplier supplier = SupplierRepo.searchById(isd.getSupId()); // Get Item Supplier table Supplier Id Wise Supplier Details
 
         if (item != null) {
             txtItemId.setText(item.getItemId());
             txtName.setText(item.getName());
             txtDescription.setText(item.getDescription());
-            txtModel.setText(item.getModelNo());
+            txtDate.setValue(item.getStockDate());
             txtCategory.setText(item.getCategory());
             txtBrand.setText(item.getBrand());
             if(isd != null) {
@@ -409,7 +412,7 @@ public class BrandNewItemFormController {
             }
             cmbType.setValue(item.getType());
             txtWaranty.setText(item.getWarranty());
-            image = new Image(item.getPath(), 153, 176, false, true);
+            image = new Image(item.getPath(), 153, 176, false, true); // Set Image path and size
             itemImage.setImage(image);
 
 
@@ -417,7 +420,7 @@ public class BrandNewItemFormController {
             new Alert(Alert.AlertType.INFORMATION, "Item not found!").show();
         }
     }
-    private void getItemName() {
+    private void getItemName() { // Get Item Names and Assign Text Field (Sujess Item)
 
         ObservableList<String> obList = FXCollections.observableArrayList();
 
@@ -434,6 +437,7 @@ public class BrandNewItemFormController {
         }
     }
 
+    //Enter Press Focus Action ----------------------------------------------------------------------------------
     @FXML
     void txtDescriptionOnAction(ActionEvent event) {
         txtSupplierId.requestFocus();
@@ -442,11 +446,6 @@ public class BrandNewItemFormController {
     @FXML
     public void txtItemId(ActionEvent event) {
         txtName.requestFocus();
-    }
-
-    @FXML
-    void txtModelOnAction(ActionEvent event) {
-        txtWaranty.requestFocus();
     }
 
     @FXML
@@ -471,7 +470,10 @@ public class BrandNewItemFormController {
 
     @FXML
     void cmbtypeOnAction(ActionEvent actionEvent) {
-        txtModel.requestFocus();
+        txtDate.requestFocus();
+    }
+    public void txtDateOnAction(ActionEvent actionEvent) {
+        txtWaranty.requestFocus();
     }
 
     public void txtCategoryOnAction(ActionEvent actionEvent) {
@@ -489,7 +491,7 @@ public class BrandNewItemFormController {
         try {
             supplier = SupplierRepo.searchById(id);
 
-            lblSupCompanyName.setText(supplier.getCompanyName());
+            lblSupCompanyName.setText(supplier.getCompanyName()); // Set Supplier Id wise Company Name
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -498,6 +500,7 @@ public class BrandNewItemFormController {
         cmbType.requestFocus();
     }
 
+    //Validation Part ------------------------------------------------------------------------------------------------------------------------------------
     public void txtitemIdOnKeyRelese(KeyEvent keyEvent) {
         Regex.setTextColor(lk.ijse.chama.util.TextField.IID,txtItemId);
     }
@@ -516,6 +519,4 @@ public class BrandNewItemFormController {
         if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtUnitPrice)) return false;
         return true;
     }
-
-
 }

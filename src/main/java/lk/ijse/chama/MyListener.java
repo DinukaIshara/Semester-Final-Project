@@ -1,8 +1,8 @@
 package lk.ijse.chama;
 
-import lk.ijse.chama.model.ProductCard;
+import lk.ijse.chama.model.ItemCard;
 
 public interface MyListener {
 
-    void onClickListener(ProductCard productCard);
+    void onClickListener(ItemCard productCard);
 }

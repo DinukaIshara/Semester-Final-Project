@@ -114,9 +114,9 @@ public class PlaceOrderFormController {
 
     private ObservableList<CartTm> obList = FXCollections.observableArrayList();
 
-    private List<ProductCard> productCards = new ArrayList<>();
+    private List<ItemCard> productCards = new ArrayList<>();
 
-    ProductCard pc = null;
+    ItemCard pc = null;
 
     MyListener myListener;
 
@@ -133,93 +133,12 @@ public class PlaceOrderFormController {
         addAl();
     }
 
-    private void setCellValueFactory() {
+    private void setCellValueFactory() { // Set Columns Cart Data In CartTm
         colItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
         colAction.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
-    }
-
-    private List<ProductCard> getData(){
-
-        try {
-            //List<BrandNewItem> itemList = BrandNewItemRepo.getAll();
-            List<ItemSupplierDetail> supplierDetail = ItemSupplierDetailRepo.getAll();
-            for(ItemSupplierDetail itemSupplier : supplierDetail) {
-
-                String item_name = null;
-                String item_cat = null;
-                String path = null;
-
-
-                for (BrandNewItem item : itemList){
-                    if (item.getItemId().equals(itemSupplier.getItemId())){
-                        item_name =   item.getName();
-                        item_cat = item.getCategory();
-                        path = item.getPath();
-                    }
-                }
-
-
-                pc = new ProductCard(
-
-                        itemSupplier.getItemId(),
-                        item_name,
-                        itemSupplier.getUnitPrice(),
-                        itemSupplier.getQty(),
-                        item_cat,
-                        path
-
-                );
-                productCards.add(pc);
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return productCards;
-
-    }
-
-    private void addAl(){
-        productCards.addAll(getData());
-
-        if (productCards.size() > 0){
-            setChosenItem(productCards.get(0));
-
-            myListener = new MyListener() {
-                @Override
-                public void onClickListener(ProductCard productCard) {
-                    setChosenItem(productCard);
-                }
-            };
-        }
-
-        int col = 0;
-        int row = 1;
-
-        try {
-            for (int i = 0; i < itemList.size(); i++){
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/view/productCard.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
-
-
-                ItemCardController productCardController = fxmlLoader.getController();
-                productCardController.setData(productCards.get(i), myListener);
-
-                if (col == 2){
-                    col = 0;
-                    row++;
-                }
-
-                gridPane.add(anchorPane, col++, row);
-                GridPane.setMargin(anchorPane, new Insets(10));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @FXML
@@ -280,27 +199,8 @@ public class PlaceOrderFormController {
         lblNetTotal.setText(String.valueOf(netTotal));
     }
 
-    private void setChosenItem(ProductCard productCard) {
-        lblItemName.setText(productCard.getItemName());
-        lblCatagory.setText(productCard.getCategory());
-        lblUnitPrice.setText(String.valueOf(productCard.getPrice()));
-        lblItemId.setText(productCard.getItemId());
-        lblHandOnQty.setText(String.valueOf(productCard.getHandOnQty()));
-        Image image = new Image(productCard.getImage(),281, 178, false, true);
-        imageCart.setImage(image);
-
-    }
-
     @FXML
-    void btnAddCustomerOnAction(ActionEvent event) throws IOException {
-        AnchorPane customerRootNode = FXMLLoader.load(this.getClass().getResource("/view/customer_form.fxml"));
-        rootNode.getChildren().clear();
-        rootNode.getChildren().add(customerRootNode);
-
-    }
-
-    @FXML
-    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException {
+    void btnPlaceOrderOnAction() throws SQLException {
         String orderId = lblOrderCode.getText();
         String cusId = lblCustomerId.getText();
         String transId = String.valueOf(lblTrId.getText());
@@ -341,9 +241,123 @@ public class PlaceOrderFormController {
         }
     }
 
+    private List<ItemCard> getData(){ // Load All Item Data in ItemCard
+        try {
+            List<ItemSupplierDetail> supplierDetail = ItemSupplierDetailRepo.getAll();
+            for(ItemSupplierDetail itemSupplier : supplierDetail) {
+
+                String item_name = null;
+                String item_cat = null;
+                String path = null;
+
+
+                for (BrandNewItem item : itemList){
+                    if (item.getItemId().equals(itemSupplier.getItemId())){
+                        item_name =   item.getName();
+                        item_cat = item.getCategory();
+                        path = item.getPath();
+                    }
+                }
+                pc = new ItemCard(
+
+                        itemSupplier.getItemId(),
+                        item_name,
+                        itemSupplier.getUnitPrice(),
+                        itemSupplier.getQty(),
+                        item_cat,
+                        path
+
+                );
+                productCards.add(pc);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return productCards;
+
+    }
+
+    private void clear() {
+        txtItemNameSearch.setText("");
+        txtCustomerTel.setText("");
+        lblCustomerId.setText("");
+        lblCustName.setText("");
+        txtLocation.setText("");
+        cmbPaymentMethod.setValue("");
+        lblNetTotal.setText("");
+        lblTrId.setText("");
+        lblTransportCost.setText("");
+        getCurrentOrderId();
+        tblOrder.getItems().clear();
+    }
+
+    private void addAl(){ // Set Item Card
+        productCards.addAll(getData());
+
+        if (productCards.size() > 0){
+            setChosenItem(productCards.get(0));
+
+            myListener = new MyListener() {
+                @Override
+                public void onClickListener(ItemCard productCard) {
+                    setChosenItem(productCard);
+                }
+            };
+        }
+
+        int col = 0;
+        int row = 1;
+
+        try {
+            for (int i = 0; i < itemList.size(); i++){
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/view/productCard.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+
+
+                ItemCardController productCardController = fxmlLoader.getController();
+                productCardController.setData(productCards.get(i), myListener);
+
+                if (col == 2){
+                    col = 0;
+                    row++;
+                }
+
+                gridPane.add(anchorPane, col++, row);
+                GridPane.setMargin(anchorPane, new Insets(10));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setChosenItem(ItemCard productCard) {
+        lblItemName.setText(productCard.getItemName());
+        lblCatagory.setText(productCard.getCategory());
+        lblUnitPrice.setText(String.valueOf(productCard.getPrice()));
+        lblItemId.setText(productCard.getItemId());
+        lblHandOnQty.setText(String.valueOf(productCard.getHandOnQty()));
+        Image image = new Image(productCard.getImage(),281, 178, false, true);
+        imageCart.setImage(image);
+
+    }
+
+    @FXML
+    void btnAddCustomerOnAction(ActionEvent event) throws IOException {
+        AnchorPane customerRootNode = FXMLLoader.load(this.getClass().getResource("/view/customer_form.fxml"));
+        rootNode.getChildren().clear();
+        rootNode.getChildren().add(customerRootNode);
+
+    }
+
     @FXML
     void cmbPaymentMethod(ActionEvent event) {
-
+        try {
+            btnPlaceOrderOnAction();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void getItemName() {
@@ -495,6 +509,43 @@ public class PlaceOrderFormController {
         }
     }
 
+    public void txtLocationOnAction(ActionEvent actionEvent) {
+        String location = txtLocation.getText();
+
+        try {
+            Transport tr = TransportRepo.searchByLoca(location);
+            if(tr != null) {
+                lblTrId.setText(tr.getTrId());
+                lblTransportCost.setText(String.valueOf(tr.getCost()));
+
+            }
+
+            txtQty.requestFocus();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        txtItemNameSearch.requestFocus();
+    }
+
+    //Validation -----------------------------------------------------------------------------------------------------------------
+    public void txtQtyOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty);
+    }
+
+    public void txtTelOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtCustomerTel);
+    }
+
+    public boolean isValidate(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtCustomerTel))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty))return false;
+
+        return true;
+    }
+
+    //Get Order Receipt --------------------------------------------------------------------------------------------------------
     public void btnOrderReceiptOnAction(ActionEvent actionEvent) throws Exception {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/OrderBill.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
@@ -507,7 +558,6 @@ public class PlaceOrderFormController {
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
     }
-
 
     private double gettNetTotal() {
         double netTotal = 0.0;
@@ -529,54 +579,5 @@ public class PlaceOrderFormController {
         }
 
         return orderId;
-    }
-
-    private void clear() {
-        txtItemNameSearch.setText("");
-        txtCustomerTel.setText("");
-        lblCustomerId.setText("");
-        lblCustName.setText("");
-        txtLocation.setText("");
-        cmbPaymentMethod.setValue("");
-        lblNetTotal.setText("");
-        lblTrId.setText("");
-        lblTransportCost.setText("");
-        getCurrentOrderId();
-        tblOrder.getItems().clear();
-    }
-
-    public void txtLocationOnAction(ActionEvent actionEvent) {
-        String location = txtLocation.getText();
-
-        try {
-            Transport tr = TransportRepo.searchByLoca(location);
-            if(tr != null) {
-                lblTrId.setText(tr.getTrId());
-                lblTransportCost.setText(String.valueOf(tr.getCost()));
-
-            }
-
-            txtQty.requestFocus();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        txtItemNameSearch.requestFocus();
-    }
-
-    public void txtQtyOnKeyRelesed(KeyEvent keyEvent) {
-        Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty);
-    }
-
-    public void txtTelOnKeyRelesed(KeyEvent keyEvent) {
-        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtCustomerTel);
-    }
-
-    public boolean isValidate(){
-        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtCustomerTel))return false;
-        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty))return false;
-
-        return true;
     }
 }

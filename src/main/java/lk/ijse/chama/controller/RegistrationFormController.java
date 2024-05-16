@@ -48,7 +48,7 @@ public class RegistrationFormController {
         String password = txtPassword.getText();
 
         try {
-            if(isValied()){
+            if(isValied()){ // Add Validation
                 boolean isSaved = saveUser(userName, password);
                 if(isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "user saved!").show();
@@ -99,6 +99,8 @@ public class RegistrationFormController {
         registrationOnAction();
     }
 
+
+    // Validation
     public boolean isValied(){
         if (!Regex.setTextColor(lk.ijse.chama.util.TextField.NAME,txtUserName)) return false;
         if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PASSWORD,txtPassword)) return false;

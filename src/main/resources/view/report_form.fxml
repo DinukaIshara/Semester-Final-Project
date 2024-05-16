@@ -2,37 +2,34 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="890.0" prefWidth="1080.0" style="-fx-background-color: #272727; -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.ReportFormController">
+<AnchorPane prefHeight="890.0" prefWidth="1080.0" style="-fx-background-color: #31ADBD; -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.ReportFormController">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="435.0" layoutY="280.0" onAction="#btnCustomerReportOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Cutomer Report" textFill="WHITE">
+      <ImageView fitHeight="515.0" fitWidth="762.0" layoutX="176.0" layoutY="1.0">
+         <image>
+            <Image url="@../image/computer.gif" />
+         </image>
+      </ImageView>
+      <JFXButton buttonType="RAISED" layoutX="435.0" layoutY="528.0" onAction="#btnCustomerReportOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Cutomer Report" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="435.0" layoutY="420.0" onAction="#btnEmployeeReportOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Employee Report" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="435.0" layoutY="666.0" onAction="#btnStockOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Stock Management" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="435.0" layoutY="547.0" onAction="#btnStockOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Stock Management" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </JFXButton>
-      <TextField fx:id="txtSearchCustomerTel" layoutX="405.0" layoutY="248.0" onAction="#txtSearchCustomerTelOnAction" prefHeight="32.0" prefWidth="298.0" promptText="Customer MobileNumber" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+      <TextField fx:id="txtSearchCustomerTel" layoutX="405.0" layoutY="488.0" prefHeight="40.0" prefWidth="298.0" promptText="Customer MobileNumber" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtSearchEmployeeId" layoutX="406.0" layoutY="388.0" onAction="#txtSearchEmployeeIdOnAction" prefHeight="32.0" prefWidth="298.0" promptText="Employee Mobile Number" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="14.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="txtSearchItemName" layoutX="405.0" layoutY="515.0" onAction="#txtSearchItemNameOnAction" prefHeight="32.0" prefWidth="298.0" promptText="Item Name" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+      <TextField fx:id="txtSearchItemStockDate" layoutX="405.0" layoutY="626.0" prefHeight="40.0" prefWidth="298.0" promptText="Stock Date" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>

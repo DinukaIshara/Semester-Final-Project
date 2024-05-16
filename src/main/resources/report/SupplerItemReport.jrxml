@@ -24,8 +24,7 @@ JOIN
     item_supplier_detail isd ON s.sup_id = isd.sup_id
 JOIN 
     item i ON isd.item_id = i.item_id
-WHERE s.sup_id = $P{supId}
-]]>
+WHERE s.sup_id = $P{supId}]]>
 	</queryString>
 	<field name="sup_id" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="sup_id"/>
@@ -120,15 +119,15 @@ WHERE s.sup_id = $P{supId}
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="113" splitType="Stretch">
+		<band height="149" splitType="Stretch">
 			<image>
-				<reportElement x="-20" y="-21" width="595" height="130" uuid="41c9ada2-1d82-4781-85a8-fbb1eeb491ad"/>
-				<imageExpression><![CDATA["/home/ijse/Desktop/JDBC/chamaComputersNew/src/main/resources/report img/chama report hedder.png"]]></imageExpression>
+				<reportElement x="-20" y="-21" width="595" height="170" uuid="0d0f601e-f01a-4033-9a2e-30f0033df503"/>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/chama invoice sheps new.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="103" splitType="Stretch">
+		<band height="113" splitType="Stretch">
 			<textField>
 				<reportElement x="91" y="8" width="100" height="23" uuid="c186cc4c-d4b7-41d1-b922-2cc75edbd79e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -151,22 +150,24 @@ WHERE s.sup_id = $P{supId}
 				<text><![CDATA[Company Name :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="378" y="3" width="172" height="30" uuid="f927a3c4-4b96-40fb-96dc-ee7d21370547"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="411" y="3" width="142" height="30" uuid="f927a3c4-4b96-40fb-96dc-ee7d21370547"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{supplier_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="436" y="54" width="100" height="30" uuid="3933f2cd-f279-447b-a202-6e04b45fc968"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="411" y="58" width="122" height="30" uuid="3933f2cd-f279-447b-a202-6e04b45fc968"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="439" y="33" width="100" height="30" uuid="d6f2c890-445a-4618-aae8-7d6bb38187a6"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="411" y="40" width="126" height="30" uuid="d6f2c890-445a-4618-aae8-7d6bb38187a6"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -174,7 +175,7 @@ WHERE s.sup_id = $P{supId}
 	<columnHeader>
 		<band height="40" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="30" uuid="24cf2757-c9e3-450d-993d-af4ddfcbd2a4">
+				<reportElement mode="Opaque" x="0" y="0" width="104" height="30" backcolor="#05BCFF" uuid="24cf2757-c9e3-450d-993d-af4ddfcbd2a4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ab5b7f52-1b96-4186-bb8a-6b53f9c92e01"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -183,7 +184,7 @@ WHERE s.sup_id = $P{supId}
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="104" y="0" width="100" height="30" uuid="6e67c9ca-53a1-4652-b6b4-3d7c774146c7">
+				<reportElement mode="Opaque" x="104" y="0" width="106" height="30" backcolor="#05BCFF" uuid="6e67c9ca-53a1-4652-b6b4-3d7c774146c7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8614fc04-bcd3-424d-a1b4-962a412fc5af"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -192,7 +193,7 @@ WHERE s.sup_id = $P{supId}
 				<text><![CDATA[Item]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="207" y="0" width="100" height="30" uuid="92a9f30a-68ab-4b34-8e19-aabd54a716fc">
+				<reportElement mode="Opaque" x="206" y="0" width="102" height="30" backcolor="#05BCFF" uuid="92a9f30a-68ab-4b34-8e19-aabd54a716fc">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0dbaff42-f923-4103-b3ca-fc3b3676f437"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -201,7 +202,7 @@ WHERE s.sup_id = $P{supId}
 				<text><![CDATA[Category]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="307" y="0" width="100" height="30" uuid="72d84dc9-a478-4aa9-acb2-6f7d8260a6ee">
+				<reportElement mode="Opaque" x="307" y="0" width="100" height="30" backcolor="#05BCFF" uuid="72d84dc9-a478-4aa9-acb2-6f7d8260a6ee">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca3fab6c-6d8e-4175-b614-8685cb480c0d"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -210,7 +211,7 @@ WHERE s.sup_id = $P{supId}
 				<text><![CDATA[Brand]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="406" y="0" width="44" height="30" uuid="ddcc9bfa-7e54-41e5-add4-1f8369eda589">
+				<reportElement mode="Opaque" x="406" y="0" width="44" height="30" backcolor="#05BCFF" uuid="ddcc9bfa-7e54-41e5-add4-1f8369eda589">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8d88b95-af19-4f1f-bbb6-d5475ce1d93a"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -219,7 +220,7 @@ WHERE s.sup_id = $P{supId}
 				<text><![CDATA[qty]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="449" y="0" width="100" height="30" uuid="8e5e3922-0385-4485-9a5d-3174f4df4274">
+				<reportElement mode="Opaque" x="449" y="0" width="100" height="30" backcolor="#05BCFF" uuid="8e5e3922-0385-4485-9a5d-3174f4df4274">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="893de725-e236-48d6-a1f0-578ca70042e7"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -291,10 +292,37 @@ WHERE s.sup_id = $P{supId}
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
+		<band height="73" splitType="Stretch">
 			<image>
-				<reportElement x="-21" y="12" width="595" height="40" uuid="d337438a-bcdb-4c44-bfd3-42264d3fa3b6"/>
+				<reportElement x="-20" y="8" width="595" height="40" uuid="5834da96-fe5d-4a06-a08a-3e495c2709ef"/>
 				<imageExpression><![CDATA["/home/ijse/Desktop/JDBC/chamaComputersNew/src/main/resources/report img/fotter chama computers.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="32" y="50" width="210" height="18" uuid="fc9a4694-b83c-4459-9d1a-7034e4c736a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[110, 01/01 Veyangoda Rd, Minuwangoda ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="9" y="47" width="21" height="24" uuid="31a418b1-2a0e-4d0c-b59d-8c6c4be4d587"/>
+				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-location-24.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="254" y="47" width="27" height="23" uuid="ccaca4bb-6f4e-4ac9-abde-28f3db4c568a"/>
+				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-phone-48.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="269" y="50" width="100" height="18" uuid="961e923a-5b87-4d50-8408-796263ce5c7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ 077 722 3363]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="50" width="164" height="18" uuid="00fa665f-eca2-4561-aa34-80813b37c32e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[www.chamacomputers.lk]]></text>
+			</staticText>
+			<image>
+				<reportElement x="383" y="45" width="34" height="27" uuid="cec9f287-39b3-4821-9904-30198f740a8d"/>
+				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-website-48.png"]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>

@@ -33,7 +33,10 @@ public class Regex {
                 filed = "^([TR][0-9]{3,10})$";
                 break;
             case NAME:
-                filed = "^[A-Za-z]{3,}(?:\\s[A-Za-z]{3,})?$"; //   /"^[A-z|\\\\s]{3,}$"/   /"^[A-Za-z]+(?:\\s[A-Za-z]+)?$"/
+                filed = "^[A-Za-z]{3,}(?:\\s[A-Za-z]{3,})?$";
+                break;
+            case NIC:
+                filed = "^([0-9]{8}[x|X|v|V]|[0-9]{12})$";
                 break;
             case EMAIL:
                 filed = "^([A-z])([A-z0-9.]){1,}[@]([A-z0-9]){1,10}[.]([A-z]){2,5}$";
@@ -75,11 +78,11 @@ public class Regex {
 
     public static boolean setTextColor(TextField location, javafx.scene.control.TextField textField){
         if (Regex.isTextFieldValid(location, textField.getText())){
-            textField.setStyle("-fx-border-color: #00ff00; -fx-border-radius: 5px; -fx-border-width:  2px 2px 2px 2px; -fx-background-radius: 5px;");
+            textField.setStyle("-fx-border-color: #00ff00; -fx-text-fill: #00ff00;  -fx-border-radius: 5px; -fx-border-width:  2px 2px 2px 2px; -fx-background-radius: 5px;");
 
             return true;
         }else {
-            textField.setStyle("-fx-border-color: #ff0000; -fx-border-radius: 5px; -fx-border-width:  2px 2px 2px 2px; -fx-background-radius: 5px;");
+            textField.setStyle("-fx-border-color: #ff0000; -fx-text-fill: #ff0000; -fx-border-radius: 5px; -fx-border-width:  2px 2px 2px 2px; -fx-background-radius: 5px;");
 
             return false;
         }

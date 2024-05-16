@@ -12,7 +12,6 @@ import java.sql.Date;
 public class EmployeeTm {
     private String empId;
     private String empName;
-    private String empAddress;
     private String empNic;
     private String position;
     private String empTel;

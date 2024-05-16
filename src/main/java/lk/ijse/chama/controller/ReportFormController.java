@@ -2,6 +2,7 @@ package lk.ijse.chama.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import lk.ijse.chama.db.DbConnection;
@@ -14,26 +15,21 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import org.controlsfx.control.textfield.TextFields;
 
-import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ReportFormController {
+
+    @FXML
+    private TextField txtSearchItemStockDate;
     @FXML
     private TextField txtSearchCustomerTel;
 
-    @FXML
-    private TextField txtSearchEmployeeId;
-
-    @FXML
-    private TextField txtSearchItemName;
-
     public void initialize(){
         getCustomerTel();
-        getEmpId();
-        getItemName();
+        getItemDate();
     }
 
     @FXML
@@ -50,25 +46,17 @@ public class ReportFormController {
     }
 
     @FXML
-    void btnEmployeeReportOnAction() {
+    void btnStockOnAction() throws Exception {
+        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/supplierDateVise.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
-    }
+        Map<String,Object> data = new HashMap<>();
+        data.put("date",txtSearchItemStockDate.getText());
 
-    @FXML
-    void btnStockOnAction() {
+        JasperPrint jasperPrint =
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
 
-    }
-
-    public void txtSearchItemNameOnAction(javafx.event.ActionEvent actionEvent) {
-        btnStockOnAction();
-    }
-
-    public void txtSearchCustomerTelOnAction(javafx.event.ActionEvent actionEvent) {
-        //btnCustomerReportOnAction();
-    }
-
-    public void txtSearchEmployeeIdOnAction(javafx.event.ActionEvent actionEvent) {
-        btnEmployeeReportOnAction();
     }
 
     private void getCustomerTel() {
@@ -86,31 +74,15 @@ public class ReportFormController {
             throw new RuntimeException(e);
         }
     }
-    private void getItemName() {
+    private void getItemDate() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> codeList = BrandNewItemRepo.getName();
+            List<String> dateList = BrandNewItemRepo.getDate();
 
-            for (String code : codeList) {
-                obList.add(code);
+            for (String date : dateList) {
+                obList.add(date);
             }
-            TextFields.bindAutoCompletion(txtSearchItemName,obList);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void getEmpId() {
-        ObservableList<String> obList = FXCollections.observableArrayList();
-
-        try {
-            List<String> telList = EmployeeRepo.getId();
-
-            for(String tel : telList) {
-                obList.add(tel);
-            }
-            TextFields.bindAutoCompletion(txtSearchEmployeeId,obList);
+            TextFields.bindAutoCompletion(txtSearchItemStockDate,obList);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

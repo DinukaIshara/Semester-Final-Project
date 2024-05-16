@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -33,8 +34,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtModel" layoutX="586.0" layoutY="76.0" onAction="#txtModelOnAction" prefHeight="28.0" prefWidth="124.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
-            <Label layoutX="473.0" layoutY="78.0" prefHeight="21.0" prefWidth="104.0" text="Model No :">
+            <Label layoutX="456.0" layoutY="80.0" prefHeight="21.0" prefWidth="124.0" text="Stock Date :">
                <font>
                   <Font size="18.0" />
                </font>
@@ -101,7 +101,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="cmbType" layoutX="584.0" layoutY="24.0" onAction="#cmbtypeOnAction" prefHeight="28.0" prefWidth="178.0" style="-fx-background-color: white;" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
+            <JFXComboBox fx:id="cmbType" layoutX="584.0" layoutY="22.0" onAction="#cmbtypeOnAction" prefHeight="32.0" prefWidth="178.0" style="-fx-background-color: white;" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" unFocusColor="WHITE" />
+            <DatePicker fx:id="txtDate" layoutX="585.0" layoutY="72.0" onAction="#txtDateOnAction" prefHeight="32.0" prefWidth="178.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
          </children></AnchorPane>
       <TableView fx:id="tableBrandNewItem" layoutX="26.0" layoutY="568.0" prefHeight="288.0" prefWidth="1032.0" stylesheets="@../css/sidePane.css" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="568.0">
          <columns>

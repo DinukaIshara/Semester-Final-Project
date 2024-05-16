@@ -146,8 +146,8 @@
       </AnchorPane>
       <TableView fx:id="tblCustomer" layoutX="25.0" layoutY="586.0" prefHeight="283.0" prefWidth="1031.0" stylesheets="@../css/sidePane.css">
          <columns>
-            <TableColumn fx:id="colName" prefWidth="119.0" text="Name" />
-            <TableColumn fx:id="colAddress" prefWidth="133.0" text="Address" />
+            <TableColumn fx:id="colEid" prefWidth="94.0" text="ID" />
+            <TableColumn fx:id="colName" prefWidth="158.0" text="Name" />
             <TableColumn fx:id="colNic" prefWidth="128.0" text="NIC" />
             <TableColumn fx:id="colTel" prefWidth="146.0" text="Tel Number" />
             <TableColumn fx:id="colEmail" minWidth="0.0" prefWidth="177.0" text="Email" />

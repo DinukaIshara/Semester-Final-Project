@@ -23,8 +23,12 @@ import java.sql.SQLException;
 
 public class LoginFormController {
 
-    public TextField txtUserName;
-    public PasswordField txtPassword;
+    @FXML
+    private TextField txtUserName;
+
+    @FXML
+    private PasswordField txtPassword;
+
     @FXML
     private AnchorPane rootNode;
 
@@ -34,9 +38,9 @@ public class LoginFormController {
         String pw = txtPassword.getText();
 
         try {
-            //if(isValied()) {
+            if(isValied()) { // Validated
                 checkCredential(userName, pw);
-            //}
+            }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -69,11 +73,13 @@ public class LoginFormController {
         Parent dashboardRoot = loader.load();
         SidepanelformController controller = loader.getController();
         controller.setUserName(user_name); // Pass the username to the DashboardFormController
+
         Scene scene = new Scene(dashboardRoot);
+
         Stage stage = (Stage) rootNode.getScene().getWindow();
         stage.setScene(scene);
         stage.centerOnScreen();
-        stage.setTitle("Dashboard Form");
+        stage.setTitle("Home Page");
     }
 
     @FXML
@@ -86,7 +92,6 @@ public class LoginFormController {
 
         stage.setScene(scene);
         stage.setTitle("Registration");
-
         stage.centerOnScreen();
         stage.show();
     }
@@ -101,6 +106,7 @@ public class LoginFormController {
         btnLoginOnAction();
     }
 
+    // Validation -------------------------------------------------------------------------------
     public void txtUserNameOnKeyRelesed(KeyEvent keyEvent) {
         Regex.setTextColor(lk.ijse.chama.util.TextField.NAME,txtUserName);
     }

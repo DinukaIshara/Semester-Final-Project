@@ -12,10 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.Employee;
 import lk.ijse.chama.model.tm.EmployeeTm;
-import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.EmployeeRepo;
 import lk.ijse.chama.util.Regex;
 import net.sf.jasperreports.engine.*;
@@ -33,14 +31,20 @@ import java.util.Map;
 
 public class EmployeeFormController {
 
-    public ImageView ImgView;
-    public Pane main_pain;
-    public TextField txtSearchEmployee;
+    @FXML
+    private ImageView ImgView;
+
+    @FXML
+    private Pane main_pain;
+
+    @FXML
+    private TextField txtSearchEmployee;
+
     @FXML
     private TextField txtSallary;
 
     @FXML
-    private TableColumn<?, ?> colAddress;
+    private TableColumn<?, ?> colEid;
 
     @FXML
     private TableColumn<?, ?> colDob;
@@ -64,9 +68,6 @@ public class EmployeeFormController {
     private TableColumn<?, ?> colTel;
     @FXML
     public DatePicker txtEnrollDate;
-
-    @FXML
-    private Label lblCustId;
 
     @FXML
     private AnchorPane rootNode;
@@ -106,9 +107,9 @@ public class EmployeeFormController {
         getEmpId();
     }
 
-    private void setCellValueFactory() {
+    private void setCellValueFactory() { // Set EmployeeTm Data in column
+        colEid.setCellValueFactory(new PropertyValueFactory<>("empId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("empName"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<>("empAddress"));
         colNic.setCellValueFactory(new PropertyValueFactory<>("empNic"));
         colTel.setCellValueFactory(new PropertyValueFactory<>("empTel"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("empEmail"));
@@ -117,7 +118,7 @@ public class EmployeeFormController {
         colDOR.setCellValueFactory(new PropertyValueFactory<>("dateRegister"));
     }
 
-    private void loadAllEmployee() {
+    private void loadAllEmployee() { // Load All Employees In EmployeeTm Table
         ObservableList<EmployeeTm> obList = FXCollections.observableArrayList();
 
         try {
@@ -126,7 +127,6 @@ public class EmployeeFormController {
                 EmployeeTm tm = new EmployeeTm(
                         employee.getEmpId(),
                         employee.getEmpName(),
-                        employee.getEmpAddress(),
                         employee.getEmpNic(),
                         employee.getPosition(),
                         employee.getEmpTel(),
@@ -159,15 +159,16 @@ public class EmployeeFormController {
         double salary = Double.parseDouble(txtSallary.getText());
         String path = image.getUrl();
 
-        Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary, path);
+        Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary, path); // Set Employee Data
 
         try {
-
-            boolean isSaved = EmployeeRepo.save(employee);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Employee saved!").show();
-                clearFields();
-                initialize();
+            if(isValidate()) {
+                boolean isSaved = EmployeeRepo.save(employee);
+                if (isSaved) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Employee saved!").show();
+                    clearFields();
+                    initialize();
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -188,13 +189,15 @@ public class EmployeeFormController {
         double salary = Double.parseDouble(txtSallary.getText());
         String path = image.getUrl();
 
-        Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary, path);
+        Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary, path); // Set Employee Data
 
         try {
-            boolean isUpdated = EmployeeRepo.update(employee);
-            if(isUpdated) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Employee updated!").show();
-                initialize();
+            if(isValidate()) { // Validated
+                boolean isUpdated = EmployeeRepo.update(employee);
+                if (isUpdated) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Employee updated!").show();
+                    initialize();
+                }
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -206,10 +209,12 @@ public class EmployeeFormController {
         String id = txtId.getText();
 
         try {
-            boolean isDeleted = EmployeeRepo.delete(id);
-            if(isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Employee deleted!").show();
-                initialize();
+            if(isValidate()) { // Validated
+                boolean isDeleted = EmployeeRepo.delete(id); // Delete Employee Data
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Employee deleted!").show();
+                    initialize();
+                }
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -217,7 +222,7 @@ public class EmployeeFormController {
     }
 
     @FXML
-    void btnClearOnAction(ActionEvent event) {
+    void btnClearOnAction(ActionEvent event) { // Clear Text Field Data
         clearFields();
     }
 
@@ -234,35 +239,16 @@ public class EmployeeFormController {
         txtSallary.setText("");
     }
 
-    @FXML
-    void dobOnAction(ActionEvent actionEvent) {
-
-    }
-
-    public void btnImportImgOnAction() {
+    public void btnImportImgOnAction() { // Search Image Path in Your PC
         FileChooser openFile = new FileChooser();
         openFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("Open Image File", "*png", "*jpg"));
 
         File file = openFile.showOpenDialog(main_pain.getScene().getWindow());
 
         if (file != null) {
-
             image = new Image(file.toURI().toString(), 153, 176, false, true);
-
             ImgView.setImage(image);
         }
-    }
-
-    public void btnEmployeeReportOnAction(ActionEvent actionEvent) throws JRException, SQLException {
-        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/EmployeeReport.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-
-        Map<String,Object> data = new HashMap<>();
-        data.put("emp_id",txtId.getText());
-
-        JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
-        JasperViewer.viewReport(jasperPrint,false);
     }
 
     private void getEmpId() {
@@ -274,14 +260,14 @@ public class EmployeeFormController {
             for(String tel : telList) {
                 obList.add(tel);
             }
-            TextFields.bindAutoCompletion(txtSearchEmployee,obList);
+            TextFields.bindAutoCompletion(txtSearchEmployee,obList); // Load Employee Ids In Text Field
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void txtSearchEmployeeOnAction(ActionEvent actionEvent) {
+    public void txtSearchEmployeeOnAction(ActionEvent actionEvent) { // Search Employee Button Call
         try {
             btnSearchEmployeeOnAction();
         } catch (SQLException e) {
@@ -289,10 +275,10 @@ public class EmployeeFormController {
         }
     }
 
-    public void btnSearchEmployeeOnAction() throws SQLException {
+    public void btnSearchEmployeeOnAction() throws SQLException { // Search Employees
         String tel = txtSearchEmployee.getText();
 
-        Employee emp = EmployeeRepo.searchById(String.valueOf(tel));
+        Employee emp = EmployeeRepo.searchById(String.valueOf(tel)); // Search Employees In Employee Id
         if (emp != null) {
             txtId.setText(emp.getEmpId());
             txtName.setText(emp.getEmpName());
@@ -332,10 +318,6 @@ public class EmployeeFormController {
         txtDOB.requestFocus();
     }
 
-    public void txtNicOnKeyRelesed(KeyEvent keyEvent) {
-        Regex.setTextColor(lk.ijse.chama.util.TextField.NIC,txtNIC);
-    }
-
     public void txtPositionOnAction(ActionEvent actionEvent) {
         btnImportImgOnAction();
 
@@ -345,20 +327,8 @@ public class EmployeeFormController {
         txtPosition.requestFocus();
     }
 
-    public void txtSalOnKeyRelesed(KeyEvent keyEvent) {
-        Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtSallary);
-    }
-
     public void txtIdOnAction(ActionEvent actionEvent) {
         txtName.requestFocus();
-    }
-
-    public void txtAddressOnKeyRelesed(KeyEvent keyEvent) {
-        Regex.setTextColor(lk.ijse.chama.util.TextField.ADDRESS,txtAddress);
-    }
-
-    public void txtTelOnKeyRelesed(KeyEvent keyEvent) {
-        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtTel);
     }
 
     public void txtDOBOnAction(ActionEvent actionEvent) {
@@ -373,12 +343,29 @@ public class EmployeeFormController {
         txtSallary.requestFocus();
     }
 
+    // Validation Part
+    public void txtAddressOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.ADDRESS,txtAddress);
+    }
+
+    public void txtTelOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtTel);
+    }
+
     public void txtEmailOnKeyRelesed(KeyEvent keyEvent) {
         Regex.setTextColor(lk.ijse.chama.util.TextField.EMAIL,txtEmail);
     }
 
     public void txtEmpIdOnKeyRelesed(KeyEvent keyEvent) {
         Regex.setTextColor(lk.ijse.chama.util.TextField.EID,txtId);
+    }
+
+    public void txtNicOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.NIC,txtNIC);
+    }
+
+    public void txtSalOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtSallary);
     }
 
     public boolean isValidate(){
@@ -390,5 +377,18 @@ public class EmployeeFormController {
         if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtSallary))return false;
 
         return true;
+    }
+
+    // Employee Report Generate ----------------------------------------------------------------------------
+    public void btnEmployeeReportOnAction(ActionEvent actionEvent) throws JRException, SQLException {
+        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/EmployeeReport.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        Map<String,Object> data = new HashMap<>();
+        data.put("emp_id",txtId.getText());
+
+        JasperPrint jasperPrint =
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
     }
 }

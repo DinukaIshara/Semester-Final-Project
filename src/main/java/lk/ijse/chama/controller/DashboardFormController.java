@@ -5,7 +5,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
@@ -14,8 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.*;
-import lk.ijse.chama.model.tm.CustomerTm;
-import lk.ijse.chama.model.tm.EmployeeTm;
 import lk.ijse.chama.model.tm.MostSellItemTm;
 import lk.ijse.chama.repository.*;
 import org.controlsfx.control.textfield.TextFields;
@@ -70,7 +67,12 @@ public class DashboardFormController {
         loadMostSellItemTable();
         loadAll();
         getOrderDate();
-        barChart();
+
+        try {
+            barChart();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             pieChartConnect();
@@ -79,13 +81,13 @@ public class DashboardFormController {
         }
     }
 
-    private void loadMostSellItemTable() {
+    private void loadMostSellItemTable() { // Set Most Top 5 Sell Items in column
         colItemName.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         colOrderCount.setCellValueFactory(new PropertyValueFactory<>("orderCount"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("sumQty"));
     }
 
-    private void loadAll() {
+    private void loadAll() { // Load Most Top 5 Sell Items in Most Sell Item TM
         ObservableList<MostSellItemTm> obList = FXCollections.observableArrayList();
 
         try {
@@ -110,8 +112,7 @@ public class DashboardFormController {
         }
     }
 
-    private void loadCustomerCount() {
-
+    private void loadCustomerCount() { // Check Customer Count
         int count = 0;
         try {
             List<Customer> customerList = CustomerRepo.getAll();
@@ -123,11 +124,10 @@ public class DashboardFormController {
             throw new RuntimeException(e);
         }
 
-        labCutCount.setText(String.valueOf(count));
+        labCutCount.setText(String.valueOf(count)); // Set Customer Count
     }
 
-    private void loadOrderCount() {
-
+    private void loadOrderCount() { // Chech Order Count
         int count = 0;
         try {
             List<Order> orderList = OrderRepo.getAll();
@@ -139,62 +139,34 @@ public class DashboardFormController {
             throw new RuntimeException(e);
         }
 
-        lblOrderCount.setText(String.valueOf(count));
+        lblOrderCount.setText(String.valueOf(count)); // Set Order Count
     }
 
     public void pieChartConnect() throws SQLException {
-        //ObservableList<MostSellItemTm> obList = FXCollections.observableArrayList();
-
-        List<MostSellItemTm> itemList = DashboardRepo.getMostSellItem();
+        List<MostSellItemTm> itemList = DashboardRepo.getMostSellItem(); //Load Most sell Item In MostSellItemTm
         BrandNewItem item;
         for (MostSellItemTm sellItem : itemList) {
-            item = BrandNewItemRepo.searchById(sellItem.getItemId());
+            item = BrandNewItemRepo.searchById(sellItem.getItemId()); // Item Id wise Search Items
 
             ObservableList<PieChart.Data> pieChartData =
                     FXCollections.observableArrayList(
-                            new PieChart.Data(item.getName(), sellItem.getSumQty())
+                            new PieChart.Data(item.getName(), sellItem.getSumQty()) // Set Most 5 Items In Pie Chart
                     );
             pieChartData.forEach(data ->
                     data.nameProperty().bind(
                             Bindings.concat(
-                                    data.getName(), "     qty: ", data.pieValueProperty()
+                                    data.getName(), "amount: ", data.pieValueProperty() // Set Labels
                             )
                     )
             );
 
-            pieChart.getData().addAll(pieChartData);
+            pieChart.getData().addAll(pieChartData); // Add Data In Pie Chart and Show it
         }
     }
 
-    private void getOrderDate() {
-        ObservableList<String> obList = FXCollections.observableArrayList();
-
-        try {
-            List<String> dateList = OrderRepo.getAllDate();
-
-            for (String date : dateList) {
-                obList.add(date);
-            }
-            TextFields.bindAutoCompletion(txtOrderDate, obList);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @FXML
-    void btnSearchOrderDateOnAction() throws SQLException {
-        Date date = java.sql.Date.valueOf(txtOrderDate.getText());
-
-        DailyOrders dailyOrders = orderDaily(date);
-
-        lblOrderCountlab.setText(String.valueOf(dailyOrders.getCountOr()));
-        lblItemQty.setText(String.valueOf(dailyOrders.getCountQty()));
-    }
-
-    public void barChart(){
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("Chama Computers");
+    public void barChart() throws SQLException {
+        XYChart.Series chart = new XYChart.Series();
+        chart.setName("Chama Computers");
 
         String sql = "SELECT\n" +
                 "    DATE_FORMAT(MIN(o.order_date), '%Y-%m-%d') AS WeekStartDate,\n" +
@@ -212,43 +184,45 @@ public class DashboardFormController {
                 "ORDER BY\n" +
                 "    WeekStartDate;";
 
-        PreparedStatement stm = null;
-        try {
-            stm = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        PreparedStatement stm = DbConnection.getInstance().getConnection().prepareStatement(sql);
 
-        ResultSet rst = null;
-        try {
-            rst = stm.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        ResultSet rst  = stm.executeQuery();
 
         while (true) {
-            try {
-                if (!rst.next()) break;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            if (!rst.next()) break;
 
-            String date = null;
-            try {
-                date = rst.getString(2);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            String date = rst.getString(2);
 
-            int count = 0;
-            try {
-                count = rst.getInt(4);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            series1.getData().add(new XYChart.Data<>(date, count));
+            int count  = rst.getInt(4);
+            chart.getData().add(new XYChart.Data<>(date, count));
         }
-        barChart.getData().addAll(series1);
+        barChart.getData().addAll(chart);
+    }
+
+    private void getOrderDate() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> dateList = OrderRepo.getAllDate();
+
+            for (String date : dateList) {
+                obList.add(date);
+            }
+            TextFields.bindAutoCompletion(txtOrderDate, obList); // Set Order dates In Text Field
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void btnSearchOrderDateOnAction() throws SQLException {
+        Date date = java.sql.Date.valueOf(txtOrderDate.getText());
+
+        DailyOrders dailyOrders = orderDaily(date); // Check Date and get Daily Orders Details
+
+        lblOrderCountlab.setText(String.valueOf(dailyOrders.getCountOr())); // Set Order Count For Search Date
+        lblItemQty.setText(String.valueOf(dailyOrders.getCountQty())); // Set Order Item Qty Fro  Search Date
     }
 
     public void txtOrderDateOnAction(ActionEvent actionEvent) throws SQLException {

@@ -48,7 +48,7 @@ CREATE TABLE item(
                                name VARCHAR(20),
                                category VARCHAR(20),
                                brand VARCHAR(20),
-                               model_no VARCHAR(15),
+                               date DATE,
                                description VARCHAR(20),
                                warranty VARCHAR(15),
                                type VARCHAR(10),
@@ -106,3 +106,72 @@ CREATE TABLE item_supplier_detail(
                                      qty INT(10),
                                      unit_price DECIMAL(10,2)
 );
+
+CREATE TABLE location (
+                          place VARCHAR(255) PRIMARY KEY,
+                          lat DOUBLE,
+                          lng DOUBLE
+);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Kalutara', 6.585264855395206, 79.96085527795101);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Colombo',6.927536964290191, 79.86393207534826);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Kandy',7.290951950661763, 80.63147711707803);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Minuwangoda',7.184797957538298, 79.94836173247637);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Galle',6.03152881180865, 80.21480697621271);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Panadura',6.711053811499971, 79.9097716129893);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Matara',5.949174667858217, 80.54697120846816);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Anuradhapura',8.311363899295017, 80.41051955295175);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Negambo',7.202384607889234, 79.86889232460419);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Ja-Ela',7.0669296616245445, 79.90350557864505);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Kurunagala',7.48215024043348, 80.36018269338656);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Kuliyapitiya',7.472327402079904, 80.04429421970612);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Jaffna',9.66141109986867, 80.02507906307824);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Wadduwa',6.636454192598532, 79.9532466327645);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Rathmalana',6.819376599109911, 79.8808315820237);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Mount-Laveniya',6.8304555220194025, 79.87817083060982);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Maggona',6.510786925434501, 79.99261390086427);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Beruwala',6.474366952230507, 79.99054684231942);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Aluthgama',6.434579664077613, 79.99992919876203);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Katukurundha',6.5619542460121165, 79.96918173463999);
+
+INSERT INTO location (place, lat, lng)
+VALUES ('Moratuwa',6.787302781021451, 79.89225750145597);
