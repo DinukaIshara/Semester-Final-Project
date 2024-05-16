@@ -176,7 +176,7 @@ public class TransportFormController {
         try {
             boolean isDeleted = TransportRepo.delete(id);
             if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "transport deleted!").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Transport deleted!").show();
                 clearFields();
                 initialize();
             }

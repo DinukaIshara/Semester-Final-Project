@@ -176,10 +176,10 @@ public class RepairFormController {
             if(isValidate()) {
                 boolean isPlaced = RepairRepo.update(repair);
                 if (isPlaced) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Save Repair!").show();
+                    new Alert(Alert.AlertType.CONFIRMATION, "Update Repair!").show();
                     initialize();
                 } else {
-                    new Alert(Alert.AlertType.WARNING, "Repair Save Unsuccessfully!").show();
+                    new Alert(Alert.AlertType.WARNING, "Repair Update Unsuccessfully!").show();
                 }
             }else{
                 new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
