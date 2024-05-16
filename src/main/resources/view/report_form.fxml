@@ -24,12 +24,12 @@
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="txtSearchCustomerTel" layoutX="405.0" layoutY="488.0" prefHeight="40.0" prefWidth="298.0" promptText="Customer MobileNumber" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+      <TextField fx:id="txtSearchCustomerTel" layoutX="405.0" layoutY="488.0" onKeyReleased="#txtCustTelOnKeyRelesed" prefHeight="40.0" prefWidth="298.0" promptText="Customer MobileNumber" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtSearchItemStockDate" layoutX="405.0" layoutY="626.0" prefHeight="40.0" prefWidth="298.0" promptText="Stock Date" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+      <TextField fx:id="txtSearchItemStockDate" layoutX="405.0" layoutY="626.0" onKeyReleased="#txtStockDateOnKeyRelesed" prefHeight="40.0" prefWidth="298.0" promptText="Stock Date" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>

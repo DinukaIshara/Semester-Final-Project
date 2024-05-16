@@ -8,21 +8,30 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.RepairTm;
 import lk.ijse.chama.repository.CustomerRepo;
-import lk.ijse.chama.repository.EmployeeRepo;
 import lk.ijse.chama.repository.RepairRepo;
 import lk.ijse.chama.model.Repair;
 import lk.ijse.chama.util.Regex;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RepairFormController {
 
@@ -85,22 +94,6 @@ public class RepairFormController {
         getRepairId();
     }
 
-    private void getRepairId() {
-        ObservableList<String> obList = FXCollections.observableArrayList();
-
-        try {
-            List<String> idList = RepairRepo.getId();
-
-            for (String id : idList) {
-                obList.add(id);
-            }
-            TextFields.bindAutoCompletion(txtSearchRepair, obList);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void setCellValueFactory() {
         colRepairId.setCellValueFactory(new PropertyValueFactory<>("repId"));
         colItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -136,48 +129,11 @@ public class RepairFormController {
         }
     }
 
-    private void getCustomerTel() {
-        ObservableList<String> obList = FXCollections.observableArrayList();
-
-        try {
-            List<String> telList = CustomerRepo.getTel();
-
-            for(String tel : telList) {
-                obList.add(tel);
-            }
-            TextFields.bindAutoCompletion(txtCustomerTel,obList);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @FXML
-    void btnAddCustomerOnAction(ActionEvent event) throws IOException {
-        AnchorPane customerRootNode = FXMLLoader.load(this.getClass().getResource("/view/customer_form.fxml"));
-        customerRootNode.getChildren().clear();
-        customerRootNode.getChildren().add(customerRootNode);
-    }
-
-    @FXML
-    void btnDeleteOnAction(ActionEvent event) {
-        String id = txtRepairId.getText();
-
-        try {
-            boolean isDeleted = RepairRepo.delete(id);
-            if(isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Repair deleted!").show();
-                initialize();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         String repairId = txtRepairId.getText();
-        Date reciveDate = java.sql.Date.valueOf(txtReceiveDate.getValue());
-        Date returnDate = java.sql.Date.valueOf(txtReturnDate.getValue());
+        LocalDate reciveDate = txtReceiveDate.getValue();
+        LocalDate returnDate = txtReturnDate.getValue();
         double cost = Double.parseDouble(txtCost.getText());
         String description = txtDescription.getText();
         String custId = lblCustomerId.getText();
@@ -187,13 +143,17 @@ public class RepairFormController {
         var repair = new Repair(repairId, reciveDate, returnDate, cost, description, custId, itemName);
 
         try {
-            boolean isPlaced = RepairRepo.save(repair);
-            if(isPlaced) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Save Repair!").show();
-                clearFields();
-                initialize();
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Repair Save Unsuccessfully!").show();
+            if(isValidate()) {
+                boolean isPlaced = RepairRepo.save(repair);
+                if (isPlaced) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Save Repair!").show();
+                    clearFields();
+                    initialize();
+                } else {
+                    new Alert(Alert.AlertType.WARNING, "Repair Save Unsuccessfully!").show();
+                }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -203,8 +163,8 @@ public class RepairFormController {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         String repairId = txtRepairId.getText();
-        Date reciveDate = java.sql.Date.valueOf(txtReceiveDate.getValue());
-        Date returnDate = java.sql.Date.valueOf(txtReturnDate.getValue());
+        LocalDate reciveDate = txtReceiveDate.getValue();
+        LocalDate returnDate = txtReturnDate.getValue();
         double cost = Double.parseDouble(txtCost.getText());
         String description = txtDescription.getText();
         String custId = lblCustomerId.getText();
@@ -213,12 +173,32 @@ public class RepairFormController {
         var repair = new Repair(repairId, reciveDate, returnDate, cost, description, custId, itemName);
 
         try {
-            boolean isPlaced = RepairRepo.update(repair);
-            if(isPlaced) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Save Repair!").show();
+            if(isValidate()) {
+                boolean isPlaced = RepairRepo.update(repair);
+                if (isPlaced) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Save Repair!").show();
+                    initialize();
+                } else {
+                    new Alert(Alert.AlertType.WARNING, "Repair Save Unsuccessfully!").show();
+                }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void btnDeleteOnAction(ActionEvent event) {
+        String id = txtRepairId.getText();
+
+        try {
+            boolean isDeleted = RepairRepo.delete(id);
+            if (isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Repair deleted!").show();
+                clearFields();
                 initialize();
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Repair Save Unsuccessfully!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -240,6 +220,45 @@ public class RepairFormController {
         lblCustomerId.setText("");
         lblCustomerName.setText("");
 
+    }
+
+    @FXML
+    void btnAddCustomerOnAction(ActionEvent event) throws IOException {
+        AnchorPane customerRootNode = FXMLLoader.load(this.getClass().getResource("/view/customer_form.fxml"));
+        customerRootNode.getChildren().clear();
+        customerRootNode.getChildren().add(customerRootNode);
+    }
+
+    private void getRepairId() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> idList = RepairRepo.getId();
+
+            for (String id : idList) {
+                obList.add(id);
+            }
+            TextFields.bindAutoCompletion(txtSearchRepair, obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void getCustomerTel() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> telList = CustomerRepo.getTel();
+
+            for(String tel : telList) {
+                obList.add(tel);
+            }
+            TextFields.bindAutoCompletion(txtCustomerTel,obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void txtCustomerTelOnAction(ActionEvent actionEvent) {
@@ -278,17 +297,13 @@ public class RepairFormController {
                 txtCustomerTel.setText(cust.getContactNo());
                 lblCustomerName.setText(cust.getCName());
             }
-            //txtReceiveDate.setValue(rep.getReciveDate());
-            //txtReturnDate.setValue(rep.getReturnDate().toLocalDate());
+            txtReceiveDate.setValue(rep.getReciveDate());
+            txtReturnDate.setValue(rep.getReturnDate());
             txtDescription.setText(rep.getDescription());
             txtCost.setText(String.valueOf(rep.getCost()));
         } else {
             new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
         }
-    }
-    @FXML
-    void checkCustomerIsSelect(MouseEvent event) {
-
     }
 
     @FXML
@@ -321,14 +336,31 @@ public class RepairFormController {
         Regex.setTextColor(lk.ijse.chama.util.TextField.RPID,txtRepairId);
     }
 
+    public void txtCustomerTellOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtCustomerTel);
+    }
+
     public void txtCostOnKeyRelesed(KeyEvent keyEvent) {
         Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtCost);
     }
 
     public boolean isValidate(){
         if(!Regex.setTextColor(lk.ijse.chama.util.TextField.RPID,txtRepairId))return false;
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtCustomerTel))return false;
         if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtCost))return false;
 
         return true;
+    }
+
+    public void btnBillOnAction(ActionEvent actionEvent) throws Exception {
+        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/RepairReport.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        Map<String,Object> data = new HashMap<>();
+        data.put("repId",txtRepairId.getText());
+
+        JasperPrint jasperPrint =
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
     }
 }

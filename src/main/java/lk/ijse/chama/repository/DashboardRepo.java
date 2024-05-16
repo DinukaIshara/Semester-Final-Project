@@ -1,11 +1,9 @@
 package lk.ijse.chama.repository;
 
 import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.DailyOrders;
 import lk.ijse.chama.model.tm.MostSellItemTm;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

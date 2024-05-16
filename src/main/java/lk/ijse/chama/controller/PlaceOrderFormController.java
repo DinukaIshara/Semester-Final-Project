@@ -39,16 +39,36 @@ import java.util.*;
 
 public class PlaceOrderFormController {
 
-    public AnchorPane addToCartItemRootNode;
-    public Label lblItemName;
-    public Label lblItemId;
-    public Label lblCatagory;
-    public Label lblHandOnQty;
-    public ImageView imageCart;
-    public TextField txtItemNameSearch;
-    public JFXButton btnOrderReceipt;
-    public TextField txtLocation;
-    public Label lblTrId;
+    @FXML
+    private AnchorPane addToCartItemRootNode;
+
+    @FXML
+    private Label lblItemName;
+
+    @FXML
+    private Label lblItemId;
+
+    @FXML
+    private Label lblCatagory;
+
+    @FXML
+    private Label lblHandOnQty;
+
+    @FXML
+    private ImageView imageCart;
+
+    @FXML
+    private TextField txtItemNameSearch;
+
+    @FXML
+    private JFXButton btnOrderReceipt;
+
+    @FXML
+    private TextField txtLocation;
+
+    @FXML
+    private Label lblTrId;
+
     @FXML
     private ScrollPane scrollPane;
 
@@ -191,7 +211,7 @@ public class PlaceOrderFormController {
 
     }
 
-    private void calculateNetTotal() {
+    private void calculateNetTotal() { // Net Total Calculate
         int netTotal = 0;
         for (int i = 0; i < tblOrder.getItems().size(); i++) {
             netTotal += (double) colTotal.getCellData(i);
@@ -229,12 +249,12 @@ public class PlaceOrderFormController {
         PlaceOrder po = new PlaceOrder(order, odList);
         try {
             boolean isPlaced = PlaceOrderRepo.placeOrder(po);
-            if(isPlaced) {
+            if (isPlaced) {
                 getLastOrderId();
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
                 clear();
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -312,7 +332,7 @@ public class PlaceOrderFormController {
         try {
             for (int i = 0; i < itemList.size(); i++){
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/view/productCard.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/view/itemCard.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
 
@@ -527,22 +547,6 @@ public class PlaceOrderFormController {
         }
 
         txtItemNameSearch.requestFocus();
-    }
-
-    //Validation -----------------------------------------------------------------------------------------------------------------
-    public void txtQtyOnKeyRelesed(KeyEvent keyEvent) {
-        Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty);
-    }
-
-    public void txtTelOnKeyRelesed(KeyEvent keyEvent) {
-        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtCustomerTel);
-    }
-
-    public boolean isValidate(){
-        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtCustomerTel))return false;
-        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty))return false;
-
-        return true;
     }
 
     //Get Order Receipt --------------------------------------------------------------------------------------------------------

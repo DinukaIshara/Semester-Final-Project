@@ -23,9 +23,13 @@ public class SidepanelformController {
     @FXML
     private Label lblUserName;
 
-    public void initialize() throws IOException {
+    public void initialize(){
         setDate();
-        loadDashboardForm();
+        try {
+            loadDashboardForm();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     private void setDate() {
         LocalDate nowDate = LocalDate.now();
@@ -51,13 +55,13 @@ public class SidepanelformController {
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) throws IOException {
-        AnchorPane placeOrRootNode = FXMLLoader.load(this.getClass().getResource("/view/PlaceOrderForm.fxml"));
+        AnchorPane placeOrRootNode = FXMLLoader.load(this.getClass().getResource("/view/placeOrderForm.fxml"));
         childRootNode.getChildren().clear();
         childRootNode.getChildren().add(placeOrRootNode);
     }
 
     public void btnItemOnAction(ActionEvent actionEvent) throws IOException {
-        AnchorPane itemRootNode = FXMLLoader.load(this.getClass().getResource("/view/brandNewItem_form.fxml"));
+        AnchorPane itemRootNode = FXMLLoader.load(this.getClass().getResource("/view/item_form.fxml"));
         childRootNode.getChildren().clear();
         childRootNode.getChildren().add(itemRootNode);
 

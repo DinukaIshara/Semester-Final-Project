@@ -85,70 +85,6 @@ public class TransportFormController {
         }
 
     }
-    public void getPlaces(){
-        ObservableList<String> obList = FXCollections.observableArrayList();
-
-        try {
-            List<String> placeList = LocationRepo.getPlace();
-
-            for(String place : placeList) {
-                obList.add(place);
-            }
-
-            TextFields.bindAutoCompletion(txtLocation, obList);
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public MapView crateMapView() throws SQLException {
-        MapView mapView = new MapView();
-        List<String> validLocations = LocationRepo.getPlace();
-        if (validLocations.contains(txtLocation.getText())) { //if (txtLocation.getText().equals("Colombo")|| txtLocation.getText().equals("Kandy") || txtLocation.getText().equals("Kalutara"))
-            Location location = LocationRepo.searchByPath(txtLocation.getText());
-            System.out.println(location.getLatitude());
-            System.out.println(location.getLongitude());
-            eiffelPoint = new MapPoint(location.getLatitude(), location.getLongitude());
-
-            mapView.setPrefSize(446, 487);
-            mapView.addLayer(new CustomLayer());
-            mapView.setZoom(15);
-            mapView.flyTo(0, eiffelPoint, 0.1);
-
-            return mapView;
-        }
-
-        else if (!(txtLocation.getText().equals(null))) {
-
-            mapView.setPrefSize(446, 487);
-            mapView.addLayer(new CustomLayer());
-            mapView.setZoom(15);
-            mapView.flyTo(0, eiffelPoint, 0.1);
-
-            System.out.println("!null");
-            return mapView;
-        }
-        return mapView;
-    }
-
-    public class CustomLayer extends MapLayer {
-
-        private final Node mark;
-
-        public CustomLayer(){
-            mark = new Circle(5, Color.RED);
-            getChildren().add(mark);
-        }
-
-        @Override
-        protected void layoutLayer(){
-            Point2D point2D = getMapPoint(eiffelPoint.getLatitude(), eiffelPoint.getLatitude());
-            mark.setTranslateX(point2D.getX());
-            mark.setTranslateY(point2D.getY());
-        }
-
-    }
 
     private void setCellValueFactory() {
         colTransportId.setCellValueFactory(new PropertyValueFactory<>("trId"));
@@ -192,12 +128,16 @@ public class TransportFormController {
         Transport transport = new Transport(trId,vehicalNo,driverName,location,cost);
 
         try {
-            boolean isSaved = TransportRepo.save(transport);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Transport saved!").show();
-                clearFields();
-                initialize();
-            }
+            //if(isValidate()) {
+                boolean isSaved = TransportRepo.save(transport);
+                if (isSaved) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Transport saved!").show();
+                    clearFields();
+                    initialize();
+                }
+            /*}else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+            }*/
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -214,12 +154,16 @@ public class TransportFormController {
         Transport transport = new Transport(trId,vehicalNo,driverName,location,cost);
 
         try {
-            boolean isSaved = TransportRepo.update(transport);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Transport updated!").show();
-                clearFields();
-                initialize();
-            }
+            //if(isValidate()) {
+                boolean isSaved = TransportRepo.update(transport);
+                if (isSaved) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Transport updated!").show();
+                    clearFields();
+                    initialize();
+                }
+            /*}else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+            }*/
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -231,7 +175,7 @@ public class TransportFormController {
 
         try {
             boolean isDeleted = TransportRepo.delete(id);
-            if(isDeleted) {
+            if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "transport deleted!").show();
                 clearFields();
                 initialize();
@@ -254,6 +198,84 @@ public class TransportFormController {
         txtCost.setText("");
     }
 
+    public void getPlaces(){  // Location Table place get
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<String> placeList = LocationRepo.getPlace();
+
+            for(String place : placeList) {
+                obList.add(place);
+            }
+
+            TextFields.bindAutoCompletion(txtLocation, obList);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public MapView crateMapView() throws SQLException {
+        MapView mapView = new MapView();
+        List<String> validLocations = LocationRepo.getPlace();
+        if (validLocations.contains(txtLocation.getText())) { // if (txtLocation.getText().equals("Colombo")|| txtLocation.getText().equals("Kandy") || txtLocation.getText().equals("Kalutara"))
+            Location location = LocationRepo.searchByPath(txtLocation.getText());
+            System.out.println(location.getLatitude());
+            System.out.println(location.getLongitude());
+            eiffelPoint = new MapPoint(location.getLatitude(), location.getLongitude());
+
+            mapView.setPrefSize(446, 487);
+            mapView.addLayer(new CustomLayer());
+            mapView.setZoom(15);
+            mapView.flyTo(0, eiffelPoint, 0.1);
+
+            return mapView;
+
+        }else if (!(txtLocation.getText().equals(null))) {
+
+            mapView.setPrefSize(446, 487);
+            mapView.addLayer(new CustomLayer());
+            mapView.setZoom(15);
+            mapView.flyTo(0, eiffelPoint, 0.1);
+
+            System.out.println("!null");
+            return mapView;
+        }
+        return mapView;
+    }
+
+    public class CustomLayer extends MapLayer {
+        private final Node mark;
+
+        public CustomLayer(){
+            mark = new Circle(5, Color.RED);
+            getChildren().add(mark);
+        }
+
+        @Override
+        protected void layoutLayer(){
+            try {
+                List<String> validLocations = LocationRepo.getPlace();
+                if (validLocations.contains(txtLocation.getText())) {
+                    Location location = LocationRepo.searchByPath(txtLocation.getText());
+                    eiffelPoint = new MapPoint(location.getLatitude(), location.getLongitude());
+
+                    Point2D point2D = getMapPoint(eiffelPoint.getLatitude(), eiffelPoint.getLatitude());
+                    mark.setTranslateX(point2D.getX());
+                    mark.setTranslateY(point2D.getY());
+
+                } else if (!(txtLocation.getText().equals(null))) {
+                    Point2D point2D = getMapPoint(eiffelPoint.getLatitude(), eiffelPoint.getLatitude());
+                    mark.setTranslateX(point2D.getX());
+                    mark.setTranslateY(point2D.getY());
+                }
+            }catch (SQLException e){
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
+
     public void txtSearchLocationOnAction(ActionEvent actionEvent) {
         try {
             btnSearchLocationOnAction();
@@ -262,8 +284,7 @@ public class TransportFormController {
         }
     }
 
-    private void getLoaction() {
-
+    private void getLoaction() {  // Transport Table Location Loads
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
@@ -302,10 +323,6 @@ public class TransportFormController {
         txtDriverName.requestFocus();
     }
 
-    public void txtVehicalNoOnKeyRelesed(KeyEvent keyEvent) {
-
-    }
-
     public void txtDriverNameOnAction(ActionEvent actionEvent) {
         txtLocation.requestFocus();
     }
@@ -323,17 +340,22 @@ public class TransportFormController {
         txtCost.requestFocus();
     }
 
-    public void txtcostOnKeyRelesed(KeyEvent keyEvent) {
-        Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtCost);
-    }
-
     public void txtTrIdOnKeyRelesed(KeyEvent keyEvent) {
         Regex.setTextColor(lk.ijse.chama.util.TextField.TID,txtId);
     }
 
+    public void txtVehicalNoOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.VEHICALNO,txtVehicalNo);
+    }
+
+    public void txtcostOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtCost);
+    }
+
     public boolean isValidate(){
-        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.TID,txtId))return false;
-        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtCost))return false;
+        //if (!Regex.setTextColor(lk.ijse.chama.util.TextField.TID,txtId))return false;
+        //if (!Regex.setTextColor(lk.ijse.chama.util.TextField.VEHICALNO,txtVehicalNo))return false;
+        //if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtCost))return false;
 
         return false;
     }

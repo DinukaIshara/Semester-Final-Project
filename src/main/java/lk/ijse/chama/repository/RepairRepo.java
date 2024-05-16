@@ -1,12 +1,10 @@
 package lk.ijse.chama.repository;
 
 import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.Customer;
-import lk.ijse.chama.model.Employee;
 import lk.ijse.chama.model.Repair;
-import lk.ijse.chama.model.Supplier;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +37,8 @@ public class RepairRepo {
 
         while (resultSet.next()) {
             String repairId = resultSet.getString(1);
-            Date reciveDate = resultSet.getDate(2);
-            Date returnDate = resultSet.getDate(3);
+            LocalDate reciveDate = resultSet.getDate(2).toLocalDate();
+            LocalDate returnDate = resultSet.getDate(3).toLocalDate();
             double cost = resultSet.getDouble(4);
             String description = resultSet.getString(5);
             String custId = resultSet.getString(6);
@@ -103,8 +101,8 @@ public class RepairRepo {
         ResultSet resultSet = pstm.executeQuery();
         if (resultSet.next()) {
             String rep_id = resultSet.getString(1);
-            Date recive = resultSet.getDate(2);
-            Date retu = resultSet.getDate(3);
+            LocalDate recive = resultSet.getDate(2).toLocalDate();
+            LocalDate retu = resultSet.getDate(3).toLocalDate();
             double cost = resultSet.getDouble(4);
             String description =resultSet.getString(5);
             String cust_id = resultSet.getString(6);

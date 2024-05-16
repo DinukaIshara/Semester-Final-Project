@@ -1,7 +1,6 @@
 package lk.ijse.chama.repository;
 
 import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.BrandNewItem;
 import lk.ijse.chama.model.Location;
 
 import java.sql.PreparedStatement;
@@ -9,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class LocationRepo {
     public static Location searchByPath(String name) throws SQLException {

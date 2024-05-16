@@ -49,7 +49,7 @@ CREATE TABLE item(
                                category VARCHAR(20),
                                brand VARCHAR(20),
                                date DATE,
-                               description VARCHAR(20),
+                               description TEXT,
                                warranty VARCHAR(15),
                                type VARCHAR(10),
                                path TEXT
@@ -81,7 +81,7 @@ CREATE TABLE repair(
                        date_recive DATE,
                        date_return DATE,
                        repair_cost DECIMAL(8,2),
-                       description VARCHAR(50),
+                       description TEXT,
                        cust_id VARCHAR(5),
                        itemName VARCHAR(30),
                        CONSTRAINT FOREIGN KEY(cust_id) REFERENCES customer(cust_id) on Delete Cascade on Update Cascade

@@ -169,6 +169,8 @@ public class EmployeeFormController {
                     clearFields();
                     initialize();
                 }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -198,6 +200,8 @@ public class EmployeeFormController {
                     new Alert(Alert.AlertType.CONFIRMATION, "Employee updated!").show();
                     initialize();
                 }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -209,12 +213,11 @@ public class EmployeeFormController {
         String id = txtId.getText();
 
         try {
-            if(isValidate()) { // Validated
-                boolean isDeleted = EmployeeRepo.delete(id); // Delete Employee Data
-                if (isDeleted) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Employee deleted!").show();
-                    initialize();
-                }
+            boolean isDeleted = EmployeeRepo.delete(id); // Delete Employee Data
+            if (isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Employee deleted!").show();
+                clearFields();
+                initialize();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -237,6 +240,7 @@ public class EmployeeFormController {
         txtEnrollDate.setValue(null);
         txtEmail.setText("");
         txtSallary.setText("");
+        ImgView.setImage(null);
     }
 
     public void btnImportImgOnAction() { // Search Image Path in Your PC

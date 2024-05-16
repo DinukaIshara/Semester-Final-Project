@@ -1,7 +1,6 @@
 package lk.ijse.chama.repository;
 
 import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.Supplier;
 
 import java.sql.Connection;
@@ -73,7 +72,7 @@ public class SupplierRepo {
     }
 
     public static Supplier searchByName(String name) throws SQLException {
-        String sql = "SELECT * FROM supplier WHERE person_name = ?";
+        String sql = "SELECT * FROM supplier WHERE company_name = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -110,7 +109,7 @@ public class SupplierRepo {
     }
 
     public static List<String> getName() throws SQLException {
-        String sql = "SELECT person_name FROM supplier";
+        String sql = "SELECT company_name FROM supplier";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
 
@@ -130,8 +129,8 @@ public class SupplierRepo {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
 
-        pstm.setObject(1, supplier.getCompanyName());
-        pstm.setObject(2, supplier.getPersonName());
+        pstm.setObject(1, supplier.getPersonName());
+        pstm.setObject(2, supplier.getCompanyName());
         pstm.setObject(3, supplier.getTel());
         pstm.setObject(4, supplier.getLocation());
         pstm.setObject(5, supplier.getEmail());

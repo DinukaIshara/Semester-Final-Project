@@ -117,7 +117,7 @@ public class DashboardFormController {
         try {
             List<Customer> customerList = CustomerRepo.getAll();
             for (Customer cust : customerList) {
-                //System.out.println("dinuk");
+
                 count ++;
             }
         } catch (SQLException e) {
@@ -132,7 +132,7 @@ public class DashboardFormController {
         try {
             List<Order> orderList = OrderRepo.getAll();
             for (Order order : orderList) {
-                //System.out.println("dinuk");
+
                 count ++;
             }
         } catch (SQLException e) {
@@ -142,6 +142,7 @@ public class DashboardFormController {
         lblOrderCount.setText(String.valueOf(count)); // Set Order Count
     }
 
+    // Pie Chart --------------------------------------------------------------------------------------------------------------------------------------------------
     public void pieChartConnect() throws SQLException {
         List<MostSellItemTm> itemList = DashboardRepo.getMostSellItem(); //Load Most sell Item In MostSellItemTm
         BrandNewItem item;
@@ -164,6 +165,7 @@ public class DashboardFormController {
         }
     }
 
+    // Bar Chart -----------------------------------------------------------------------------------------------------------------------------------------------------
     public void barChart() throws SQLException {
         XYChart.Series chart = new XYChart.Series();
         chart.setName("Chama Computers");

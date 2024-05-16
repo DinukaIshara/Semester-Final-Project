@@ -9,11 +9,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.Supplier;
-import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.model.tm.SupplierTm;
-import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.SupplierRepo;
 import lk.ijse.chama.util.Regex;
 import net.sf.jasperreports.engine.*;
@@ -124,11 +121,41 @@ public class SupplierFormController {
         Supplier suppler = new Supplier(supId, companyName, personName, tel, location , email );
 
         try {
-            boolean isSaved = SupplierRepo.save(suppler);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "supplier saved!").show();
-                clearFields();
-                initialize();
+            if(isValidat()) {
+                boolean isSaved = SupplierRepo.save(suppler);
+                if (isSaved) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "supplier saved!").show();
+                    clearFields();
+                    initialize();
+                }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
+        String supId = txtSupId.getText();
+        String companyName = txtCompanyName.getText();
+        String personName = txtPersonName.getText();
+        String tel = txtContact.getText();
+        String location = txtLoacation.getText();
+        String email = txtEmail.getText();
+
+        Supplier suppler = new Supplier(supId, companyName, personName, tel, location , email );
+
+        try {
+            if(isValidat()) {
+                boolean isSaved = SupplierRepo.update(suppler);
+                if (isSaved) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "supplier update!").show();
+                    clearFields();
+                    initialize();
+                }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -144,26 +171,8 @@ public class SupplierFormController {
         txtEmail.setText("");
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
-        String supId = txtSupId.getText();
-        String companyName = txtCompanyName.getText();
-        String personName = txtPersonName.getText();
-        String tel = txtContact.getText();
-        String location = txtLoacation.getText();
-        String email = txtEmail.getText();
-
-        Supplier suppler = new Supplier(supId, companyName, personName, tel, location , email );
-
-        try {
-            boolean isSaved = SupplierRepo.update(suppler);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "supplier update!").show();
-                clearFields();
-                initialize();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public void btnClearOnAction(ActionEvent actionEvent) {
+        clearFields();
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
@@ -171,7 +180,7 @@ public class SupplierFormController {
 
         try {
             boolean isDeleted = SupplierRepo.delete(id);
-            if(isDeleted) {
+            if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "supplier deleted!").show();
                 clearFields();
                 initialize();
@@ -179,23 +188,6 @@ public class SupplierFormController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-    }
-
-    public void btnClearOnAction(ActionEvent actionEvent) {
-        clearFields();
-    }
-
-    @FXML
-    void btnSupplierReportOnAction(ActionEvent event) throws Exception {
-        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/SupplerItemReport.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-
-        Map<String,Object> data = new HashMap<>();
-        data.put("supId",txtSupId.getText());
-
-        JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
-        JasperViewer.viewReport(jasperPrint,false);
     }
 
     public void supplierCompanyName() {
@@ -255,6 +247,7 @@ public class SupplierFormController {
         txtLoacation.requestFocus();
     }
 
+    // Validation Part -------------------------------------------------------------------------------------
     public void txtContactNoOnKeyRelesed(KeyEvent keyEvent) {
         Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtContact);
     }
@@ -277,5 +270,19 @@ public class SupplierFormController {
         if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtContact))return false;
 
         return true;
+    }
+
+    // Supplier Report -----------------------------------------------------------------------------------------------------------
+    @FXML
+    void btnSupplierReportOnAction(ActionEvent event) throws Exception {
+        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/SupplerItemReport.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        Map<String,Object> data = new HashMap<>();
+        data.put("supId",txtSupId.getText());
+
+        JasperPrint jasperPrint =
+                JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
     }
 }

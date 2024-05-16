@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +16,6 @@ public class RepairTm extends Repair {
     private String description;
     private String custId;
     private double cost;
-    private Date reciveDate;
-    private Date reternDate;
+    private LocalDate reciveDate;
+    private LocalDate reternDate;
 }

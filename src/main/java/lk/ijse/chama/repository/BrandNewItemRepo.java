@@ -1,10 +1,7 @@
 package lk.ijse.chama.repository;
 
-import javafx.collections.FXCollections;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.BrandNewItem;
-import lk.ijse.chama.model.Customer;
-import lk.ijse.chama.model.ItemSupplierDetail;
 import lk.ijse.chama.model.OrderDetail;
 
 import java.sql.*;

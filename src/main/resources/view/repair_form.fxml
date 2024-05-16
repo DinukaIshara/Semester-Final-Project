@@ -60,7 +60,7 @@
                               <Insets right="10.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="txtCustomerTel" onAction="#txtCustomerTelOnAction" prefHeight="30.0" prefWidth="170.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
+                        <TextField fx:id="txtCustomerTel" onAction="#txtCustomerTelOnAction" onKeyReleased="#txtCustomerTellOnKeyRelesed" prefHeight="30.0" prefWidth="170.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
                      </children>
                      <padding>
                         <Insets left="20.0" right="20.0" />
@@ -143,7 +143,7 @@
                               <Insets right="30.0" />
                            </HBox.margin>
                         </Label>
-                        <DatePicker fx:id="txtReceiveDate" editable="false" onAction="#dpReceiveDateOnAction" onMouseClicked="#checkCustomerIsSelect" prefHeight="28.0" prefWidth="200.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+                        <DatePicker fx:id="txtReceiveDate" editable="false" onAction="#dpReceiveDateOnAction" prefHeight="28.0" prefWidth="200.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
                      </children>
                      <padding>
                         <Insets left="20.0" />
@@ -167,7 +167,7 @@
                               <Insets right="30.0" />
                            </HBox.margin>
                         </Label>
-                        <DatePicker fx:id="txtReturnDate" editable="false" onAction="#dpReturnDateOnAction" onMouseClicked="#checkCustomerIsSelect" prefHeight="25.0" prefWidth="200.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+                        <DatePicker fx:id="txtReturnDate" editable="false" onAction="#dpReturnDateOnAction" prefHeight="25.0" prefWidth="200.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
                      </children>
                      <padding>
                         <Insets left="20.0" />
@@ -191,7 +191,7 @@
                               <Insets right="30.0" />
                            </HBox.margin>
                         </Label>
-                        <TextField fx:id="txtDescription" onAction="#txtDescriptionOnAction" onMouseClicked="#checkCustomerIsSelect" prefHeight="32.0" prefWidth="295.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+                        <TextField fx:id="txtDescription" onAction="#txtDescriptionOnAction" prefHeight="32.0" prefWidth="295.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="14.0" />
                            </font>
@@ -211,29 +211,34 @@
                         <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtCost" layoutX="196.0" layoutY="126.0" onAction="#txtCostOnAction" onKeyReleased="#txtCostOnKeyRelesed" onMouseClicked="#checkCustomerIsSelect" prefHeight="32.0" prefWidth="295.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+                  <TextField fx:id="txtCost" layoutX="196.0" layoutY="126.0" onAction="#txtCostOnAction" onKeyReleased="#txtCostOnKeyRelesed" prefHeight="32.0" prefWidth="295.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </TextField>
                </children>
             </Pane>
-            <JFXButton buttonType="RAISED" layoutX="632.0" layoutY="244.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="532.0" layoutY="252.0" onAction="#btnUpdateOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="758.0" layoutY="244.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Delete" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="658.0" layoutY="252.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Delete" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="514.0" layoutY="244.0" onAction="#btnSaveOnAction" prefWidth="80.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Save" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="414.0" layoutY="252.0" onAction="#btnSaveOnAction" prefWidth="80.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Save" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="878.0" layoutY="244.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Clear" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="778.0" layoutY="252.0" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Clear" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="897.0" layoutY="252.0" onAction="#btnBillOnAction" prefHeight="30.0" prefWidth="88.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Bill" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

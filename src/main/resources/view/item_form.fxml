@@ -95,7 +95,7 @@
                </children>
             </AnchorPane>
             <JFXButton buttonType="RAISED" layoutX="838.0" layoutY="291.0" onAction="#btnPicImportOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="Import" textFill="WHITE" />
-            <JFXButton buttonType="RAISED" layoutX="560.0" layoutY="347.0" onAction="#btnClearOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="green" stylesheets="@../css/btnStyles.css" text="Clear" textFill="WHITE" />
+            <JFXButton buttonType="RAISED" layoutX="560.0" layoutY="347.0" onAction="#btnClearOnAction" prefHeight="33.0" prefWidth="124.0" styleClass="sale" stylesheets="@../css/style.css" text="Clear" textFill="WHITE" />
             <Label layoutX="511.0" layoutY="29.0" prefHeight="21.0" prefWidth="70.0" text="Type :">
                <font>
                   <Font size="18.0" />

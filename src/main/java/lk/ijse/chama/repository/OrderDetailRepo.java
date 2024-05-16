@@ -1,15 +1,10 @@
 package lk.ijse.chama.repository;
 
 import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.Customer;
-import lk.ijse.chama.model.Order;
 import lk.ijse.chama.model.OrderDetail;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailRepo {

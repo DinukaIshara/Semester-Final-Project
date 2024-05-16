@@ -4,11 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.repository.BrandNewItemRepo;
 import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.EmployeeRepo;
+import lk.ijse.chama.util.Regex;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -38,7 +41,13 @@ public class ReportFormController {
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
         Map<String,Object> data = new HashMap<>();
-        data.put("custTel",txtSearchCustomerTel.getText());
+
+        if(isValidateNum()) {
+            data.put("custTel", txtSearchCustomerTel.getText());
+        }else{
+            new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+        }
+
 
         JasperPrint jasperPrint =
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
@@ -51,7 +60,12 @@ public class ReportFormController {
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
         Map<String,Object> data = new HashMap<>();
-        data.put("date",txtSearchItemStockDate.getText());
+
+        if(isValidateDate()) {
+            data.put("date", txtSearchItemStockDate.getText());
+        }else{
+            new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+        }
 
         JasperPrint jasperPrint =
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
@@ -87,5 +101,25 @@ public class ReportFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void txtCustTelOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtSearchCustomerTel);
+    }
+
+    public void txtStockDateOnKeyRelesed(KeyEvent keyEvent) {
+        Regex.setTextColor(lk.ijse.chama.util.TextField.DATE,txtSearchItemStockDate);
+    }
+
+    public boolean isValidateNum(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.PHONENO,txtSearchCustomerTel))return false;
+
+        return true;
+    }
+
+    public boolean isValidateDate(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.DATE,txtSearchItemStockDate))return false;
+
+        return true;
     }
 }

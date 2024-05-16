@@ -1,10 +1,8 @@
 package lk.ijse.chama.repository;
 
 import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.BrandNewItem;
 import lk.ijse.chama.model.ItemSupplierDetail;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -83,20 +81,4 @@ public class ItemSupplierDetailRepo {
         }
         return null;
     }
-
-    /*public static boolean delete(String id) throws SQLException {
-        String sql = "DELETE FROM item_supplier_detail WHERE item_id = ? ";
-
-        System.out.println(id);
-
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, id);
-
-        boolean tx = pstm.executeUpdate() > 0;
-
-        System.out.println(tx);
-
-        return tx;
-    }*/
 }

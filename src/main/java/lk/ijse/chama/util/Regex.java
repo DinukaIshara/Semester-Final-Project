@@ -38,6 +38,12 @@ public class Regex {
             case NIC:
                 filed = "^([0-9]{8}[x|X|v|V]|[0-9]{12})$";
                 break;
+            case DATE:
+                filed = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$";
+                break;
+            case VEHICALNO:
+                filed = "^[A-Z]{2}-\\d{4}$";
+                break;
             case EMAIL:
                 filed = "^([A-z])([A-z0-9.]){1,}[@]([A-z0-9]){1,10}[.]([A-z]){2,5}$";
                 break;
@@ -78,7 +84,7 @@ public class Regex {
 
     public static boolean setTextColor(TextField location, javafx.scene.control.TextField textField){
         if (Regex.isTextFieldValid(location, textField.getText())){
-            textField.setStyle("-fx-border-color: #00ff00; -fx-text-fill: #00ff00;  -fx-border-radius: 5px; -fx-border-width:  2px 2px 2px 2px; -fx-background-radius: 5px;");
+            textField.setStyle("-fx-border-color: #0081ff; -fx-text-fill: #05bef3;  -fx-border-radius: 5px; -fx-border-width:  2px 2px 2px 2px; -fx-background-radius: 5px;");
 
             return true;
         }else {

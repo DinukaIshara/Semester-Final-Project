@@ -205,6 +205,8 @@ public class BrandNewItemFormController {
                 } else {
                     new Alert(Alert.AlertType.WARNING, "Item Save Unsuccessfully!").show();
                 }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -243,6 +245,8 @@ public class BrandNewItemFormController {
                 } else {
                     new Alert(Alert.AlertType.WARNING, "Item Update Unsuccessfully!").show();
                 }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -262,6 +266,7 @@ public class BrandNewItemFormController {
         txtCategory.setText("");
         txtSupplierId.setText("");
         lblSupCompanyName.setText("");
+        itemImage.setImage(null);
 
     }
 
@@ -274,14 +279,12 @@ public class BrandNewItemFormController {
         String id = txtItemId.getText();
 
         try {
-            if(isValied()) { // Add Validation
-                boolean isItemDeleted = BrandNewItemRepo.delete(id); //
-                if (isItemDeleted) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "item deleted!").show();
-                    clearFields();
-                    initialize(); // Reload Page
+            boolean isItemDeleted = BrandNewItemRepo.delete(id); //
+            if (isItemDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "item deleted!").show();
+                clearFields();
+                initialize(); // Reload Page
                 }
-            }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }

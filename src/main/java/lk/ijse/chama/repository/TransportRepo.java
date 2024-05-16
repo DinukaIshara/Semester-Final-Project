@@ -1,8 +1,6 @@
 package lk.ijse.chama.repository;
 
 import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.Customer;
-import lk.ijse.chama.model.Supplier;
 import lk.ijse.chama.model.Transport;
 
 import java.sql.Connection;

@@ -1,11 +1,13 @@
 package lk.ijse.chama.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Employee {
 
@@ -21,19 +23,6 @@ public class Employee {
     private double salary;
     private String path;
 
-    public Employee(String empId, String empName, String empAddress, String empNic, String position, String empTel, Date dob, Date dateRegister, String empEmail, double salary, String path) {
-        this.empId = empId;
-        this.empName = empName;
-        this.empAddress = empAddress;
-        this.empNic = empNic;
-        this.position = position;
-        this.empTel = empTel;
-        this.dob = dob;
-        this.dateRegister = dateRegister;
-        this.empEmail = empEmail;
-        this.salary = salary;
-        this.path = path;
-    }
     @Override
     public String toString() {
         return "Employee{" +

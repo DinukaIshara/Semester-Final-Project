@@ -124,6 +124,8 @@ public class CustomerFormController {
                     clearFields();
                     initialize();
                 }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -149,6 +151,8 @@ public class CustomerFormController {
                     clearFields();
                     initialize();
                 }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
 
         } catch (SQLException e) {
@@ -161,13 +165,11 @@ public class CustomerFormController {
         String id = txtId.getText();
 
         try {
-            if(isValidate()) { // Add Validation
-                boolean isDeleted = CustomerRepo.delete(id);
-                if (isDeleted) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "customer deleted!").show();
-                    clearFields();
-                    initialize();
-                }
+            boolean isDeleted = CustomerRepo.delete(id);
+            if (isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "customer deleted!").show();
+                clearFields();
+                initialize();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

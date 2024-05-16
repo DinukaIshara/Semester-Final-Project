@@ -40,6 +40,8 @@ public class LoginFormController {
         try {
             if(isValied()) { // Validated
                 checkCredential(userName, pw);
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

@@ -1,10 +1,10 @@
 package lk.ijse.chama.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Setter
-@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Customer {
     private String custId;
     private String cName;
@@ -13,14 +13,6 @@ public class Customer {
     private String contactNo;
     private String cEmail;
 
-    public Customer(String custId, String cName, String cAddress, String cNIC, String contactNo, String cEmail) {
-        this.custId = custId;
-        this.cName = cName;
-        this.cAddress = cAddress;
-        this.cNIC = cNIC;
-        this.contactNo = contactNo;
-        this.cEmail = cEmail;
-    }
     @Override
     public String toString() {
         return "Customer{" +

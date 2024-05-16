@@ -1,7 +1,6 @@
 package lk.ijse.chama.repository;
 
 import lk.ijse.chama.db.DbConnection;
-import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.Employee;
 
 import java.sql.Connection;
@@ -11,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
 
 public class EmployeeRepo {
     public static boolean save(Employee employee) throws SQLException {

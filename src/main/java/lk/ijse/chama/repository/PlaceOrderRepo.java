@@ -12,17 +12,11 @@ public class PlaceOrderRepo {
         connection.setAutoCommit(false);
 
         try {
-            System.out.println("Road to order "+po.getOrder());
             boolean isOrderSaved = OrderRepo.save(po.getOrder());
-            System.out.println("placed order " + isOrderSaved);
             if (isOrderSaved) {
-                System.out.println("Road to update qty " + po.getOdList());
                 boolean isQtyUpdated = BrandNewItemRepo.update(po.getOdList());
-                System.out.println("updated qty " + isQtyUpdated);
                 if (isQtyUpdated) {
-                    System.out.println("Road to save Order Detail ");
                     boolean isOrderDetailSaved = OrderDetailRepo.save(po.getOdList());
-                    System.out.println("saved order detail" + isOrderDetailSaved);
                     if (isOrderDetailSaved) {
                         connection.commit();
                         return true;

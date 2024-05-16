@@ -42,7 +42,7 @@
       <PasswordField fx:id="txtPassword" layoutX="466.0" layoutY="341.0" onAction="#txtPasswordOnAction" onKeyReleased="#txtPasswordOnActionKeyReleased" prefHeight="44.0" prefWidth="269.0" promptText="\@Password" style="-fx-background-radius: 5;" />
       <ImageView fitHeight="105.0" fitWidth="113.0" layoutX="542.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
          <image>
-            <Image url="@../icon/loginIconMan.png" />
+            <Image url="@../icon/manager.png" />
          </image>
       </ImageView>
    </children>

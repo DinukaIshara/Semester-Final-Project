@@ -54,6 +54,8 @@ public class RegistrationFormController {
                     new Alert(Alert.AlertType.CONFIRMATION, "user saved!").show();
                     callLogIn();
                 }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
 
         } catch (SQLException e) {
