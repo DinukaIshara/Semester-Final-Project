@@ -52,6 +52,8 @@ public class ReportFormController {
         JasperPrint jasperPrint =
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
+
+        clearTel();
     }
 
     @FXML
@@ -71,6 +73,16 @@ public class ReportFormController {
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
 
+        clearDate();
+
+    }
+
+    public void clearTel(){
+        txtSearchCustomerTel.setText("");
+    }
+
+    public void clearDate(){
+        txtSearchItemStockDate.setText("");
     }
 
     private void getCustomerTel() {

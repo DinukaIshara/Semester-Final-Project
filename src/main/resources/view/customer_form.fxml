@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -11,7 +12,7 @@
 
 <AnchorPane fx:id="rootNode" prefHeight="890.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.CustomerFormController">
    <children>
-      <Pane layoutX="43.0" layoutY="91.0" prefHeight="268.0" prefWidth="998.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 20;" styleClass="shadow1" stylesheets="@../css/sidePane.css">
+      <Pane layoutX="43.0" layoutY="87.0" prefHeight="268.0" prefWidth="998.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 20;" stylesheets="@../css/sidePane.css">
          <children>
             <JFXButton buttonType="RAISED" layoutX="627.0" layoutY="207.0" onAction="#btnUpdateOnAction" prefWidth="100.0" ripplerFill="BLACK" styleClass="sale" stylesheets="@../css/style.css" text="Update" textFill="WHITE">
                <font>
@@ -96,7 +97,7 @@
          </children>
       </Pane>
       <Label fx:id="lblCostId" layoutX="233.0" layoutY="36.0" />
-      <TableView fx:id="tblCustomer" layoutX="43.0" layoutY="435.0" prefHeight="421.0" prefWidth="998.0" stylesheets="@../css/sidePane.css">
+      <TableView fx:id="tblCustomer" layoutX="43.0" layoutY="437.0" prefHeight="421.0" prefWidth="998.0">
          <columns>
             <TableColumn fx:id="colId" prefWidth="105.0" text="Customer Id" />
             <TableColumn fx:id="colName" prefWidth="182.0" text="Name" />
@@ -105,13 +106,17 @@
             <TableColumn fx:id="colTel" prefWidth="156.0" text="Tel Number" />
             <TableColumn fx:id="colEmail" minWidth="0.0" prefWidth="186.0" text="Email" />
          </columns>
+         <stylesheets>
+            <URL value="@../css/sidePane.css" />
+            <URL value="@../css/style.css" />
+         </stylesheets>
       </TableView>
       <Label layoutX="391.0" layoutY="25.0" prefHeight="37.0" prefWidth="329.0" text="Customer Management" textFill="#008cff">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Pane layoutX="43.0" layoutY="377.0" prefHeight="47.0" prefWidth="272.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 50;">
+      <Pane layoutX="43.0" layoutY="373.0" prefHeight="47.0" prefWidth="272.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 50;" stylesheets="@../css/sidePane.css">
          <children>
             <TextField fx:id="txtSearchCustomers" layoutX="14.0" layoutY="2.0" onAction="#txtSearchCustomersOnAction" prefHeight="43.0" prefWidth="165.0" promptText="Search Contact" style="-fx-background-color: transparent;" />
             <JFXButton layoutX="185.0" layoutY="8.0" onAction="#btnSearchCustomersOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-radius: 20;" styleClass="sale" stylesheets="@../css/style.css" text="Search" textFill="WHITE" />

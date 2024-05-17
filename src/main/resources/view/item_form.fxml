@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="rootNode" prefHeight="890.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chama.controller.BrandNewItemFormController">
    <children>
-      <AnchorPane layoutX="26.0" layoutY="82.0" prefHeight="391.0" prefWidth="1032.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../css/sidePane.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="82.0">
+      <AnchorPane layoutX="26.0" layoutY="82.0" prefHeight="391.0" prefWidth="1032.0" style="-fx-background-color: #e8e8e8; -fx-background-radius: 20;" stylesheets="@../css/sidePane.css" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="82.0">
          <children>
             <TextField fx:id="txtQty" layoutX="587.0" layoutY="181.0" onAction="#txtQtyOnAction" onKeyReleased="#txtQtyOnKeyRelesed" prefHeight="28.0" prefWidth="60.0" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css" />
             <Label layoutX="526.0" layoutY="183.0" prefHeight="21.0" prefWidth="48.0" text="Qty :">

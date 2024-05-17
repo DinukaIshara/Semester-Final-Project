@@ -121,8 +121,8 @@ public class CustomerFormController {
                 boolean isSaved = CustomerRepo.save(customer);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
-                    clearFields();
                     initialize();
+                    clearFields();
                 }
             }else{
                 new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
@@ -148,8 +148,8 @@ public class CustomerFormController {
                 boolean isUpdated = CustomerRepo.update(customer);
                 if(isUpdated) {
                     new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
-                    clearFields();
                     initialize();
+                    clearFields();
                 }
             }else{
                 new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
@@ -183,6 +183,7 @@ public class CustomerFormController {
         txtNIC.setText("");
         txtTel.setText("");
         txtEmail.setText("");
+        txtSearchCustomers.setText("");
     }
 
     @FXML
@@ -205,6 +206,7 @@ public class CustomerFormController {
             for (String tel : telList) {
                 obList.add(tel);
             }
+
             TextFields.bindAutoCompletion(txtSearchCustomers, obList); // Set Data List in Text Field
 
         } catch (SQLException e) {

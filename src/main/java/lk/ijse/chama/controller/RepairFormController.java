@@ -219,6 +219,7 @@ public class RepairFormController {
         txtCustomerTel.setText("");
         lblCustomerId.setText("");
         lblCustomerName.setText("");
+        txtSearchRepair.setText("");
 
     }
 
@@ -352,12 +353,22 @@ public class RepairFormController {
         return true;
     }
 
+    public boolean isIdValidate(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.RPID,txtRepairId)) return false;
+
+        return true;
+    }
+
     public void btnBillOnAction(ActionEvent actionEvent) throws Exception {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/RepairReport.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
         Map<String,Object> data = new HashMap<>();
-        data.put("repId",txtRepairId.getText());
+        if(isIdValidate()) {
+            data.put("repId", txtRepairId.getText());
+        }else{
+            new Alert(Alert.AlertType.INFORMATION, "Repair Id you entered is incorrect").show();
+        }
 
         JasperPrint jasperPrint =
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());

@@ -241,6 +241,7 @@ public class EmployeeFormController {
         txtEmail.setText("");
         txtSallary.setText("");
         ImgView.setImage(null);
+        txtSearchEmployee.setText("");
     }
 
     public void btnImportImgOnAction() { // Search Image Path in Your PC
@@ -383,14 +384,23 @@ public class EmployeeFormController {
         return true;
     }
 
+    public boolean isIdValidate(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.EID,txtId)) return false;
+
+        return true;
+    }
+
     // Employee Report Generate ----------------------------------------------------------------------------
     public void btnEmployeeReportOnAction(ActionEvent actionEvent) throws JRException, SQLException {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/EmployeeReport.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
         Map<String,Object> data = new HashMap<>();
-        data.put("emp_id",txtId.getText());
-
+        if(isIdValidate()) {
+            data.put("emp_id", txtId.getText());
+        } else{
+            new Alert(Alert.AlertType.INFORMATION, "Employee Id you entered is incorrect").show();
+        }
         JasperPrint jasperPrint =
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint,false);

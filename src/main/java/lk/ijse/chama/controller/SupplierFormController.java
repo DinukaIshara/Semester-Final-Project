@@ -272,6 +272,12 @@ public class SupplierFormController {
         return true;
     }
 
+    public boolean isIdValidate(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.SID,txtSupId)) return false;
+
+        return true;
+    }
+
     // Supplier Report -----------------------------------------------------------------------------------------------------------
     @FXML
     void btnSupplierReportOnAction(ActionEvent event) throws Exception {
@@ -279,7 +285,11 @@ public class SupplierFormController {
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
         Map<String,Object> data = new HashMap<>();
-        data.put("supId",txtSupId.getText());
+        if(isIdValidate()) {
+            data.put("supId", txtSupId.getText());
+        }else{
+            new Alert(Alert.AlertType.INFORMATION, "Supplier Id you entered is incorrect").show();
+        }
 
         JasperPrint jasperPrint =
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());

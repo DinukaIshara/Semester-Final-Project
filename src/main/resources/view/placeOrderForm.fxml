@@ -93,7 +93,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblTrId" layoutX="327.0" layoutY="222.0" textFill="#0066ff">
+            <Label fx:id="lblTrId" layoutX="293.0" layoutY="222.0" textFill="#0066ff">
                <font>
                   <Font size="18.0" />
                </font>
@@ -103,12 +103,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblTransportCost" layoutX="508.0" layoutY="221.0" textFill="#0066ff">
+            <Label fx:id="lblTransportCost" layoutX="445.0" layoutY="221.0" textFill="#0066ff">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="scrollPane" layoutX="70.0" layoutY="331.0" prefHeight="509.0" prefWidth="516.0" styleClass="transparent" stylesheets="@../css/style.css">
+            <ScrollPane fx:id="scrollPane" layoutX="76.0" layoutY="331.0" prefHeight="509.0" prefWidth="509.0" styleClass="transparent" stylesheets="@../css/style.css">
                <content>
                   <GridPane fx:id="gridPane" prefHeight="18.0" prefWidth="61.0">
                     <rowConstraints>
@@ -126,6 +126,11 @@
                   <JFXButton layoutX="185.0" layoutY="8.0" onAction="#btnItemNameSearchOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-radius: 20;" styleClass="sale" stylesheets="@../css/style.css" text="Search" textFill="WHITE" />
                </children>
             </Pane>
+            <JFXButton buttonType="RAISED" layoutX="571.0" layoutY="183.0" onAction="#btnAddLocationOnAction" style="-fx-background-color: green;" text="+" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
          </children></AnchorPane>
       <AnchorPane layoutX="685.0" layoutY="21.0" prefHeight="850.0" prefWidth="373.0" style="-fx-background-color: #e8e8e8 #e8e8e8; -fx-background-radius: 15;" styleClass="shadow" stylesheets="@../css/sidePane.css">
          <children>
@@ -143,7 +148,7 @@
                   <Font name="Ubuntu" size="18.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="cmbPaymentMethod" layoutX="207.0" layoutY="692.0" onAction="#cmbPaymentMethod" prefHeight="24.0" prefWidth="140.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
+            <JFXComboBox fx:id="cmbPaymentMethod" layoutX="207.0" layoutY="692.0" prefHeight="24.0" prefWidth="140.0" styleClass="blue-text-Field" stylesheets="@../css/sidePane.css" />
             <Label layoutX="125.0" layoutY="735.0" text="Total ">
                <font>
                   <Font name="Ubuntu" size="18.0" />
@@ -161,7 +166,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="addToCartItemRootNode" layoutX="17.0" layoutY="22.0" prefHeight="355.0" prefWidth="334.0" style="-fx-background-color: white; -fx-background-radius: 20;" styleClass="shadow" stylesheets="@../css/sidePane.css">
+            <AnchorPane fx:id="addToCartItemRootNode" layoutX="17.0" layoutY="22.0" prefHeight="355.0" prefWidth="334.0" style="-fx-background-color: white; -fx-background-radius: 20;" stylesheets="@../css/sidePane.css">
                <children>
                   <Label layoutX="191.0" layoutY="255.0" text="Qty:">
                      <font>

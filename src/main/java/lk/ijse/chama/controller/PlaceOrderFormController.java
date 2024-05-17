@@ -253,8 +253,6 @@ public class PlaceOrderFormController {
                 getLastOrderId();
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
                 clear();
-            }else{
-                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -371,15 +369,6 @@ public class PlaceOrderFormController {
 
     }
 
-    @FXML
-    void cmbPaymentMethod(ActionEvent event) {
-        try {
-            btnPlaceOrderOnAction();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void getItemName() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
@@ -469,6 +458,12 @@ public class PlaceOrderFormController {
         }
     }
 
+    public void btnAddLocationOnAction(ActionEvent actionEvent) throws IOException {
+        AnchorPane supRootNode = FXMLLoader.load(this.getClass().getResource("/view/transport_form.fxml"));
+        rootNode.getChildren().clear();
+        rootNode.getChildren().add(supRootNode);
+    }
+
     private void getPMethod() {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
@@ -476,11 +471,6 @@ public class PlaceOrderFormController {
         obList.add("Card");
 
         cmbPaymentMethod.setItems(obList);
-
-    }
-
-    @FXML
-    void cmbTransportIdOnAction(ActionEvent actionEvent) {
 
     }
 

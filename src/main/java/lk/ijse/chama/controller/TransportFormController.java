@@ -127,20 +127,21 @@ public class TransportFormController {
 
         Transport transport = new Transport(trId,vehicalNo,driverName,location,cost);
 
+        //if(isValidate()) {
         try {
-            //if(isValidate()) {
+
                 boolean isSaved = TransportRepo.save(transport);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Transport saved!").show();
                     clearFields();
                     initialize();
                 }
-            /*}else{
-                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
-            }*/
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        /*}else{
+            new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+        }*/
     }
 
     @FXML
@@ -353,9 +354,9 @@ public class TransportFormController {
     }
 
     public boolean isValidate(){
-        //if (!Regex.setTextColor(lk.ijse.chama.util.TextField.TID,txtId))return false;
-        //if (!Regex.setTextColor(lk.ijse.chama.util.TextField.VEHICALNO,txtVehicalNo))return false;
-        //if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtCost))return false;
+        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.TID,txtId))return false;
+        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.VEHICALNO,txtVehicalNo))return false;
+        if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtCost))return false;
 
         return false;
     }

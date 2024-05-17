@@ -267,7 +267,9 @@ public class BrandNewItemFormController {
         txtSupplierId.setText("");
         lblSupCompanyName.setText("");
         itemImage.setImage(null);
+        txtSearchItemName.setText("");
 
+        txtItemId.requestFocus();
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) { // Clear Text Field Data
@@ -520,6 +522,12 @@ public class BrandNewItemFormController {
         if(!Regex.setTextColor(lk.ijse.chama.util.TextField.IID,txtItemId))return false;
         if (!Regex.setTextColor(lk.ijse.chama.util.TextField.QTY,txtQty)) return false;
         if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PRICE,txtUnitPrice)) return false;
+        return true;
+    }
+
+    public boolean isIdValidate(){
+        if(!Regex.setTextColor(lk.ijse.chama.util.TextField.IID,txtItemId)) return false;
+
         return true;
     }
 }
