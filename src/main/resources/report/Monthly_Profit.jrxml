@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Monthly_Profit" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cf5f6980-c0af-4884-bf8f-bb92f39d1069">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (18)"/>
+	<queryString language="SQL">
+		<![CDATA[WITH MonthlySalesRevenue AS (
+    SELECT 
+        DATE_FORMAT(o.order_date, '%Y-%m') AS month,
+        SUM(od.qty * od.unit_price) AS total_revenue
+    FROM 
+        orders o
+    JOIN 
+        order_detail od ON o.order_id = od.order_id
+    GROUP BY 
+        DATE_FORMAT(o.order_date, '%Y-%m')
+),
+MonthlyCosts AS (
+    SELECT 
+        DATE_FORMAT(o.order_date, '%Y-%m') AS month,
+        SUM(od.qty * isd.unit_price) AS total_cost
+    FROM 
+        orders o
+    JOIN 
+        order_detail od ON o.order_id = od.order_id
+    JOIN 
+        item_supplier_detail isd ON od.item_id = isd.item_id
+    GROUP BY 
+        DATE_FORMAT(o.order_date, '%Y-%m')
+)
+SELECT 
+    sr.month,
+    sr.total_revenue,
+    coalesce(mc.total_cost, 0) AS total_cost,
+    sr.total_revenue - coalesce(mc.total_cost, 0) AS profit
+FROM 
+    MonthlySalesRevenue sr
+LEFT JOIN 
+    MonthlyCosts mc ON sr.month = mc.month
+ORDER BY 
+    sr.month;]]>
+	</queryString>
+	<field name="month" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="month"/>
+		<property name="com.jaspersoft.studio.field.label" value="month"/>
+	</field>
+	<field name="total_revenue" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_revenue"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_revenue"/>
+	</field>
+	<field name="total_cost" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_cost"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_cost"/>
+	</field>
+	<field name="profit" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="profit"/>
+		<property name="com.jaspersoft.studio.field.label" value="profit"/>
+	</field>
+	<group name="month">
+		<groupExpression><![CDATA[$F{month}]]></groupExpression>
+	</group>
+	<group name="total_revenue">
+		<groupExpression><![CDATA[$F{total_revenue}]]></groupExpression>
+	</group>
+	<group name="total_cost">
+		<groupExpression><![CDATA[$F{total_cost}]]></groupExpression>
+	</group>
+	<group name="profit">
+		<groupExpression><![CDATA[$F{profit}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="151" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="-21" width="595" height="170" uuid="a81bfd82-ef57-4837-bc9c-91a91b672bf4"/>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/chama invoice sheps new.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="117" splitType="Stretch">
+			<image>
+				<reportElement x="332" y="-25" width="191" height="109" uuid="d49c0369-86f3-4462-a572-4980a05cd516"/>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/Address Chama.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="40" y="0" width="130" height="30" backcolor="#05D5FF" uuid="bce8f238-254e-4c01-8f10-1a54bfdae3ba">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="08ba39b8-85a1-4682-996a-63f2a8618b83"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Month]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="169" y="0" width="104" height="30" backcolor="#05D5FF" uuid="74401a72-9b4f-4235-b336-4885d81de21d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f501ae77-5a28-441b-91d9-8ff18b944c29"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revenue]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="272" y="0" width="123" height="30" backcolor="#05D5FF" uuid="6989c898-e556-4a4c-833d-eee004f70152">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="555d3a95-0493-4c95-9d5a-d6d5e329ea84"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="394" y="0" width="123" height="30" backcolor="#05D5FF" uuid="8a8dcf63-df1a-4e86-a13b-ec3167399d46">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43948508-1a06-426b-b36e-a4d88ffb19b7"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profit]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="1" width="130" height="30" uuid="ff828833-11fd-4a3c-8011-2093aa3b9c56">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="08ba39b8-85a1-4682-996a-63f2a8618b83"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{month}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="169" y="1" width="103" height="30" uuid="46689506-a219-4a79-ab51-9e5162975c3f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f501ae77-5a28-441b-91d9-8ff18b944c29"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_revenue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="1" width="125" height="30" uuid="ea3697de-7d27-492d-8f31-8f59eac398c4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="555d3a95-0493-4c95-9d5a-d6d5e329ea84"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="394" y="1" width="123" height="30" uuid="34e44a4d-97d3-4e42-a64b-c83f149f94f8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43948508-1a06-426b-b36e-a4d88ffb19b7"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{profit}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="62" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="-2" width="595" height="40" uuid="a97edece-69c6-45cf-a644-025d51a85024"/>
+				<imageExpression><![CDATA["/home/ijse/Desktop/JDBC/chamaComputersNew/src/main/resources/report img/fotter chama computers.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="32" y="40" width="210" height="18" uuid="de9c395c-2c19-4d07-b36e-0b76ecadd12d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[110, 01/01 Veyangoda Rd, Minuwangoda ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="40" width="100" height="18" uuid="f68947e0-d6d1-4511-a9a2-704e35831d08"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ 077 722 3363]]></text>
+			</staticText>
+			<image>
+				<reportElement x="254" y="37" width="27" height="23" uuid="6e40dc8d-9585-441f-82d8-56e6706582d3"/>
+				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-phone-48.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="383" y="35" width="34" height="27" uuid="fc29f125-4ede-4d8f-b2b4-6b853ebcceb4"/>
+				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-website-48.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="396" y="40" width="164" height="18" uuid="d6118417-840f-4351-b7c0-71c3624e0400"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[www.chamacomputers.lk]]></text>
+			</staticText>
+			<image>
+				<reportElement x="9" y="37" width="21" height="24" uuid="10e73643-47f2-4fac-b7e0-02acc624b4be"/>
+				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-location-24.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

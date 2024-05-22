@@ -11,9 +11,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import lk.ijse.chama.QrReader;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.Employee;
+import lk.ijse.chama.model.QrResult;
 import lk.ijse.chama.model.tm.EmployeeTm;
+import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.EmployeeRepo;
 import lk.ijse.chama.util.Regex;
 import net.sf.jasperreports.engine.*;
@@ -28,6 +31,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class EmployeeFormController {
 
@@ -101,10 +105,19 @@ public class EmployeeFormController {
 
     private Image image;
 
+    private QrReader qr;
+
+    private QrResult qrResultModel;
+
+    public EmployeeFormController(){
+        qrResultModel = new QrResult();
+    }
+
     public void initialize() {
         setCellValueFactory();
         loadAllEmployee();
         getEmpId();
+        getCurrentId();
     }
 
     private void setCellValueFactory() { // Set EmployeeTm Data in column
@@ -179,48 +192,63 @@ public class EmployeeFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        String id = txtId.getText();
-        String name = txtName.getText();
-        String address = txtAddress.getText();
-        String nic = txtNIC.getText();
-        String position = txtPosition.getText();
-        String contact = txtTel.getText();
-        Date dob = Date.valueOf(txtDOB.getValue());
-        Date dateRegistration = Date.valueOf(txtEnrollDate.getValue());
-        String email = txtEmail.getText();
-        double salary = Double.parseDouble(txtSallary.getText());
-        String path = image.getUrl();
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        Employee employee = new Employee(id, name, address, nic, position, contact , dob, dateRegistration, email, salary, path); // Set Employee Data
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Update Employee?", yes, no).showAndWait();
 
-        try {
-            if(isValidate()) { // Validated
-                boolean isUpdated = EmployeeRepo.update(employee);
-                if (isUpdated) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Employee updated!").show();
-                    initialize();
+        if (type.orElse(no) == yes) {
+            String id = txtId.getText();
+            String name = txtName.getText();
+            String address = txtAddress.getText();
+            String nic = txtNIC.getText();
+            String position = txtPosition.getText();
+            String contact = txtTel.getText();
+            Date dob = Date.valueOf(txtDOB.getValue());
+            Date dateRegistration = Date.valueOf(txtEnrollDate.getValue());
+            String email = txtEmail.getText();
+            double salary = Double.parseDouble(txtSallary.getText());
+            String path = image.getUrl();
+
+            Employee employee = new Employee(id, name, address, nic, position, contact, dob, dateRegistration, email, salary, path); // Set Employee Data
+
+            try {
+                if (isValidate()) {
+                    boolean isUpdated = EmployeeRepo.update(employee);
+                    if (isUpdated) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Employee updated!").show();
+                        initialize();
+                        clearFields();
+                    }
+                } else {
+                    new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
                 }
-            }else{
-                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        String id = txtId.getText();
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        try {
-            boolean isDeleted = EmployeeRepo.delete(id); // Delete Employee Data
-            if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Employee deleted!").show();
-                clearFields();
-                initialize();
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Delete Employee?", yes, no).showAndWait();
+
+        if (type.orElse(no) == yes) {
+            String id = txtId.getText();
+
+            try {
+                boolean isDeleted = EmployeeRepo.delete(id); // Delete Employee Data
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Employee deleted!").show();
+                    clearFields();
+                    initialize();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -242,6 +270,37 @@ public class EmployeeFormController {
         txtSallary.setText("");
         ImgView.setImage(null);
         txtSearchEmployee.setText("");
+    }
+
+    private String getCurrentId() {
+        String nextId = "";
+
+        try {
+            String currentId = EmployeeRepo.getLastId();
+
+            nextId = generateNextId(currentId);
+            txtId.setText(nextId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return nextId;
+    }
+
+    private String generateNextId(String currentId) {
+        if(currentId != null) {
+            String[] split = currentId.split("E");  //" ", "2"
+            int idNum = Integer.parseInt(split[1]);
+
+            if(idNum >= 1){
+                return "E" + 0 + 0 + ++idNum;
+            }else if(idNum >= 9){
+                return "E" + 0 + ++idNum;
+            } else if(idNum >= 99){
+                return "E" + ++idNum;
+            }
+        }
+        return "E001";
     }
 
     public void btnImportImgOnAction() { // Search Image Path in Your PC
@@ -301,6 +360,22 @@ public class EmployeeFormController {
         } else {
             new Alert(Alert.AlertType.INFORMATION, "customer not found!").show();
         }
+    }
+
+    public void btnScanOnAction(ActionEvent actionEvent) {
+        qr = new QrReader(qrResultModel);
+        new Thread(() -> {
+            while (qrResultModel.getResult() == null) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            txtSearchEmployee.setText(qrResultModel.getResult());
+        }).start();
+
+        txtSearchEmployee.requestFocus();
     }
 
     @FXML

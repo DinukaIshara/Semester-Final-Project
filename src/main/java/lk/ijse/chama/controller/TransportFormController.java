@@ -9,10 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -22,12 +19,14 @@ import lk.ijse.chama.model.Location;
 import lk.ijse.chama.model.Transport;
 import lk.ijse.chama.model.tm.TransportTm;
 import lk.ijse.chama.repository.LocationRepo;
+import lk.ijse.chama.repository.SupplierRepo;
 import lk.ijse.chama.repository.TransportRepo;
 import lk.ijse.chama.util.Regex;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class TransportFormController {
 
@@ -76,6 +75,7 @@ public class TransportFormController {
         loadAllTransport();
         getPlaces();
         getLoaction();
+        getCurrentId();
 
         try {
             MapView mapView = crateMapView();
@@ -146,16 +146,22 @@ public class TransportFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        String trId = txtId.getText();
-        String vehicalNo = txtVehicalNo.getText();
-        String driverName = txtDriverName.getText();
-        String location = txtLocation.getText();
-        double cost = Double.parseDouble(txtCost.getText());
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        Transport transport = new Transport(trId,vehicalNo,driverName,location,cost);
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Update Transport?", yes, no).showAndWait();
 
-        try {
-            //if(isValidate()) {
+        if (type.orElse(no) == yes) {
+            String trId = txtId.getText();
+            String vehicalNo = txtVehicalNo.getText();
+            String driverName = txtDriverName.getText();
+            String location = txtLocation.getText();
+            double cost = Double.parseDouble(txtCost.getText());
+
+            Transport transport = new Transport(trId, vehicalNo, driverName, location, cost);
+
+            try {
+                //if(isValidate()) {
                 boolean isSaved = TransportRepo.update(transport);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Transport updated!").show();
@@ -165,24 +171,32 @@ public class TransportFormController {
             /*}else{
                 new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
             }*/
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        String id = txtId.getText();
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        try {
-            boolean isDeleted = TransportRepo.delete(id);
-            if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Transport deleted!").show();
-                clearFields();
-                initialize();
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Delete Supplier?", yes, no).showAndWait();
+
+        if (type.orElse(no) == yes) {
+            String id = txtId.getText();
+
+            try {
+                boolean isDeleted = TransportRepo.delete(id);
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Transport deleted!").show();
+                    clearFields();
+                    initialize();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -197,6 +211,38 @@ public class TransportFormController {
         txtVehicalNo.setText("");
         txtLocation.setText("");
         txtCost.setText("");
+        txtSearchLocation.setText("");
+    }
+
+    private String getCurrentId() {
+        String nextId = "";
+
+        try {
+            String currentId = TransportRepo.getLastId();
+
+            nextId = generateNextId(currentId);
+            txtId.setText(nextId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return nextId;
+    }
+
+    private String generateNextId(String currentId) {
+        if(currentId != null) {
+            String[] split = currentId.split("T");  //" ", "2"
+            int idNum = Integer.parseInt(split[1]);
+
+            if(idNum >= 1){
+                return "T" + 0 + 0 + ++idNum;
+            }else if(idNum >= 9){
+                return "T" + 0 + ++idNum;
+            } else if(idNum >= 99){
+                return "T" + ++idNum;
+            }
+        }
+        return "T001";
     }
 
     public void getPlaces(){  // Location Table place get
@@ -219,14 +265,13 @@ public class TransportFormController {
     public MapView crateMapView() throws SQLException {
         MapView mapView = new MapView();
         List<String> validLocations = LocationRepo.getPlace();
-        if (validLocations.contains(txtLocation.getText())) { // if (txtLocation.getText().equals("Colombo")|| txtLocation.getText().equals("Kandy") || txtLocation.getText().equals("Kalutara"))
+        if (validLocations.contains(txtLocation.getText())) {
             Location location = LocationRepo.searchByPath(txtLocation.getText());
             System.out.println(location.getLatitude());
             System.out.println(location.getLongitude());
             eiffelPoint = new MapPoint(location.getLatitude(), location.getLongitude());
 
             mapView.setPrefSize(446, 487);
-            mapView.addLayer(new CustomLayer());
             mapView.setZoom(15);
             mapView.flyTo(0, eiffelPoint, 0.1);
 
@@ -235,7 +280,6 @@ public class TransportFormController {
         }else if (!(txtLocation.getText().equals(null))) {
 
             mapView.setPrefSize(446, 487);
-            mapView.addLayer(new CustomLayer());
             mapView.setZoom(15);
             mapView.flyTo(0, eiffelPoint, 0.1);
 
@@ -243,38 +287,6 @@ public class TransportFormController {
             return mapView;
         }
         return mapView;
-    }
-
-    public class CustomLayer extends MapLayer {
-        private final Node mark;
-
-        public CustomLayer(){
-            mark = new Circle(5, Color.RED);
-            getChildren().add(mark);
-        }
-
-        @Override
-        protected void layoutLayer(){
-            try {
-                List<String> validLocations = LocationRepo.getPlace();
-                if (validLocations.contains(txtLocation.getText())) {
-                    Location location = LocationRepo.searchByPath(txtLocation.getText());
-                    eiffelPoint = new MapPoint(location.getLatitude(), location.getLongitude());
-
-                    Point2D point2D = getMapPoint(eiffelPoint.getLatitude(), eiffelPoint.getLatitude());
-                    mark.setTranslateX(point2D.getX());
-                    mark.setTranslateY(point2D.getY());
-
-                } else if (!(txtLocation.getText().equals(null))) {
-                    Point2D point2D = getMapPoint(eiffelPoint.getLatitude(), eiffelPoint.getLatitude());
-                    mark.setTranslateX(point2D.getX());
-                    mark.setTranslateY(point2D.getY());
-                }
-            }catch (SQLException e){
-                throw new RuntimeException(e);
-            }
-        }
-
     }
 
     public void txtSearchLocationOnAction(ActionEvent actionEvent) {

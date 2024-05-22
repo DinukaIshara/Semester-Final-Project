@@ -10,12 +10,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.tm.CustomerTm;
+import lk.ijse.chama.repository.BrandNewItemRepo;
 import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.util.Regex;
 import org.controlsfx.control.textfield.TextFields;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class CustomerFormController {
 
@@ -65,14 +67,15 @@ public class CustomerFormController {
     private TextField txtSearchCustomers;
 
 
-    public void initialize() { // The method that is called first when the page is loaded
+    public void initialize() {
         setCellValueFactory();
         loadAllCustomers();
         getCustomerTel();
+        getCurrentId();
 
     }
 
-    private void setCellValueFactory() {  // Set CustomerTm Data in column
+    private void setCellValueFactory() {
         colId.setCellValueFactory(new PropertyValueFactory<>("custId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("cName"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("cAddress"));
@@ -81,7 +84,7 @@ public class CustomerFormController {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("cEmail"));
     }
 
-    private void loadAllCustomers() { // Load All Customers In CustomerTM Table
+    private void loadAllCustomers() {
         ObservableList<CustomerTm> obList = FXCollections.observableArrayList();
 
         try {
@@ -106,7 +109,7 @@ public class CustomerFormController {
     }
 
     @FXML
-    void btnSaveOnAction(ActionEvent event) { // Save Customer
+    void btnSaveOnAction(ActionEvent event) {
         String id = txtId.getText();
         String name = txtName.getText();
         String address = txtAddress.getText();
@@ -114,10 +117,10 @@ public class CustomerFormController {
         String contact = txtTel.getText();
         String email = txtEmail.getText();
 
-        Customer customer = new Customer(id, name, address, nic, contact , email ); // Set Customer Data
+        Customer customer = new Customer(id, name, address, nic, contact , email );
 
         try {
-            if(isValidate()) { // Add Validation
+            if(isValidate()) {
                 boolean isSaved = CustomerRepo.save(customer);
                 if (isSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
@@ -134,45 +137,59 @@ public class CustomerFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) { // Update Customer
-        String id = txtId.getText();
-        String name = txtName.getText();
-        String address = txtAddress.getText();
-        String nic = txtNIC.getText();
-        String contact = txtTel.getText();
-        String email = txtEmail.getText();
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        Customer customer = new Customer(id, name, address, nic, contact , email); // Set Customer Data
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Update Customer?", yes, no).showAndWait();
 
-        try {
-            if(isValidate()){ // Add Validation
-                boolean isUpdated = CustomerRepo.update(customer);
-                if(isUpdated) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
-                    initialize();
-                    clearFields();
+        if (type.orElse(no) == yes) {
+            String id = txtId.getText();
+            String name = txtName.getText();
+            String address = txtAddress.getText();
+            String nic = txtNIC.getText();
+            String contact = txtTel.getText();
+            String email = txtEmail.getText();
+
+            Customer customer = new Customer(id, name, address, nic, contact, email); // Set Customer Data
+
+            try {
+                if (isValidate()) { // Add Validation
+                    boolean isUpdated = CustomerRepo.update(customer);
+                    if (isUpdated) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
+                        initialize();
+                        clearFields();
+                    }
+                } else {
+                    new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
                 }
-            }else{
-                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
-            }
 
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
         }
     }
 
     @FXML
     void btnDeleteOnAction() { // Delete Customers
-        String id = txtId.getText();
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        try {
-            boolean isDeleted = CustomerRepo.delete(id);
-            if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "customer deleted!").show();
-                clearFields();
-                initialize();
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Delete Customer?", yes, no).showAndWait();
+
+        if (type.orElse(no) == yes) {
+            String id = txtId.getText();
+
+            try {
+                boolean isDeleted = CustomerRepo.delete(id);
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "customer deleted!").show();
+                    clearFields();
+                    initialize();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -189,6 +206,37 @@ public class CustomerFormController {
     @FXML
     void btnClearOnAction(ActionEvent event) {
         clearFields();
+    }
+
+    private String getCurrentId() {
+        String nextId = "";
+
+        try {
+            String currentId = CustomerRepo.getLastId();
+
+            nextId = generateNextId(currentId);
+            txtId.setText(nextId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return nextId;
+    }
+
+    private String generateNextId(String currentId) {
+        if(currentId != null) {
+            String[] split = currentId.split("C");  //" ", "2"
+            int idNum = Integer.parseInt(split[1]);
+
+            if(idNum >= 1){
+                return "C" + 0 + 0 + ++idNum;
+            }else if(idNum >= 9){
+                return "C" + 0 + ++idNum;
+            } else if(idNum >= 99){
+                return "C" + ++idNum;
+            }
+        }
+        return "C001";
     }
 
     @FXML

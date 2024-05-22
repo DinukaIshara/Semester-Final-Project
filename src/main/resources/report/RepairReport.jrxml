@@ -299,11 +299,11 @@ WHERE  r.rep_id = $P{repId}]]>
 		<band height="66" splitType="Stretch">
 			<image>
 				<reportElement x="-20" y="2" width="595" height="40" uuid="c0707fdc-f291-4bde-81de-d42b45d6b5fc"/>
-				<imageExpression><![CDATA["/home/ijse/Desktop/JDBC/chamaComputersNew/src/main/resources/report img/fotter chama computers.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/fotter chama computers.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="9" y="41" width="21" height="24" uuid="9f337b20-7e45-4a32-9699-8992ff3654d8"/>
-				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-location-24.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/location.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="32" y="44" width="210" height="18" uuid="761a9cae-dee8-4709-9a2a-32aeea2f94d1"/>
@@ -312,7 +312,7 @@ WHERE  r.rep_id = $P{repId}]]>
 			</staticText>
 			<image>
 				<reportElement x="254" y="41" width="27" height="23" uuid="2180fda0-1999-4c29-9b7b-b07168b0274e"/>
-				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-phone-48.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/phone.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="269" y="44" width="100" height="18" uuid="b894f3ef-3c37-448b-9991-8711ee23a7c1"/>
@@ -321,7 +321,7 @@ WHERE  r.rep_id = $P{repId}]]>
 			</staticText>
 			<image>
 				<reportElement x="383" y="39" width="34" height="27" uuid="4d25d3d1-085a-4d95-ac24-4391bd39a6c9"/>
-				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-website-48.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/website.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="396" y="44" width="164" height="18" uuid="d91f2a43-91ab-4731-9660-e77e9a9a4093"/>

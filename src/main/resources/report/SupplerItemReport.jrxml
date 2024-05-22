@@ -295,7 +295,7 @@ WHERE s.sup_id = $P{supId}]]>
 		<band height="73" splitType="Stretch">
 			<image>
 				<reportElement x="-20" y="8" width="595" height="40" uuid="5834da96-fe5d-4a06-a08a-3e495c2709ef"/>
-				<imageExpression><![CDATA["/home/ijse/Desktop/JDBC/chamaComputersNew/src/main/resources/report img/fotter chama computers.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/fotter chama computers.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="32" y="50" width="210" height="18" uuid="fc9a4694-b83c-4459-9d1a-7034e4c736a2"/>
@@ -304,11 +304,11 @@ WHERE s.sup_id = $P{supId}]]>
 			</staticText>
 			<image>
 				<reportElement x="9" y="47" width="21" height="24" uuid="31a418b1-2a0e-4d0c-b59d-8c6c4be4d587"/>
-				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-location-24.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/location.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="254" y="47" width="27" height="23" uuid="ccaca4bb-6f4e-4ac9-abde-28f3db4c568a"/>
-				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-phone-48.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/phone.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="269" y="50" width="100" height="18" uuid="961e923a-5b87-4d50-8408-796263ce5c7c"/>
@@ -322,7 +322,7 @@ WHERE s.sup_id = $P{supId}]]>
 			</staticText>
 			<image>
 				<reportElement x="383" y="45" width="34" height="27" uuid="cec9f287-39b3-4821-9904-30198f740a8d"/>
-				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-website-48.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/website.png"]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>

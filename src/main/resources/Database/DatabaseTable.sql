@@ -7,8 +7,8 @@ use chama_computers;
 
 CREATE TABLE employee(
                          emp_id VARCHAR(5) PRIMARY KEY,
-                         name VARCHAR(20),
-                         address VARCHAR(20),
+                         name TEXT,
+                         address TEXT,
                          nic VARCHAR(12),
                          position VARCHAR(20),
                          contact VARCHAR(10),
@@ -20,16 +20,16 @@ CREATE TABLE employee(
 );
 
 CREATE TABLE users(
-                      user_name VARCHAR(10) PRIMARY KEY,
-                      password VARCHAR(15)
+                      user_name VARCHAR(20) PRIMARY KEY,
+                      password TEXT
 );
 
 CREATE TABLE customer(
                          cust_id VARCHAR(5) PRIMARY KEY,
                          c_name VARCHAR(20),
                          c_address VARCHAR(20),
-                         c_nic VARCHAR(12),
-                         contact_no VARCHAR(10),
+                         c_nic VARCHAR(12) unique,
+                         contact_no VARCHAR(10) unique,
                          email VARCHAR(40)
 );
 
@@ -44,15 +44,15 @@ CREATE TABLE transport(
 
 
 CREATE TABLE item(
-                               item_id VARCHAR(5) PRIMARY KEY,
-                               name VARCHAR(20),
-                               category VARCHAR(20),
-                               brand VARCHAR(20),
-                               date DATE,
-                               description TEXT,
-                               warranty VARCHAR(15),
-                               type VARCHAR(10),
-                               path TEXT
+                     item_id VARCHAR(5) PRIMARY KEY,
+                     name VARCHAR(20),
+                     category VARCHAR(20),
+                     brand VARCHAR(20),
+                     date DATE,
+                     description TEXT,
+                     warranty VARCHAR(15),
+                     type VARCHAR(10),
+                     path TEXT
 );
 
 CREATE TABLE orders(
@@ -68,8 +68,8 @@ CREATE TABLE orders(
 
 CREATE TABLE supplier(
                          sup_id VARCHAR(5) PRIMARY KEY,
-                         company_name VARCHAR(20),
-                         person_name VARCHAR(20),
+                         company_name TEXT,
+                         person_name TEXT,
                          contact_no INT,
                          location VARCHAR(20),
                          email VARCHAR(40)
@@ -89,12 +89,12 @@ CREATE TABLE repair(
 
 
 CREATE TABLE order_detail(
-                                  order_id VARCHAR(5),
-                                  CONSTRAINT FOREIGN KEY(order_id) REFERENCES orders(order_id) on Delete Cascade on Update Cascade,
-                                  item_id VARCHAR(5),
-                                  CONSTRAINT FOREIGN KEY(item_id) REFERENCES item(item_id) on Delete Cascade on Update Cascade,
-                                  qty VARCHAR(10),
-                                  unit_price DECIMAL(10,2)
+                             order_id VARCHAR(5),
+                             CONSTRAINT FOREIGN KEY(order_id) REFERENCES orders(order_id) on Delete Cascade on Update Cascade,
+                             item_id VARCHAR(5),
+                             CONSTRAINT FOREIGN KEY(item_id) REFERENCES item(item_id) on Delete Cascade on Update Cascade,
+                             qty VARCHAR(10),
+                             unit_price DECIMAL(10,2)
 );
 
 

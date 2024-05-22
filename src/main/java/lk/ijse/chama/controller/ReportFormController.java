@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import lk.ijse.chama.QrReader;
 import lk.ijse.chama.db.DbConnection;
+import lk.ijse.chama.model.QrResult;
 import lk.ijse.chama.repository.BrandNewItemRepo;
 import lk.ijse.chama.repository.CustomerRepo;
 import lk.ijse.chama.repository.EmployeeRepo;
@@ -29,6 +31,10 @@ public class ReportFormController {
     private TextField txtSearchItemStockDate;
     @FXML
     private TextField txtSearchCustomerTel;
+
+    public ReportFormController(){
+        qrResultModel = new QrResult();
+    }
 
     public void initialize(){
         getCustomerTel();
@@ -75,6 +81,15 @@ public class ReportFormController {
 
         clearDate();
 
+    }
+
+    public void btnProfitOnAction(ActionEvent actionEvent) throws Exception {
+        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/report/Monthly_Profit.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        JasperPrint jasperPrint =
+                JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
     }
 
     public void clearTel(){
@@ -133,5 +148,24 @@ public class ReportFormController {
         if(!Regex.setTextColor(lk.ijse.chama.util.TextField.DATE,txtSearchItemStockDate))return false;
 
         return true;
+    }
+
+    private QrReader qr;
+    private QrResult qrResultModel;
+
+    public void btnScanOnAction(ActionEvent actionEvent) {
+        qr = new QrReader(qrResultModel);
+        new Thread(() -> {
+            while (qrResultModel.getResult() == null) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            txtSearchCustomerTel.setText(qrResultModel.getResult());
+        }).start();
+
+        txtSearchCustomerTel.requestFocus();
     }
 }

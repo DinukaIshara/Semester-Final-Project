@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.Supplier;
 import lk.ijse.chama.model.tm.SupplierTm;
+import lk.ijse.chama.repository.EmployeeRepo;
 import lk.ijse.chama.repository.SupplierRepo;
 import lk.ijse.chama.util.Regex;
 import net.sf.jasperreports.engine.*;
@@ -23,6 +24,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class SupplierFormController {
 
@@ -75,6 +77,7 @@ public class SupplierFormController {
         setCellValueFactory();
         loadAllSuppliers();
         supplierCompanyName();
+        getCurrentId();
     }
 
     private void setCellValueFactory() {
@@ -137,28 +140,35 @@ public class SupplierFormController {
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
-        String supId = txtSupId.getText();
-        String companyName = txtCompanyName.getText();
-        String personName = txtPersonName.getText();
-        String tel = txtContact.getText();
-        String location = txtLoacation.getText();
-        String email = txtEmail.getText();
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        Supplier suppler = new Supplier(supId, companyName, personName, tel, location , email );
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Update Supplier?", yes, no).showAndWait();
 
-        try {
-            if(isValidat()) {
-                boolean isSaved = SupplierRepo.update(suppler);
-                if (isSaved) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "supplier update!").show();
-                    clearFields();
-                    initialize();
+        if (type.orElse(no) == yes) {
+            String supId = txtSupId.getText();
+            String companyName = txtCompanyName.getText();
+            String personName = txtPersonName.getText();
+            String tel = txtContact.getText();
+            String location = txtLoacation.getText();
+            String email = txtEmail.getText();
+
+            Supplier suppler = new Supplier(supId, companyName, personName, tel, location, email);
+
+            try {
+                if (isValidat()) {
+                    boolean isSaved = SupplierRepo.update(suppler);
+                    if (isSaved) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "supplier update!").show();
+                        clearFields();
+                        initialize();
+                    }
+                } else {
+                    new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
                 }
-            }else{
-                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -169,6 +179,7 @@ public class SupplierFormController {
         txtContact.setText("");
         txtLoacation.setText("");
         txtEmail.setText("");
+        txtSearchSupplier.setText("");
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {
@@ -176,18 +187,56 @@ public class SupplierFormController {
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-        String id = txtSupId.getText();
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Delete Supplier?", yes, no).showAndWait();
+
+        if (type.orElse(no) == yes) {
+            String id = txtSupId.getText();
+
+            try {
+                boolean isDeleted = SupplierRepo.delete(id);
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "supplier deleted!").show();
+                    clearFields();
+                    initialize();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+        }
+    }
+
+    private String getCurrentId() {
+        String nextId = "";
 
         try {
-            boolean isDeleted = SupplierRepo.delete(id);
-            if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "supplier deleted!").show();
-                clearFields();
-                initialize();
-            }
+            String currentId = SupplierRepo.getLastId();
+
+            nextId = generateNextId(currentId);
+            txtSupId.setText(nextId);
+
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            throw new RuntimeException(e);
         }
+        return nextId;
+    }
+
+    private String generateNextId(String currentId) {
+        if(currentId != null) {
+            String[] split = currentId.split("S");  //" ", "2"
+            int idNum = Integer.parseInt(split[1]);
+
+            if(idNum >= 1){
+                return "S" + 0 + 0 + ++idNum;
+            }else if(idNum >= 9){
+                return "S" + 0 + ++idNum;
+            } else if(idNum >= 99){
+                return "S" + ++idNum;
+            }
+        }
+        return "S001";
     }
 
     public void supplierCompanyName() {

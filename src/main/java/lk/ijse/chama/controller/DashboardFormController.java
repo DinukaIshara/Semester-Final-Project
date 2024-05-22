@@ -81,13 +81,13 @@ public class DashboardFormController {
         }
     }
 
-    private void loadMostSellItemTable() { // Set Most Top 5 Sell Items in column
+    private void loadMostSellItemTable() {
         colItemName.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         colOrderCount.setCellValueFactory(new PropertyValueFactory<>("orderCount"));
         colQty.setCellValueFactory(new PropertyValueFactory<>("sumQty"));
     }
 
-    private void loadAll() { // Load Most Top 5 Sell Items in Most Sell Item TM
+    private void loadAll() {
         ObservableList<MostSellItemTm> obList = FXCollections.observableArrayList();
 
         try {
@@ -124,10 +124,10 @@ public class DashboardFormController {
             throw new RuntimeException(e);
         }
 
-        labCutCount.setText(String.valueOf(count)); // Set Customer Count
+        labCutCount.setText(String.valueOf(count));
     }
 
-    private void loadOrderCount() { // Chech Order Count
+    private void loadOrderCount() {
         int count = 0;
         try {
             List<Order> orderList = OrderRepo.getAll();
@@ -139,29 +139,29 @@ public class DashboardFormController {
             throw new RuntimeException(e);
         }
 
-        lblOrderCount.setText(String.valueOf(count)); // Set Order Count
+        lblOrderCount.setText(String.valueOf(count));
     }
 
     // Pie Chart --------------------------------------------------------------------------------------------------------------------------------------------------
     public void pieChartConnect() throws SQLException {
-        List<MostSellItemTm> itemList = DashboardRepo.getMostSellItem(); //Load Most sell Item In MostSellItemTm
+        List<MostSellItemTm> itemList = DashboardRepo.getMostSellItem();
         BrandNewItem item;
         for (MostSellItemTm sellItem : itemList) {
-            item = BrandNewItemRepo.searchById(sellItem.getItemId()); // Item Id wise Search Items
+            item = BrandNewItemRepo.searchById(sellItem.getItemId());
 
             ObservableList<PieChart.Data> pieChartData =
                     FXCollections.observableArrayList(
-                            new PieChart.Data(item.getName(), sellItem.getSumQty()) // Set Most 5 Items In Pie Chart
+                            new PieChart.Data(item.getName(), sellItem.getSumQty())
                     );
             pieChartData.forEach(data ->
                     data.nameProperty().bind(
                             Bindings.concat(
-                                    data.getName(), "amount: ", data.pieValueProperty() // Set Labels
+                                    data.getName(), "  amount: ", data.pieValueProperty()
                             )
                     )
             );
 
-            pieChart.getData().addAll(pieChartData); // Add Data In Pie Chart and Show it
+            pieChart.getData().addAll(pieChartData);
         }
     }
 
@@ -210,7 +210,7 @@ public class DashboardFormController {
             for (String date : dateList) {
                 obList.add(date);
             }
-            TextFields.bindAutoCompletion(txtOrderDate, obList); // Set Order dates In Text Field
+            TextFields.bindAutoCompletion(txtOrderDate, obList);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -221,10 +221,10 @@ public class DashboardFormController {
     void btnSearchOrderDateOnAction() throws SQLException {
         Date date = java.sql.Date.valueOf(txtOrderDate.getText());
 
-        DailyOrders dailyOrders = orderDaily(date); // Check Date and get Daily Orders Details
+        DailyOrders dailyOrders = orderDaily(date);
 
-        lblOrderCountlab.setText(String.valueOf(dailyOrders.getCountOr())); // Set Order Count For Search Date
-        lblItemQty.setText(String.valueOf(dailyOrders.getCountQty())); // Set Order Item Qty Fro  Search Date
+        lblOrderCountlab.setText(String.valueOf(dailyOrders.getCountOr()));
+        lblItemQty.setText(String.valueOf(dailyOrders.getCountQty()));
     }
 
     public void txtOrderDateOnAction(ActionEvent actionEvent) throws SQLException {

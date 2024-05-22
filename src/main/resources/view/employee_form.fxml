@@ -167,5 +167,10 @@
             <JFXButton layoutX="163.0" layoutY="8.0" onAction="#btnSearchEmployeeOnAction" prefHeight="31.0" prefWidth="77.0" style="-fx-background-radius: 20;" styleClass="sale" stylesheets="@../css/style.css" text="Search" textFill="WHITE" />
          </children>
       </Pane>
+      <JFXButton buttonType="RAISED" layoutX="314.0" layoutY="535.0" onAction="#btnScanOnAction" prefWidth="100.0" ripplerFill="BLACK" style="-fx-background-radius: 15;" styleClass="sale" stylesheets="@../css/style.css" text="Scan" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

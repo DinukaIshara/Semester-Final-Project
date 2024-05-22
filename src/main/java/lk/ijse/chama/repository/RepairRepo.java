@@ -113,4 +113,18 @@ public class RepairRepo {
 
         return null;
     }
+
+    public static String getLastId() throws SQLException {
+        String sql = "SELECT rep_id FROM repair ORDER BY CAST(SUBSTRING(rep_id, 2) AS UNSIGNED) DESC LIMIT 1;";
+
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            String Id = resultSet.getString(1);
+            return Id;
+        }
+        return null;
+    }
 }

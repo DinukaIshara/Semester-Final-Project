@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class BrandNewItemFormController {
 
@@ -104,7 +105,7 @@ public class BrandNewItemFormController {
 
     private Image image;
 
-    public void initialize() { // The method that is called first when the page is loaded
+    public void initialize() {
         getSupplierId();
         getBrand();
         getCategory();
@@ -112,9 +113,10 @@ public class BrandNewItemFormController {
         setCellValueFactory();
         loadAllItems();
         getItemName();
+        getCurrentItemId();
     }
 
-    private void setCellValueFactory() { // Set ItemTm in column
+    private void setCellValueFactory() {
         colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -124,14 +126,14 @@ public class BrandNewItemFormController {
         colSupCompany.setCellValueFactory(new PropertyValueFactory<>("supplierId"));
     }
 
-    private void loadAllItems() { // Load All Items In ItemTm Table
+    private void loadAllItems() {
         ObservableList<BrandNewItemTm> obList = FXCollections.observableArrayList();
 
         try {
             List<BrandNewItem> itemList = BrandNewItemRepo.getAll();
             List<ItemSupplierDetail> supplierDetail = ItemSupplierDetailRepo.getAll();
             List<Supplier> suppliers = SupplierRepo.getAll();
-            BrandNewItemTm tm = null;
+            BrandNewItemTm tm;
                 for(ItemSupplierDetail itemSupplier : supplierDetail) {
                     String item_name = null;
                     String item_category = null;
@@ -185,19 +187,19 @@ public class BrandNewItemFormController {
         String type = String.valueOf(cmbType.getValue());
         String path = image.getUrl();
 
-        var item = new BrandNewItem(itemId, name, category, brand, date, description, warranty, type, path); //Set Item Table Data
+        var item = new BrandNewItem(itemId, name, category, brand, date, description, warranty, type, path);
 
         itemId = txtItemId.getText();
         String supId = txtSupplierId.getText();
         int handOnQty = Integer.parseInt(txtQty.getText());
         double unitPrice = Double.parseDouble(txtUnitPrice.getText());
 
-        var itemSupplier = new ItemSupplierDetail(itemId,supId,handOnQty,unitPrice); //Set Item Supplier Table Data
+        var itemSupplier = new ItemSupplierDetail(itemId,supId,handOnQty,unitPrice);
 
         SaveBrandNewItem si = new SaveBrandNewItem(item, itemSupplier);
         try {
-            if(isValied()) { // Add Validation
-                boolean isPlaced = SaveBrandNewItemRepo.saveBrandNewItem(si); // Transaction
+            if(isValied()) {
+                boolean isPlaced = SaveBrandNewItemRepo.saveBrandNewItem(si);
                 if (isPlaced) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Save Item!").show();
                     clearFields();
@@ -215,41 +217,48 @@ public class BrandNewItemFormController {
 
     @FXML
     void btnUpdateItemOnAction(ActionEvent event) { // Update Item
-        String itemId = txtItemId.getText();
-        String name = txtName.getText();
-        String category = txtCategory.getText();
-        String brand = txtBrand.getText();
-        LocalDate date = txtDate.getValue();
-        String warranty = txtWaranty.getText();
-        String type = String.valueOf(cmbType.getValue());
-        String description = txtDescription.getText();
-        String path = image.getUrl();
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        var item = new BrandNewItem(itemId, name, category, brand, date, description, warranty, type, path); //Set Item Table Data
+        Optional<ButtonType> bType = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Update Item?", yes, no).showAndWait();
 
-        itemId = txtItemId.getText();
-        String supId = txtSupplierId.getText();
-        int handOnQty = Integer.parseInt(txtQty.getText());
-        double unitPrice = Double.parseDouble(txtUnitPrice.getText());
+        if (bType.orElse(no) == yes) {
+            String itemId = txtItemId.getText();
+            String name = txtName.getText();
+            String category = txtCategory.getText();
+            String brand = txtBrand.getText();
+            LocalDate date = txtDate.getValue();
+            String warranty = txtWaranty.getText();
+            String type = String.valueOf(cmbType.getValue());
+            String description = txtDescription.getText();
+            String path = image.getUrl();
 
-        var itemSupplier = new ItemSupplierDetail(itemId,supId,handOnQty,unitPrice); //Set Item Supplier Table Data
+            var item = new BrandNewItem(itemId, name, category, brand, date, description, warranty, type, path);
 
-        SaveBrandNewItem si = new SaveBrandNewItem(item, itemSupplier);
-        try {
-            if(isValied()) { // Add Validation
-                boolean isPlaced = SaveBrandNewItemRepo.updateBrandNewItem(si); // Transaction
-                if (isPlaced) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Update Item!").show();
-                    clearFields();
-                    initialize(); // Reload
+            itemId = txtItemId.getText();
+            String supId = txtSupplierId.getText();
+            int handOnQty = Integer.parseInt(txtQty.getText());
+            double unitPrice = Double.parseDouble(txtUnitPrice.getText());
+
+            var itemSupplier = new ItemSupplierDetail(itemId, supId, handOnQty, unitPrice);
+
+            SaveBrandNewItem si = new SaveBrandNewItem(item, itemSupplier);
+            try {
+                if (isValied()) {
+                    boolean isPlaced = SaveBrandNewItemRepo.updateBrandNewItem(si);
+                    if (isPlaced) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Update Item!").show();
+                        clearFields();
+                        initialize();
+                    } else {
+                        new Alert(Alert.AlertType.WARNING, "Item Update Unsuccessfully!").show();
+                    }
                 } else {
-                    new Alert(Alert.AlertType.WARNING, "Item Update Unsuccessfully!").show();
+                    new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
                 }
-            }else{
-                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -277,22 +286,60 @@ public class BrandNewItemFormController {
     }
 
     @FXML
-    void btnDeleteItemOnAction(ActionEvent event) { // Delete Item
-        String id = txtItemId.getText();
+    void btnDeleteItemOnAction(ActionEvent event) {// Delete Item
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        try {
-            boolean isItemDeleted = BrandNewItemRepo.delete(id); //
-            if (isItemDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "item deleted!").show();
-                clearFields();
-                initialize(); // Reload Page
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Delete Item?", yes, no).showAndWait();
+
+        if (type.orElse(no) == yes) {
+            String id = txtItemId.getText();
+
+            try {
+                boolean isItemDeleted = BrandNewItemRepo.delete(id);
+                if (isItemDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "item deleted!").show();
+                    clearFields();
+                    initialize(); // Reload Page
                 }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
         }
     }
 
-    private void getType() { // Set Item types
+    private String getCurrentItemId() {
+        String nextId = "";
+
+        try {
+            String currentId = BrandNewItemRepo.getLastId();
+
+            nextId = generateNextOrderId(currentId);
+            txtItemId.setText(nextId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return nextId;
+    }
+
+    private String generateNextOrderId(String currentId) {
+        if(currentId != null) {
+            String[] split = currentId.split("I");  //" ", "2"
+            int idNum = Integer.parseInt(split[1]);
+
+            if(idNum >= 0){
+                return "I" + 00 + ++idNum;
+            }else if(idNum >= 9){
+                return "I" + 0 + ++idNum;
+            } else if(idNum >= 99){
+                return "I" + ++idNum;
+            }
+        }
+        return "I001";
+    }
+
+    private void getType() {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         obList.add("Brand New");
@@ -302,7 +349,7 @@ public class BrandNewItemFormController {
 
     }
 
-    private void getBrand() { // Set Item Brands
+    private void getBrand() {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         obList.add("Hp");
@@ -330,7 +377,7 @@ public class BrandNewItemFormController {
 
     }
 
-    private void getCategory(){ // Set Item Category
+    private void getCategory(){
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         obList.add("Laptop");
@@ -349,7 +396,7 @@ public class BrandNewItemFormController {
     }
 
     @FXML
-    void btnAddNewSupplierOnAction(ActionEvent event) throws IOException { // Add New Supplier
+    void btnAddNewSupplierOnAction(ActionEvent event) throws IOException {
         AnchorPane supRootNode = FXMLLoader.load(this.getClass().getResource("/view/supplier_form.fxml"));
         rootNode.getChildren().clear();
         rootNode.getChildren().add(supRootNode);
@@ -368,7 +415,7 @@ public class BrandNewItemFormController {
         }
     }
 
-    private void getSupplierId() { // Get Supplier ID and Assign Text Field
+    private void getSupplierId() {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
@@ -396,9 +443,9 @@ public class BrandNewItemFormController {
     public void btnSearchItemNameOnAction() throws SQLException {
         String name = txtSearchItemName.getText();
 
-        BrandNewItem item = BrandNewItemRepo.searchByName(name); // Get Item name wise Item Details
-        ItemSupplierDetail isd = ItemSupplierDetailRepo.searchById(item.getItemId()); // Get Item id wise Item Supplier Details
-        Supplier supplier = SupplierRepo.searchById(isd.getSupId()); // Get Item Supplier table Supplier Id Wise Supplier Details
+        BrandNewItem item = BrandNewItemRepo.searchByName(name);
+        ItemSupplierDetail isd = ItemSupplierDetailRepo.searchById(item.getItemId());
+        Supplier supplier = SupplierRepo.searchById(isd.getSupId());
 
         if (item != null) {
             txtItemId.setText(item.getItemId());
@@ -417,7 +464,7 @@ public class BrandNewItemFormController {
             }
             cmbType.setValue(item.getType());
             txtWaranty.setText(item.getWarranty());
-            image = new Image(item.getPath(), 153, 176, false, true); // Set Image path and size
+            image = new Image(item.getPath(), 153, 176, false, true);
             itemImage.setImage(image);
 
 
@@ -425,7 +472,7 @@ public class BrandNewItemFormController {
             new Alert(Alert.AlertType.INFORMATION, "Item not found!").show();
         }
     }
-    private void getItemName() { // Get Item Names and Assign Text Field (Sujess Item)
+    private void getItemName() {
 
         ObservableList<String> obList = FXCollections.observableArrayList();
 
@@ -442,7 +489,6 @@ public class BrandNewItemFormController {
         }
     }
 
-    //Enter Press Focus Action ----------------------------------------------------------------------------------
     @FXML
     void txtDescriptionOnAction(ActionEvent event) {
         txtSupplierId.requestFocus();
@@ -496,7 +542,7 @@ public class BrandNewItemFormController {
         try {
             supplier = SupplierRepo.searchById(id);
 
-            lblSupCompanyName.setText(supplier.getCompanyName()); // Set Supplier Id wise Company Name
+            lblSupCompanyName.setText(supplier.getCompanyName());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -505,7 +551,6 @@ public class BrandNewItemFormController {
         cmbType.requestFocus();
     }
 
-    //Validation Part ------------------------------------------------------------------------------------------------------------------------------------
     public void txtitemIdOnKeyRelese(KeyEvent keyEvent) {
         Regex.setTextColor(lk.ijse.chama.util.TextField.IID,txtItemId);
     }

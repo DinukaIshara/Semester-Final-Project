@@ -74,6 +74,21 @@
             <artifactId>javafx-web</artifactId>
             <version>17.0.6</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.sarxos</groupId>
+            <artifactId>webcam-capture</artifactId>
+            <version>0.3.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.5.1</version>
+        </dependency>
         <!--<dependency>
             <groupId>com.teamdev.jxbrowser</groupId>
             <artifactId>jxbrowser-javafx</artifactId>

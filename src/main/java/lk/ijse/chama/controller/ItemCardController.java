@@ -29,7 +29,10 @@ public class ItemCardController {
         this.myListener = myListener;
 
         lblItemName.setText(itemCard.getItemName());
-        lblPrice.setText(String.valueOf(itemCard.getPrice()));
+        double profit = itemCard.getPrice() * 0.25;
+        double netPrice = itemCard.getPrice() + profit;
+
+        lblPrice.setText(String.valueOf(netPrice));
         Image image = new Image(itemCard.getImage(),190, 155, false, true);
         itemImage.setImage(image);
 

@@ -102,7 +102,6 @@ public class RegistrationFormController {
     }
 
 
-    // Validation ----------------------------------------------------------------------------------------------------
     public boolean isValied(){
         if (!Regex.setTextColor(lk.ijse.chama.util.TextField.NAME,txtUserName)) return false;
         if (!Regex.setTextColor(lk.ijse.chama.util.TextField.PASSWORD,txtPassword)) return false;

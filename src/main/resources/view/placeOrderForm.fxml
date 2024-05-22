@@ -57,7 +57,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblCustomerId" layoutX="548.0" layoutY="89.0" textFill="#008cff">
+            <Label fx:id="lblCustomerId" layoutX="531.0" layoutY="131.0" prefHeight="21.0" prefWidth="87.0" textFill="#008cff">
                <font>
                   <Font size="18.0" />
                </font>
@@ -67,7 +67,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblCustName" layoutX="229.0" layoutY="131.0" prefHeight="21.0" prefWidth="349.0" textFill="#008cff">
+            <Label fx:id="lblCustName" layoutX="194.0" layoutY="131.0" prefHeight="21.0" prefWidth="302.0" textFill="#008cff">
                <font>
                   <Font size="18.0" />
                </font>
@@ -127,6 +127,11 @@
                </children>
             </Pane>
             <JFXButton buttonType="RAISED" layoutX="571.0" layoutY="183.0" onAction="#btnAddLocationOnAction" style="-fx-background-color: green;" text="+" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="542.0" layoutY="84.0" onAction="#btnScanOnAction" prefHeight="28.0" prefWidth="77.0" style="-fx-background-color: green;" text="Scan" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

@@ -399,7 +399,7 @@ ORDER BY o.order_id;]]>
 		<band height="77" splitType="Stretch">
 			<image>
 				<reportElement x="-20" y="13" width="595" height="40" uuid="28aa97e5-18f4-4b80-bd69-dba39995d87d"/>
-				<imageExpression><![CDATA["/home/ijse/Desktop/JDBC/chamaComputersNew/src/main/resources/report img/fotter chama computers.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/fotter chama computers.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="143" y="11" width="128" height="30" uuid="8cb18f7d-1532-4be3-8339-d1172164d7f6"/>
@@ -434,15 +434,15 @@ ORDER BY o.order_id;]]>
 			</staticText>
 			<image>
 				<reportElement x="9" y="52" width="21" height="24" uuid="e572b478-c425-400b-acfa-d45ebb0c6572"/>
-				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-location-24.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/location.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="254" y="52" width="27" height="23" uuid="ddc53852-5575-4950-b557-c4cb73fb4528"/>
-				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-phone-48.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/phone.png"]]></imageExpression>
 			</image>
 			<image>
 				<reportElement x="383" y="50" width="34" height="27" uuid="d64379fd-629b-4308-8b53-65afabec8475"/>
-				<imageExpression><![CDATA["/home/ijse/Downloads/icons8-website-48.png"]]></imageExpression>
+				<imageExpression><![CDATA["/home/ijse/Desktop/DBMS/my/Semester-Final-Project/src/main/resources/report img/website.png"]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>

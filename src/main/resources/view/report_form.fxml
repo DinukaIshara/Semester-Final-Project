@@ -14,25 +14,35 @@
             <Image url="@../image/computer.gif" />
          </image>
       </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="435.0" layoutY="528.0" onAction="#btnCustomerReportOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Cutomer Report" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="435.0" layoutY="543.0" onAction="#btnCustomerReportOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Cutomer Report" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="435.0" layoutY="666.0" onAction="#btnStockOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Stock Management" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="435.0" layoutY="681.0" onAction="#btnStockOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Stock Management" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="txtSearchCustomerTel" layoutX="405.0" layoutY="488.0" onKeyReleased="#txtCustTelOnKeyRelesed" prefHeight="40.0" prefWidth="298.0" promptText="Customer MobileNumber" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+      <TextField fx:id="txtSearchCustomerTel" layoutX="405.0" layoutY="503.0" onKeyReleased="#txtCustTelOnKeyRelesed" prefHeight="40.0" prefWidth="298.0" promptText="Customer MobileNumber" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtSearchItemStockDate" layoutX="405.0" layoutY="626.0" onKeyReleased="#txtStockDateOnKeyRelesed" prefHeight="40.0" prefWidth="298.0" promptText="Stock Date" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
+      <TextField fx:id="txtSearchItemStockDate" layoutX="405.0" layoutY="641.0" onKeyReleased="#txtStockDateOnKeyRelesed" prefHeight="40.0" prefWidth="298.0" promptText="Stock Date" styleClass="blue-box-text-field" stylesheets="@../css/sidePane.css">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </TextField>
+      <JFXButton buttonType="RAISED" layoutX="435.0" layoutY="779.0" onAction="#btnProfitOnAction" prefHeight="70.0" prefWidth="239.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Profit" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="469.0" layoutY="454.0" onAction="#btnScanOnAction" prefHeight="49.0" prefWidth="168.0" style="-fx-background-radius: 50;" styleClass="sale" stylesheets="@../css/style.css" text="Scan" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

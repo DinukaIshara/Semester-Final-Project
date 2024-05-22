@@ -17,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import lk.ijse.chama.MyListener;
+import lk.ijse.chama.QrReader;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.CartTm;
@@ -141,6 +142,14 @@ public class PlaceOrderFormController {
     MyListener myListener;
 
     List<BrandNewItem> itemList = BrandNewItemRepo.getAll();
+
+    private QrReader qr;
+
+    private QrResult qrResultModel;
+
+    public PlaceOrderFormController(){
+        qrResultModel = new QrResult();
+    }
 
     public void initialize() {
         setDateAndTime();
@@ -353,7 +362,11 @@ public class PlaceOrderFormController {
     private void setChosenItem(ItemCard productCard) {
         lblItemName.setText(productCard.getItemName());
         lblCatagory.setText(productCard.getCategory());
-        lblUnitPrice.setText(String.valueOf(productCard.getPrice()));
+
+        double profit = productCard.getPrice() * 0.25;
+        double netPrice = productCard.getPrice() + profit;
+
+        lblUnitPrice.setText(String.valueOf(netPrice));
         lblItemId.setText(productCard.getItemId());
         lblHandOnQty.setText(String.valueOf(productCard.getHandOnQty()));
         Image image = new Image(productCard.getImage(),281, 178, false, true);
@@ -573,5 +586,21 @@ public class PlaceOrderFormController {
         }
 
         return orderId;
+    }
+
+    public void btnScanOnAction(ActionEvent actionEvent) {
+        qr = new QrReader(qrResultModel);
+        new Thread(() -> {
+            while (qrResultModel.getResult() == null) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            txtCustomerTel.setText(qrResultModel.getResult());
+        }).start();
+
+        txtCustomerTel.requestFocus();
     }
 }

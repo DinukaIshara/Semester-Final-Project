@@ -13,6 +13,7 @@ import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.RepairTm;
 import lk.ijse.chama.repository.CustomerRepo;
+import lk.ijse.chama.repository.EmployeeRepo;
 import lk.ijse.chama.repository.RepairRepo;
 import lk.ijse.chama.model.Repair;
 import lk.ijse.chama.util.Regex;
@@ -28,10 +29,7 @@ import org.controlsfx.control.textfield.TextFields;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RepairFormController {
 
@@ -92,6 +90,7 @@ public class RepairFormController {
         loadAllRepair();
         setCellValueFactory();
         getRepairId();
+        getCurrentId();
     }
 
     private void setCellValueFactory() {
@@ -162,46 +161,61 @@ public class RepairFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        String repairId = txtRepairId.getText();
-        LocalDate reciveDate = txtReceiveDate.getValue();
-        LocalDate returnDate = txtReturnDate.getValue();
-        double cost = Double.parseDouble(txtCost.getText());
-        String description = txtDescription.getText();
-        String custId = lblCustomerId.getText();
-        String itemName = txtItemName.getText();
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        var repair = new Repair(repairId, reciveDate, returnDate, cost, description, custId, itemName);
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Update Repair?", yes, no).showAndWait();
 
-        try {
-            if(isValidate()) {
-                boolean isPlaced = RepairRepo.update(repair);
-                if (isPlaced) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Update Repair!").show();
-                    initialize();
+        if (type.orElse(no) == yes) {
+            String repairId = txtRepairId.getText();
+            LocalDate reciveDate = txtReceiveDate.getValue();
+            LocalDate returnDate = txtReturnDate.getValue();
+            double cost = Double.parseDouble(txtCost.getText());
+            String description = txtDescription.getText();
+            String custId = lblCustomerId.getText();
+            String itemName = txtItemName.getText();
+
+            var repair = new Repair(repairId, reciveDate, returnDate, cost, description, custId, itemName);
+
+            try {
+                if (isValidate()) {
+                    boolean isPlaced = RepairRepo.update(repair);
+                    if (isPlaced) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Update Repair!").show();
+                        initialize();
+                        clearFields();
+                    } else {
+                        new Alert(Alert.AlertType.WARNING, "Repair Update Unsuccessfully!").show();
+                    }
                 } else {
-                    new Alert(Alert.AlertType.WARNING, "Repair Update Unsuccessfully!").show();
+                    new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
                 }
-            }else{
-                new Alert(Alert.AlertType.INFORMATION, "The data you entered is incorrect").show();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        String id = txtRepairId.getText();
+        ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        try {
-            boolean isDeleted = RepairRepo.delete(id);
-            if (isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Repair deleted!").show();
-                clearFields();
-                initialize();
+        Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Delete Repair?", yes, no).showAndWait();
+
+        if (type.orElse(no) == yes) {
+            String id = txtRepairId.getText();
+
+            try {
+                boolean isDeleted = RepairRepo.delete(id);
+                if (isDeleted) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Repair deleted!").show();
+                    clearFields();
+                    initialize();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -221,6 +235,37 @@ public class RepairFormController {
         lblCustomerName.setText("");
         txtSearchRepair.setText("");
 
+    }
+
+    private String getCurrentId() {
+        String nextId = "";
+
+        try {
+            String currentId = RepairRepo.getLastId();
+
+            nextId = generateNextId(currentId);
+            txtRepairId.setText(nextId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return nextId;
+    }
+
+    private String generateNextId(String currentId) {
+        if(currentId != null) {
+            String[] split = currentId.split("R");  //" ", "2"
+            int idNum = Integer.parseInt(split[1]);
+
+            if(idNum >= 1){
+                return "R" + 0 + 0 + ++idNum;
+            }else if(idNum >= 9){
+                return "R" + 0 + ++idNum;
+            } else if(idNum >= 99){
+                return "R" + ++idNum;
+            }
+        }
+        return "R001";
     }
 
     @FXML

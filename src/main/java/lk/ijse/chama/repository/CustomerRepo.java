@@ -135,4 +135,18 @@ public class CustomerRepo {
         return idList;
     }
 
+    public static String getLastId() throws SQLException {
+        String sql = "SELECT cust_id FROM customer ORDER BY CAST(SUBSTRING(cust_id, 2) AS UNSIGNED) DESC LIMIT 1;";
+
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            String Id = resultSet.getString(1);
+            return Id;
+        }
+        return null;
+    }
+
 }
