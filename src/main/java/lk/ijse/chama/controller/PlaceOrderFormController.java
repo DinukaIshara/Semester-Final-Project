@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import lk.ijse.chama.MyListener;
 import lk.ijse.chama.QrReader;
+import lk.ijse.chama.SendMail;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.*;
 import lk.ijse.chama.model.tm.CartTm;
@@ -29,6 +30,7 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import org.controlsfx.control.textfield.TextFields;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -487,6 +489,8 @@ public class PlaceOrderFormController {
 
     }
 
+    String email ;
+
     @FXML
     void txtCustomerIdOnAction(ActionEvent actionEvent) {
 
@@ -497,6 +501,7 @@ public class PlaceOrderFormController {
 
             lblCustName.setText(customer.getCName());
             lblCustomerId.setText(customer.getCustId());
+            email = customer.getCEmail();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -564,6 +569,11 @@ public class PlaceOrderFormController {
         JasperPrint jasperPrint =
                 JasperFillManager.fillReport(jasperReport, data, DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
+
+        JasperExportManager.exportReportToPdfFile(jasperPrint,"src/main/resources/report/OrderBill.pdf");
+
+
+        SendMail.sendEmail(email, "src/main/resources/report/OrderBill.pdf",2);
     }
 
     private double gettNetTotal() {
