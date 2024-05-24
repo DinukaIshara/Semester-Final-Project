@@ -15,7 +15,7 @@ public class QrGenerateor {
 
     public static void setData(String mobileNumber, String gmail, String name) {
 
-        System.out.println("Mobile Number: " + mobileNumber);
+        System.out.println("QR Result : " + mobileNumber);
         try {
             String data = mobileNumber;
             String filePath = "qrcode.png";
