@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import lk.ijse.chama.QrGenerateor;
 import lk.ijse.chama.QrReader;
 import lk.ijse.chama.db.DbConnection;
 import lk.ijse.chama.model.Employee;
@@ -178,6 +179,7 @@ public class EmployeeFormController {
             if(isValidate()) {
                 boolean isSaved = EmployeeRepo.save(employee);
                 if (isSaved) {
+                    QrGenerateor.setData(id, email, name);
                     new Alert(Alert.AlertType.CONFIRMATION, "Employee saved!").show();
                     clearFields();
                     initialize();

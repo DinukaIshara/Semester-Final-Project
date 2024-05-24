@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.chama.QrGenerateor;
 import lk.ijse.chama.model.Customer;
 import lk.ijse.chama.model.tm.CustomerTm;
 import lk.ijse.chama.repository.BrandNewItemRepo;
@@ -123,6 +124,7 @@ public class CustomerFormController {
             if(isValidate()) {
                 boolean isSaved = CustomerRepo.save(customer);
                 if (isSaved) {
+                    QrGenerateor.setData(contact, email, name);
                     new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
                     initialize();
                     clearFields();
